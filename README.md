@@ -1,0 +1,1 @@
+1. copy `app.json.sample` and re-name it to `app.json`. Set your env vars under `extra`.
