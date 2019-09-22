@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "ballboy",
+    "slug": "bb",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "extra": {
+      "graphqlServer": "http://192.168.56.1:3001/graphql",
+      "chatkitAuthEndpoint": "http://192.168.56.1:3001/chatkit-auth",
+      "chatkitReadOnlyUser": "xxx",
+      "chatkitInstanceLocator": "xxx",
+      "googleMapsAndroidApiKey": "xxx",
+      "googleMapsIosApiKey": "xxx",
+      "cloudinaryCloudname": "xxx",
+      "cloudinaryApiKey": "xxx",
+      "cloudinaryApiSecret": "xxx",
+      "cloudinaryUploadPreset": "xxx",
+      "cities": [
+        {
+          "id": "amsterdam",
+          "city": "Amsterdam",
+          "country": "Netherlands",
+          "formattedAddress": "Amsterdam, Netherlands",
+          "coordinates": [52.354733, 4.8284116]
+        },
+        {
+          "id": "enschede",
+          "city": "Enschede",
+          "country": "Netherlands",
+          "formattedAddress": "Enschede, Netherlands",
+          "coordinates": [52.220615, 6.895782]
+        },
+        {
+          "id": "rotterdam",
+          "city": "Rotterdam",
+          "country": "Netherlands",
+          "formattedAddress": "Rotterdam, Netherlands",
+          "coordinates": [51.92806, 4.420195]
+        },
+        {
+          "id": "barcelona",
+          "city": "Barcelona",
+          "country": "Spain",
+          "formattedAddress": "Barcelona, Spain",
+          "coordinates": [41.394897, 2.0785563]
+        },
+        {
+          "id":"buenosAires",
+          "city":"Buenos Aires",
+          "country":"Argentina",
+          "formattedAddress": "Buenos Aires, Argentina",
+          "coordinates": [-34.61566, -58.50351]
+        }
+      ]
+    }
+  }
+}
