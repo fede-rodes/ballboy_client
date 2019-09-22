@@ -18,6 +18,7 @@
     "error-handling-utils": "^1.1.0",
     "events": "^3.0.0",
     "expo": "^35.0.0",
+    "expo-constants": "~7.0.0",
     "expo-image-picker": "~7.0.0",
     "expo-localization": "~7.0.0",
     "graphql": "^14.5.7",
