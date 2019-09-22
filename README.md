@@ -39,11 +39,14 @@ Copy `app.json.sample` and re-name it to `app.json`. Set your env vars under `ex
 ```
 
 You can then access it via
-`Expo.Constants.manifest.extra.myApiKey`
+```
+import Constants from 'expo-constants';
 
-or via `Constants.manifest.extra` ([https://docs.expo.io/versions/latest/sdk/constants/](https://docs.expo.io/versions/latest/sdk/constants/))
+Constants.manifest.extra.myApiKey
+```
 
 Find out more:
 - [https://expo.canny.io/feature-requests/p/dotenv-support](https://expo.canny.io/feature-requests/p/dotenv-support)
 - [https://stackoverflow.com/questions/52546254/react-native-with-expo-how-to-use-a-env-local-config-file](https://stackoverflow.com/questions/52546254/react-native-with-expo-how-to-use-a-env-local-config-file)
 - [https://docs.expo.io/versions/latest/workflow/configuration/](https://docs.expo.io/versions/latest/workflow/configuration/)
+- [https://docs.expo.io/versions/latest/sdk/constants/](https://docs.expo.io/versions/latest/sdk/constants/)
