@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // import Crashes from 'appcenter-crashes';
 // import codePush from 'react-native-code-push';
 import { ApolloProvider } from 'react-apollo';
-import { StatusBar, Text, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import firebase from 'react-native-firebase';
 // import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
@@ -21,6 +21,7 @@ import { getBottomSpace, ifIphoneX } from './iphoneHelpers';
 import scTheme from './Themes/scTheme'; // styled-components theme
 import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
+import Text from './Components/Common/Text';
 import {
   SPORTS,
   ACTIVITY_STATUSES,
@@ -42,17 +43,23 @@ import {
 // COMPONENT:
 //------------------------------------------------------------------------------
 class App extends Component {
+  state = {
+    fontLoaded: false,
+  }
+
   // constructor() {
   //   super();
   //   Crashes.setEnabled(true).then(() => {});
   // }
 
-  componentDidMount() {
-    Font.loadAsync({
+  async componentDidMount() {
+    await Font.loadAsync({
       'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
       'Rajdhani-SemiBold': require('../assets/fonts/Rajdhani-SemiBold.ttf'),
       'Rajdhani-Bold': require('../assets/fonts/Rajdhani-Bold.ttf'),
     });
+
+    this.setState({ fontLoaded: true });
 
   //   // signals codepush that the app is ready. If this is not called, CodePush rolls back
   //   // the last update.
@@ -143,6 +150,8 @@ class App extends Component {
   // codePushDownloadDidProgress(progress) {}
 
   render() {
+    const { fontLoaded } = this.state;
+
     return (
           <ThemeProvider theme={scTheme}>
             {/* <UserProvider>
@@ -151,13 +160,16 @@ class App extends Component {
                   {/* <MenuProvider> */}
                     {/* <AppRootView> */}
                     <View>
-                      <StatusBar barStyle="light-content" />
-
-                          <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
-                          <Text>{JSON.stringify(SPORTS)}</Text>
-                          <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
-                          <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
-                          <Text>{JSON.stringify(CITIES)}</Text>
+                        <StatusBar barStyle="light-content" />
+                          {!!fontLoaded && (
+                            <View>
+                              <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
+                              <Text>{JSON.stringify(SPORTS)}</Text>
+                              <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
+                              <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
+                              <Text>{JSON.stringify(CITIES)}</Text>
+                            </View>
+                          )}
                         </View>
                       {/* <ConnectionCheck /> */}
                       {/* <AppNavigation
