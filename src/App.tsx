@@ -1,4 +1,5 @@
 // import './polyfills';
+import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
 // import Crashes from 'appcenter-crashes';
@@ -44,7 +45,7 @@ import {
 //------------------------------------------------------------------------------
 class App extends Component {
   state = {
-    fontLoaded: false,
+    isReady: false,
   }
 
   // constructor() {
@@ -52,15 +53,7 @@ class App extends Component {
   //   Crashes.setEnabled(true).then(() => {});
   // }
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
-      'Rajdhani-SemiBold': require('../assets/fonts/Rajdhani-SemiBold.ttf'),
-      'Rajdhani-Bold': require('../assets/fonts/Rajdhani-Bold.ttf'),
-    });
-
-    this.setState({ fontLoaded: true });
-
+  componentDidMount() {
   //   // signals codepush that the app is ready. If this is not called, CodePush rolls back
   //   // the last update.
   //   // codePush.notifyAppReady();
@@ -149,8 +142,32 @@ class App extends Component {
   // eslint-disable-next-line
   // codePushDownloadDidProgress(progress) {}
 
+  async loadResourcesAsync() {
+    await Promise.all([
+      // Asset.loadAsync([
+      //   require('./assets/images/robot-dev.png'),
+      //   require('./assets/images/robot-prod.png'),
+      // ]),
+      Font.loadAsync({
+        'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
+        'Rajdhani-SemiBold': require('../assets/fonts/Rajdhani-SemiBold.ttf'),
+        'Rajdhani-Bold': require('../assets/fonts/Rajdhani-Bold.ttf'),
+      }),
+    ]);
+  }
+
   render() {
-    const { fontLoaded } = this.state;
+    const { isReady } = this.state;
+
+    if (!isReady) {
+      return (
+        <AppLoading
+          startAsync={this.loadResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={console.warn}
+        />
+      );
+    }
 
     return (
           <ThemeProvider theme={scTheme}>
@@ -161,15 +178,13 @@ class App extends Component {
                     {/* <AppRootView> */}
                     <View>
                         <StatusBar barStyle="light-content" />
-                          {!!fontLoaded && (
-                            <View>
-                              <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
-                              <Text>{JSON.stringify(SPORTS)}</Text>
-                              <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
-                              <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
-                              <Text>{JSON.stringify(CITIES)}</Text>
-                            </View>
-                          )}
+                          <View>
+                            <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
+                            <Text>{JSON.stringify(SPORTS)}</Text>
+                            <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
+                            <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
+                            <Text>{JSON.stringify(CITIES)}</Text>
+                          </View>
                         </View>
                       {/* <ConnectionCheck /> */}
                       {/* <AppNavigation
