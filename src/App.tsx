@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { StatusBar, View } from 'react-native';
 import firebase from 'react-native-firebase';
-// import { MenuProvider } from 'react-native-popup-menu';
+import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
 // import { createAppContainer } from 'react-navigation';
 // import config from './config';
@@ -32,13 +32,13 @@ import {
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
-// const AppRootView = styled.View`
-//   flex: 1;
-//   flex-direction: column;
-//   background-color: ${({ theme }) => theme.colors.black};
-//   margin-bottom: ${getBottomSpace()}px;
-//   margin-top: ${ifIphoneX() ? 30 : 0}px;
-// `;
+const AppRootView = styled.View`
+  flex: 1;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.orange};
+  margin-bottom: ${getBottomSpace()}px;
+  margin-top: ${ifIphoneX() ? 30 : 0}px;
+`;
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
@@ -173,8 +173,8 @@ class App extends Component {
         <ThemeProvider theme={scTheme}>
           <UserProvider>
             <SpotFiltersProvider>
-                {/* <MenuProvider> */}
-                  {/* <AppRootView> */}
+                <MenuProvider>
+                  <AppRootView>
                   <View>
                       <StatusBar barStyle="light-content" />
                         <View>
@@ -201,8 +201,8 @@ class App extends Component {
                         }
                       }}
                     /> */}
-                  {/* </AppRootView> */}
-                {/* </MenuProvider> */}
+                  </AppRootView>
+                </MenuProvider>
             </SpotFiltersProvider>
           </UserProvider>
         </ThemeProvider>
