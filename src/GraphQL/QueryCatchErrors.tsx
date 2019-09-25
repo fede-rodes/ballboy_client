@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Query } from 'react-apollo';
-import Analytics from 'appcenter-analytics';
+// import Analytics from 'appcenter-analytics';
 import I18n from '../I18n';
 import NothingFound from '../Components/Common/NothingFound';
 
@@ -27,10 +27,11 @@ export const QueryCatchErrors = (props) => {
               queryText,
             );
             if (logErrors) {
-              Analytics.trackEvent('GraphQL error', {
-                error: JSON.stringify(queryResultProps.error),
-                query: queryText,
-              });
+              // TODO: use appcenter or sentry
+              // Analytics.trackEvent('GraphQL error', {
+              //   error: JSON.stringify(queryResultProps.error),
+              //   query: queryText,
+              // });
             }
             return (
               <View

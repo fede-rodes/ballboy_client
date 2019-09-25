@@ -7,20 +7,19 @@ import React, { Component } from 'react';
 // import codePush from 'react-native-code-push';
 import { ApolloProvider } from 'react-apollo';
 import { StatusBar, View } from 'react-native';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
 // import { createAppContainer } from 'react-navigation';
-// import config from './config';
 import client from './GraphQL/ApolloClient';
-// import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
+import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 // import createRootNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 import { getBottomSpace, ifIphoneX } from './iphoneHelpers';
 import { UserProvider } from './Context/User';
 import { SpotFiltersProvider } from './Context/SpotFilters';
 // import { Events, getInitialEvent, IncomingLinks } from './Services/IncomingLinks';
 import scTheme from './Themes/scTheme'; // styled-components theme
-import { logNavigationState } from './utils';
+// import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
 import Text from './Components/Common/Text';
 import Images from './Themes/Images';
@@ -37,7 +36,7 @@ import {
 const AppRootView = styled.View`
   flex: 1;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.orange};
+  background-color: ${({ theme }) => theme.colors.black};
   margin-bottom: ${getBottomSpace()}px;
   margin-top: ${ifIphoneX() ? 30 : 0}px;
 `;``
@@ -160,6 +159,15 @@ class App extends Component {
         require('../assets/images/location-onboarding.png'),
         require('../assets/images/link-expired.png'),
         require('../assets/images/noactivities-illustration.png'),
+        require('../assets/icons/basketball.png'),
+        require('../assets/icons/volleyball.png'),
+        require('../assets/icons/volleyball.png'),
+        require('../assets/icons/football.png'),
+        require('../assets/icons/boules.png'),
+        require('../assets/icons/skating.png'),
+        require('../assets/icons/table_tennis.png'),
+        require('../assets/icons/tennis.png'),
+        require('../assets/icons/bootcamp.png'),
       ]),
       Font.loadAsync({
         'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
@@ -191,30 +199,26 @@ class App extends Component {
                   <AppRootView>
                   <View>
                       <StatusBar barStyle="light-content" />
-                        <View>
+                        {/* <View>
                           <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
                           <Text>{JSON.stringify(SPORTS)}</Text>
                           <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
                           <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
                           <Text>{JSON.stringify(CITIES)}</Text>
-                        </View>
+                        </View> */}
+                        <AppNavigation
+                          // ref={(ref) => { this.router = ref; }}
+                          // See: https://reactnavigation.org/docs/en/screen-tracking.html
+                          onNavigationStateChange={(prevState, currState) => {
+                            const currScreen = getActiveRouteName(currState);
+                            const prevScreen = getActiveRouteName(prevState);
+                            // if (prevScreen !== currScreen) {
+                            //   firebase.analytics().setCurrentScreen(currScreen);
+                            // }
+                          }}
+                        />
                       </View>
                     {/* <ConnectionCheck /> */}
-                    {/* <AppNavigation
-                      ref={(ref) => {
-                        this.router = ref;
-                        globalRefs.rootNavigator = ref;
-                      }}
-                      // See: https://reactnavigation.org/docs/en/screen-tracking.html
-                      onNavigationStateChange={(prevState, currState) => {
-                        if (config.logRoute) logNavigationState();
-                        const currScreen = getActiveRouteName(currState);
-                        const prevScreen = getActiveRouteName(prevState);
-                        if (prevScreen !== currScreen) {
-                          firebase.analytics().setCurrentScreen(currScreen);
-                        }
-                      }}
-                    /> */}
                   </AppRootView>
                 </MenuProvider>
             </SpotFiltersProvider>

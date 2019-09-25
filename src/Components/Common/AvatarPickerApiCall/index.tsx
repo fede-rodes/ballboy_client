@@ -1,8 +1,8 @@
+import Constants from 'expo-constants';
 import React from 'react';
 import PropTypes from 'prop-types';
 import sha1 from 'sha1';
 import superagent from 'superagent';
-import config from '../../../config';
 // import curateErrors from './utils';
 
 // See: https://www.youtube.com/watch?v=WOTFmPkWbxo
@@ -18,17 +18,17 @@ class AvatarPickerApiCall extends React.PureComponent {
     const { onError, onSuccess } = this.props;
     const { file } = inputFields;
 
-    const url = `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudname}/image/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${Constants.manifest.extra.cloudinaryCloudname}/image/upload`;
     const timestamp = Date.now() / 1000;
 
-    const paramsStr = `timestamp=${timestamp}&upload_preset=${config.cloudinaryUploadPreset}${config.cloudinaryApiSecret}`;
+    const paramsStr = `timestamp=${timestamp}&upload_preset=${Constants.manifest.extra.cloudinaryUploadPreset}${Constants.manifest.extra.cloudinaryApiSecret}`;
 
     const signature = sha1(paramsStr);
 
     const params = {
-      api_key: config.cloudinaryApiKey,
+      api_key: Constants.manifest.extra.cloudinaryApiKey,
       timestamp,
-      upload_preset: config.cloudinaryUploadPreset,
+      upload_preset: Constants.manifest.extra.cloudinaryUploadPreset,
       signature,
     };
 

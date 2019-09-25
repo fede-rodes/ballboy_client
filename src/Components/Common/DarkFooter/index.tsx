@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/native';
 import I18n from '../../../I18n';
-import { addGlobalRef } from '../../../globalRefs';
 import NavDots from '../NavDots';
 import Row from '../Row';
 import Spacer from '../Spacer';
@@ -40,7 +39,6 @@ const DarkFooter = ({
       <StyledRow justifyContent="flex-start">
         {showBack && (
           <DarkFooterButton
-            ref={addGlobalRef('footerBackButton')}
             text={buttonBackText}
             onPress={onBack}
             disabled={disableBack}

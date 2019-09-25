@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { View } from 'react-native';
 import ErrorHandling from 'error-handling-utils';
-import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 import I18n from '../../../I18n';
 import privateUserFragment from '../../../GraphQL/Users/Fragments/privateUser';
 import Row from '../Row';
@@ -35,7 +35,7 @@ class AvatarPickerForm extends React.PureComponent {
     this.setState({ errors: { avatar: [] } });
   };
 
-  handleUpload = () => {
+  andleUpload = async () => {
     const {
       onBeforeHook,
       onClientCancelHook,
@@ -64,33 +64,36 @@ class AvatarPickerForm extends React.PureComponent {
       },
     };
 
-    ImagePicker.showImagePicker(options, (res) => {
-      // console.log('res = ', res);
+    // TODO: add permissions https://docs.expo.io/versions/latest/sdk/imagepicker/
+    const res = await ImagePicker.launchImageLibraryAsync(options);
 
-      if (res.didCancel) {
-        console.log('User cancelled photo picker');
-        onClientCancelHook();
-      } else if (res.error) {
-        console.log('ImagePicker Error: ', res.error);
-        // Pass event up to parent component. onClientErrorHook will set 'disabled'
-        // value back to 'false' so that the user can re-submit the form
-        this.setState({ errors: { avatar: [res.error] } });
-        onClientErrorHook();
-      } else if (res.customButton) {
-        console.log('User tapped custom button: ', res.customButton);
-        onClientCancelHook();
-      } else {
-        const { data } = res;
+    // await ImagePicker.launchImageLibraryAsync(options, (res) => {
+    //   // console.log('res = ', res);
 
-        // You can display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + res.data };
-        const base64avatar = `data:image/jpeg;base64,${data}`;
-        this.setState({ avatar: base64avatar });
-        // Pass event up to parent component. onClientSuccessHook will set 'disabled'
-        // value back to 'false' so that the user can re-submit the form
-        onSuccessHook({ file: base64avatar });
-      }
-    });
+    //   if (res.didCancel) {
+    //     console.log('User cancelled photo picker');
+    //     onClientCancelHook();
+    //   } else if (res.error) {
+    //     console.log('ImagePicker Error: ', res.error);
+    //     // Pass event up to parent component. onClientErrorHook will set 'disabled'
+    //     // value back to 'false' so that the user can re-submit the form
+    //     this.setState({ errors: { avatar: [res.error] } });
+    //     onClientErrorHook();
+    //   } else if (res.customButton) {
+    //     console.log('User tapped custom button: ', res.customButton);
+    //     onClientCancelHook();
+    //   } else {
+    //     const { data } = res;
+
+    //     // You can display the image using data:
+    //     // const source = { uri: 'data:image/jpeg;base64,' + res.data };
+    //     const base64avatar = `data:image/jpeg;base64,${data}`;
+    //     this.setState({ avatar: base64avatar });
+    //     // Pass event up to parent component. onClientSuccessHook will set 'disabled'
+    //     // value back to 'false' so that the user can re-submit the form
+    //     onSuccessHook({ file: base64avatar });
+    //   }
+    // });
   }
 
   render() {

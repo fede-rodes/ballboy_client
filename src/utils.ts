@@ -22,13 +22,13 @@ export const addModelState = (reactComponentInstance, modalName, isOpen = false)
   reactComponentInstance.state.modals[modalName] = isOpen;
 };
 
-// export function makeNumGenerator() {
-//   let i = -1;
-//   return () => {
-//     i += 1;
-//     return i;
-//   };
-// }
+export function makeNumGenerator() {
+  let i = -1;
+  return () => {
+    i += 1;
+    return i;
+  };
+}
 
 // const convertS3ToImgix = ({ image, height, width }) => (
 //   image.replace('https://s3.amazonaws.com/sportyspots-prd', 'http://sportyspots.imgix.net')
@@ -84,9 +84,9 @@ const routeToString = (route, depth = 0) => {
   return str;
 };
 
-export const logNavigationState = (route = globalRefs.rootNavigator.state.nav) => {
-  console.log(routeToString(route));
-};
+// export const logNavigationState = (route = globalRefs.rootNavigator.state.nav) => {
+//   console.log(routeToString(route));
+// };
 
 
 /**
