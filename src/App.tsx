@@ -36,7 +36,7 @@ import {
 const AppRootView = styled.View`
   flex: 1;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.orange};
   margin-bottom: ${getBottomSpace()}px;
   margin-top: ${ifIphoneX() ? 30 : 0}px;
 `;``
@@ -197,28 +197,26 @@ class App extends Component {
             <SpotFiltersProvider>
                 <MenuProvider>
                   <AppRootView>
-                  <View>
-                      <StatusBar barStyle="light-content" />
-                        {/* <View>
-                          <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
-                          <Text>{JSON.stringify(SPORTS)}</Text>
-                          <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
-                          <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
-                          <Text>{JSON.stringify(CITIES)}</Text>
-                        </View> */}
-                        <AppNavigation
-                          // ref={(ref) => { this.router = ref; }}
-                          // See: https://reactnavigation.org/docs/en/screen-tracking.html
-                          onNavigationStateChange={(prevState, currState) => {
-                            const currScreen = getActiveRouteName(currState);
-                            const prevScreen = getActiveRouteName(prevState);
-                            // if (prevScreen !== currScreen) {
-                            //   firebase.analytics().setCurrentScreen(currScreen);
-                            // }
-                          }}
-                        />
-                      </View>
+                    <StatusBar barStyle="light-content" />
                     {/* <ConnectionCheck /> */}
+                    {/* <View>
+                      <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
+                      <Text>{JSON.stringify(SPORTS)}</Text>
+                      <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
+                      <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
+                      <Text>{JSON.stringify(CITIES)}</Text>
+                    </View> */}
+                    <AppNavigation
+                      // ref={(ref) => { this.router = ref; }}
+                      // See: https://reactnavigation.org/docs/en/screen-tracking.html
+                      onNavigationStateChange={(prevState, currState) => {
+                        const currScreen = getActiveRouteName(currState);
+                        const prevScreen = getActiveRouteName(prevState);
+                        // if (prevScreen !== currScreen) {
+                        //   firebase.analytics().setCurrentScreen(currScreen);
+                        // }
+                      }}
+                    />
                   </AppRootView>
                 </MenuProvider>
             </SpotFiltersProvider>

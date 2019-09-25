@@ -30,7 +30,7 @@ const FlexGrow = styled.View`
 // COMPONENT:
 //------------------------------------------------------------------------------
 const FieldBackground = ({ children }) => (
-  <ScrollView contentContainerStyle={{ flex: 1 }}>
+  <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'green' }}>
     <BgContainer>
       {/* <Svg width={fullWidth} height={fullHeight}>
         <Path
