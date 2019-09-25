@@ -1,6 +1,7 @@
 // import './polyfills';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';
 import React, { Component } from 'react';
 // import Crashes from 'appcenter-crashes';
 // import codePush from 'react-native-code-push';
@@ -22,6 +23,7 @@ import scTheme from './Themes/scTheme'; // styled-components theme
 import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
 import Text from './Components/Common/Text';
+import Images from './Themes/Images';
 import {
   SPORTS,
   ACTIVITY_STATUSES,
@@ -38,7 +40,7 @@ const AppRootView = styled.View`
   background-color: ${({ theme }) => theme.colors.orange};
   margin-bottom: ${getBottomSpace()}px;
   margin-top: ${ifIphoneX() ? 30 : 0}px;
-`;
+`;``
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
@@ -143,10 +145,22 @@ class App extends Component {
 
   async loadResourcesAsync() {
     await Promise.all([
-      // Asset.loadAsync([
-      //   require('./assets/images/robot-dev.png'),
-      //   require('./assets/images/robot-prod.png'),
-      // ]),
+      Asset.loadAsync([
+        require('../assets/images/sportyspots-logo.png'),
+        require('../assets/images/illustration-wizard-1.png'),
+        require('../assets/images/illustration-wizard-2.png'),
+        require('../assets/images/illustration-wizard-3.png'),
+        require('../assets/images/illustration-share-location.png'),
+        require('../assets/images/create-profile-avatar.png'),
+        require('../assets/images/spot-open-circle.png'),
+        require('../assets/images/activity-cancelled-visual.png'),
+        require('../assets/images/activity-success-visual.png'),
+        require('../assets/images/activity-confirm-visual.png'),
+        require('../assets/images/check-email.png'),
+        require('../assets/images/location-onboarding.png'),
+        require('../assets/images/link-expired.png'),
+        require('../assets/images/noactivities-illustration.png'),
+      ]),
       Font.loadAsync({
         'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
         'Rajdhani-SemiBold': require('../assets/fonts/Rajdhani-SemiBold.ttf'),
