@@ -11,13 +11,12 @@ import firebase from 'react-native-firebase';
 import styled, { ThemeProvider } from 'styled-components/native';
 // import { createAppContainer } from 'react-navigation';
 // import config from './config';
-// import client from './GraphQL/ApolloClient';
+import client from './GraphQL/ApolloClient';
 // import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 // import createRootNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 import { getBottomSpace, ifIphoneX } from './iphoneHelpers';
-// import { LocationProvider } from './Context/Location';
-// import { UserProvider } from './Context/User';
-// import { SpotFiltersProvider } from './Context/SpotFilters';
+import { UserProvider } from './Context/User';
+import { SpotFiltersProvider } from './Context/SpotFilters';
 // import { Events, getInitialEvent, IncomingLinks } from './Services/IncomingLinks';
 import scTheme from './Themes/scTheme'; // styled-components theme
 import { logNavigationState } from './utils';
@@ -170,44 +169,44 @@ class App extends Component {
     }
 
     return (
-          <ThemeProvider theme={scTheme}>
-            {/* <UserProvider>
-              <SpotFiltersProvider> */}
-                {/* <LocationProvider> */}
-                  {/* <MenuProvider> */}
-                    {/* <AppRootView> */}
-                    <View>
-                        <StatusBar barStyle="light-content" />
-                          <View>
-                            <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
-                            <Text>{JSON.stringify(SPORTS)}</Text>
-                            <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
-                            <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
-                            <Text>{JSON.stringify(CITIES)}</Text>
-                          </View>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={scTheme}>
+          <UserProvider>
+            <SpotFiltersProvider>
+                {/* <MenuProvider> */}
+                  {/* <AppRootView> */}
+                  <View>
+                      <StatusBar barStyle="light-content" />
+                        <View>
+                          <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
+                          <Text>{JSON.stringify(SPORTS)}</Text>
+                          <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
+                          <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
+                          <Text>{JSON.stringify(CITIES)}</Text>
                         </View>
-                      {/* <ConnectionCheck /> */}
-                      {/* <AppNavigation
-                        ref={(ref) => {
-                          this.router = ref;
-                          globalRefs.rootNavigator = ref;
-                        }}
-                        // See: https://reactnavigation.org/docs/en/screen-tracking.html
-                        onNavigationStateChange={(prevState, currState) => {
-                          if (config.logRoute) logNavigationState();
-                          const currScreen = getActiveRouteName(currState);
-                          const prevScreen = getActiveRouteName(prevState);
-                          if (prevScreen !== currScreen) {
-                            firebase.analytics().setCurrentScreen(currScreen);
-                          }
-                        }}
-                      /> */}
-                    {/* </AppRootView> */}
-                  {/* </MenuProvider> */}
-                {/* </LocationProvider> */}
-              {/* </SpotFiltersProvider>
-            </UserProvider> */}
-          </ThemeProvider>
+                      </View>
+                    {/* <ConnectionCheck /> */}
+                    {/* <AppNavigation
+                      ref={(ref) => {
+                        this.router = ref;
+                        globalRefs.rootNavigator = ref;
+                      }}
+                      // See: https://reactnavigation.org/docs/en/screen-tracking.html
+                      onNavigationStateChange={(prevState, currState) => {
+                        if (config.logRoute) logNavigationState();
+                        const currScreen = getActiveRouteName(currState);
+                        const prevScreen = getActiveRouteName(prevState);
+                        if (prevScreen !== currScreen) {
+                          firebase.analytics().setCurrentScreen(currScreen);
+                        }
+                      }}
+                    /> */}
+                  {/* </AppRootView> */}
+                {/* </MenuProvider> */}
+            </SpotFiltersProvider>
+          </UserProvider>
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
