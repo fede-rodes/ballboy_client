@@ -4,6 +4,8 @@ import { propType } from 'graphql-anywhere';
 import { View } from 'react-native';
 import ErrorHandling from 'error-handling-utils';
 import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 import I18n from '../../../I18n';
 import privateUserFragment from '../../../GraphQL/Users/Fragments/privateUser';
 import Row from '../Row';
@@ -31,11 +33,20 @@ class AvatarPickerForm extends React.PureComponent {
     };
   }
 
+  async componentDidMount() {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  }
+
   clearErrors = () => {
     this.setState({ errors: { avatar: [] } });
   };
 
-  andleUpload = async () => {
+  handleUpload = async () => {
     const {
       onBeforeHook,
       onClientCancelHook,
@@ -56,44 +67,39 @@ class AvatarPickerForm extends React.PureComponent {
     this.clearErrors();
 
     const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
       quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
-      storageOptions: {
-        skipBackup: true,
-      },
+      base64: true,
     };
 
-    // TODO: add permissions https://docs.expo.io/versions/latest/sdk/imagepicker/
-    const res = await ImagePicker.launchImageLibraryAsync(options);
+    try {
+      // TODO: add permissions https://docs.expo.io/versions/latest/sdk/imagepicker/
+      const res = await ImagePicker.launchImageLibraryAsync(options);
+      console.log('res = ', res);
 
-    // await ImagePicker.launchImageLibraryAsync(options, (res) => {
-    //   // console.log('res = ', res);
+      if (res.cancelled) {
+        console.log('User cancelled photo picker');
+        onClientCancelHook();
+        return;
+      }
 
-    //   if (res.didCancel) {
-    //     console.log('User cancelled photo picker');
-    //     onClientCancelHook();
-    //   } else if (res.error) {
-    //     console.log('ImagePicker Error: ', res.error);
-    //     // Pass event up to parent component. onClientErrorHook will set 'disabled'
-    //     // value back to 'false' so that the user can re-submit the form
-    //     this.setState({ errors: { avatar: [res.error] } });
-    //     onClientErrorHook();
-    //   } else if (res.customButton) {
-    //     console.log('User tapped custom button: ', res.customButton);
-    //     onClientCancelHook();
-    //   } else {
-    //     const { data } = res;
+      const { base64 } = res;
 
-    //     // You can display the image using data:
-    //     // const source = { uri: 'data:image/jpeg;base64,' + res.data };
-    //     const base64avatar = `data:image/jpeg;base64,${data}`;
-    //     this.setState({ avatar: base64avatar });
-    //     // Pass event up to parent component. onClientSuccessHook will set 'disabled'
-    //     // value back to 'false' so that the user can re-submit the form
-    //     onSuccessHook({ file: base64avatar });
-    //   }
-    // });
+      // You can display the image using data:
+      // const source = { uri: 'data:image/jpeg;base64,' + res.data };
+      const avatar = `data:image/jpeg;base64,${base64}`;
+      this.setState({ avatar });
+      // Pass event up to parent component. onClientSuccessHook will set 'disabled'
+      // value back to 'false' so that the user can re-submit the form
+      onSuccessHook({ file: avatar });
+    } catch (exc) {
+      console.log('ImagePicker Error: ', exc);
+      // Pass event up to parent component. onClientErrorHook will set 'disabled'
+      // value back to 'false' so that the user can re-submit the form
+      this.setState({ errors: { avatar: [exc] } });
+      onClientErrorHook();
+    }
   }
 
   render() {
