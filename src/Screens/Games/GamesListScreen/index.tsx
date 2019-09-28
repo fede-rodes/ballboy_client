@@ -11,10 +11,6 @@ import NoGamesFound from '../../../Components/Games/NoGamesFound';
 // import curatedGames from './utils';
 
 //------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-const LIMIT = 10;
-//------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
 const Container = styled.View`
@@ -25,17 +21,23 @@ const Container = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class GamesListScreen extends React.Component {
+class GamesListScreen extends React.PureComponent {
+  state = {
+    hasNewResults: true,
+  }
+
   handleGamePress = (activity) => {
     const { navigation } = this.props;
     navigation.navigate('GameDetailsScreen', { _id: activity._id });
   }
 
   render() {
+    const { hasNewResults } = this.state;
+
     return (
       <QueryCatchErrors
         query={activitiesQuery}
-        variables={{ offset: 0, limit: LIMIT }}
+        variables={{ offset: 0, limit: 10 }}
         fetchPolicy="cache-and-network"
       >
         {({ loading, data, refetch, fetchMore }) => {
@@ -45,7 +47,10 @@ class GamesListScreen extends React.Component {
                 offset: get(data, 'activities.length', 0),
               },
               updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
+                if (!fetchMoreResult || get(fetchMoreResult, 'activities.length', 0) === 0) {
+                  this.setState({ hasNewResults: false }); // fix/hack for persistent loading indicator (loading never gets set to false when fetchMoreResult doesn't return new data)
+                  return prev;
+                }
                 return Object.assign({}, prev, {
                   activities: [...prev.activities, ...fetchMoreResult.activities],
                 });
@@ -53,7 +58,7 @@ class GamesListScreen extends React.Component {
             });
           };
 
-          const { activities = [] } = data;
+          const activities = get(data, 'activities', []);
 
           return (
             <Container testID="GameListScreen">
@@ -63,8 +68,8 @@ class GamesListScreen extends React.Component {
                 nothingFoundComp={NoGamesFound}
                 // FlatList props
                 onRefresh={refetch}
-                refreshing={loading}
-                onEndReached={activities.length < LIMIT ? () => null : loadMore}
+                refreshing={loading && hasNewResults}
+                onEndReached={loadMore}
                 onEndReachedThreshold={0.1}
               />
             </Container>

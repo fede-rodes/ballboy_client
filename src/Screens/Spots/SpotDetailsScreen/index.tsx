@@ -21,8 +21,11 @@ const GamesContainer = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-// TODO: implement pagination
 class SpotDetailsScreen extends React.PureComponent {
+  state = {
+    hasNewResults: true,
+  }
+
   handleGamePress = (activity) => {
     const { navigation } = this.props;
     navigation.navigate('GameDetailsScreen', { _id: activity._id });
@@ -30,6 +33,7 @@ class SpotDetailsScreen extends React.PureComponent {
 
   render() {
     const { navigation } = this.props;
+    const { hasNewResults } = this.state;
 
     const variables = {
       _id: navigation.state.params._id,
@@ -47,10 +51,13 @@ class SpotDetailsScreen extends React.PureComponent {
           const loadMore = () => {
             fetchMore({
               variables: {
-                offset: get(data, 'spotDetails.activities', []).length,
+                offset: get(data, 'spotDetails.activities.length', 0),
               },
               updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
+                if (!fetchMoreResult || get(fetchMoreResult, 'spotDetails.activities.length', 0) === 0) {
+                  this.setState({ hasNewResults: false }); // fix/hack for persistent loading indicator (loading never gets set to false when fetchMoreResult doesn't return new data)
+                  return prev;
+                }
                 return Object.assign({}, prev, {
                   spotDetails: {
                     ...prev.spotDetails,
@@ -69,17 +76,18 @@ class SpotDetailsScreen extends React.PureComponent {
           }
 
           const { spotDetails } = data;
+          const activities = get(spotDetails, 'activities', []);
 
           return (
             <Container>
               <SpotDetails spot={spotDetails} />
               <GamesContainer>
                 <GamesList
-                  activities={get(spotDetails, 'activities', [])}
+                  activities={activities}
                   onCardPress={this.handleGamePress}
                   // FlatList props
                   onRefresh={refetch}
-                  refreshing={loading}
+                  refreshing={loading && hasNewResults}
                   onEndReached={loadMore}
                   onEndReachedThreshold={0.1}
                   contentContainerStyle={{

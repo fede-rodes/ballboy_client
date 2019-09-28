@@ -20,90 +20,102 @@ const LIMIT = 10;
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SpotsList = ({
-  cardComponent,
-  sports,
-  maxDistance,
-  selectedSpot,
-  onCardPress,
-  ...rest
-}) => {
-  const Card = cardComponent === 'SpotListCard' ? SpotListCard : SpotListCardSmall;
+class SpotsList extends React.PureComponent {
+  state = {
+    hasNewResults: true,
+  }
 
-  // Set query variables
-  const variables = {
-    sports, // empty array will return all spots
-    distance: parseFloat(maxDistance * 1000), // km to mt
-    offset: 0,
-    limit: LIMIT,
-  };
+  render() {
+    const {
+      cardComponent,
+      sports,
+      maxDistance,
+      selectedSpot,
+      onCardPress,
+      ...rest
+    } = this.props;
 
-  return (
-    <Query
-      query={spotsQuery}
-      variables={variables}
-      fetchPolicy="cache-and-network"
-    >
-      {({ loading, data, refetch, fetchMore }) => {
-        console.log({ data });
-        const loadMore = () => {
-          fetchMore({
-            variables: {
-              offset: get(data, 'spots.length', 0),
-            },
-            updateQuery: (prev, { fetchMoreResult }) => {
-              if (!fetchMoreResult) return prev;
-              return Object.assign({}, prev, {
-                spots: [...prev.spots, ...fetchMoreResult.spots],
-              });
-            },
-          });
-        };
+    const { hasNewResults } = this.state;
 
-        const spots = get(data, 'spots', []);
+    const Card = cardComponent === 'SpotListCard' ? SpotListCard : SpotListCardSmall;
 
-        return (
-          <FlatList
-            data={spots}
-            keyExtractor={item => item._id}
-            renderItem={({ item: spot }) => (
-              <TouchableOpacity
-                key={spot._id}
-                // Pass event up to parent component
-                onPress={() => { onCardPress(spot); }}
-                activeOpacity={1}
-              >
-                <Card
-                  spot={spot}
-                  active={(selectedSpot && selectedSpot._id === spot._id) || false}
+    // Set query variables
+    const variables = {
+      sports, // empty array will return all spots
+      distance: parseFloat(maxDistance * 1000), // km to mt
+      offset: 0,
+      limit: LIMIT,
+    };
+
+    return (
+      <Query
+        query={spotsQuery}
+        variables={variables}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data, refetch, fetchMore }) => {
+          const loadMore = () => {
+            fetchMore({
+              variables: {
+                offset: get(data, 'spots.length', 0),
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult || get(fetchMoreResult, 'spots.length', 0) === 0) {
+                  this.setState({ hasNewResults: false }); // fix/hack for persistent loading indicator (loading never gets set to false when fetchMoreResult doesn't return new data)
+                  return prev;
+                }
+                return Object.assign({}, prev, {
+                  spots: [...prev.spots, ...fetchMoreResult.spots],
+                });
+              },
+            });
+          };
+
+          const spots = get(data, 'spots', []);
+
+          return (
+            <FlatList
+              data={spots}
+              keyExtractor={item => item._id}
+              renderItem={({ item: spot }) => (
+                <TouchableOpacity
+                  key={spot._id}
+                  // Pass event up to parent component
+                  onPress={() => { onCardPress(spot); }}
+                  activeOpacity={1}
+                >
+                  <Card
+                    spot={spot}
+                    active={(selectedSpot && selectedSpot._id === spot._id) || false}
+                  />
+                </TouchableOpacity>
+              )}
+              ListEmptyComponent={(!loading && (
+                <NothingFound
+                  iconSet="MaterialCommunityIcons"
+                  iconName="map-marker"
+                  text={I18n.t('spotsList.noResults')}
                 />
-              </TouchableOpacity>
-            )}
-            ListEmptyComponent={(!loading && (
-              <NothingFound
-                iconSet="MaterialCommunityIcons"
-                iconName="map-marker"
-                text={I18n.t('spotsList.noResults')}
-              />
-            ))}
-            ItemSeparatorComponent={() => <Spacer size="ML" />}
-            showsVerticalScrollIndicator={false}
-            onRefresh={refetch}
-            refreshing={loading}
-            onEndReached={spots.length < LIMIT ? () => null : loadMore}
-            onEndReachedThreshold={0.1}
-            contentContainerStyle={{
-              flexGrow: 1,
-              paddingVertical: 8,
-              // Center not-found-component in case no spots were found
-              justifyContent: spots.length === 0 ? 'center' : 'flex-start',
-            }}
-            {...rest}
-          />
-        );
-      }}
-    </Query>
-  );
+              ))}
+              ItemSeparatorComponent={() => <Spacer size="ML" />}
+              showsVerticalScrollIndicator={false}
+              onRefresh={refetch}
+              refreshing={loading && hasNewResults}
+              onEndReached={loadMore}
+              onEndReachedThreshold={0.1}
+              contentContainerStyle={{
+                flexGrow: 1,
+                paddingVertical: 8,
+                // Center not-found-component in case no spots were found
+                justifyContent: spots.length === 0 ? 'center' : 'flex-start',
+              }}
+              {...rest}
+            />
+          );
+        }}
+      </Query>
+    );
+  }
 };
 
 SpotsList.propTypes = {
