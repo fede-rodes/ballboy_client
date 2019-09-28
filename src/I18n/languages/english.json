@@ -651,7 +651,7 @@
         }
       }
     },
-    "terms": {
+    "legal": {
       "prefix": "By signing up, you are agreeing to the",
       "termsLink": "Terms and conditions",
       "and": "and",

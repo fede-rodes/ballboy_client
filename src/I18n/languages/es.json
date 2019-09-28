@@ -651,7 +651,7 @@
         }
       }
     },
-    "terms": {
+    "legal": {
       "prefix": "Al registrarte, estás aceptando los",
       "termsLink": "Términos y condiciones",
       "and": "y",
