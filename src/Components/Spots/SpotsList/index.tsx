@@ -33,7 +33,7 @@ const SpotsList = ({
   // Set query variables
   const variables = {
     sports, // empty array will return all spots
-    distance: parseFloat(maxDistance * 1000, 10), // km to mt
+    distance: parseFloat(maxDistance * 1000), // km to mt
     offset: 0,
     limit: LIMIT,
   };
@@ -45,6 +45,7 @@ const SpotsList = ({
       fetchPolicy="cache-and-network"
     >
       {({ loading, data, refetch, fetchMore }) => {
+        console.log({ data });
         const loadMore = () => {
           fetchMore({
             variables: {
@@ -59,7 +60,7 @@ const SpotsList = ({
           });
         };
 
-        const { spots = [] } = data;
+        const spots = get(data, 'spots', []);
 
         return (
           <FlatList

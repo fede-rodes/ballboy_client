@@ -7,8 +7,8 @@ import Colors from '../../../Themes/Colors';
 //------------------------------------------------------------------------------
 const Block = styled.View`
   padding: ${({ midHeight }) => (midHeight ? '8px 16px' : '16px')};
-  height: ${({ height }) => (height ? `${height}px` : 'auto')}
-  background-color: ${({ theme, bgColor }) => theme.colors[bgColor]}
+  height: ${({ height }) => (height ? `${height}px` : 'auto')};
+  background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
 `;
 
 Block.propTypes = {
