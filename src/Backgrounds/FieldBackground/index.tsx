@@ -1,8 +1,7 @@
-// import { Svg } from 'expo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, View, ScrollView } from 'react-native';
-// import Svg, { Path } from 'react-native-svg';
+// import { Svg } from 'expo';
 import styled from 'styled-components/native';
 import Colors from '../../Themes/Colors';
 import Logo from '../../Components/Common/Logo';
@@ -30,7 +29,7 @@ const FlexGrow = styled.View`
 // COMPONENT:
 //------------------------------------------------------------------------------
 const FieldBackground = ({ children }) => (
-  <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'green' }}>
+  <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: Colors.primaryGreen }}>
     <BgContainer>
       {/* <Svg width={fullWidth} height={fullHeight}>
         <Path
