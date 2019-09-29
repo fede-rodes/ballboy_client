@@ -3,7 +3,6 @@ import React from 'react';
 // import codePush from 'react-native-code-push';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { version as packageJSONVersion } from '../../../../package.json';
 import I18n from '../../../I18n';
 import LogoHeaderBackground from '../../../Backgrounds/LogoHeaderBackground';
 import Block from '../../../Components/Common/Block';
@@ -18,7 +17,8 @@ import TapsCounter from '../../../Components/Common/TapsCounter';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const { feedbackUrl, privacyUrl, termsUrl } = Constants.manifest.extra;
+const { version, extra } = Constants.manifest;
+const { feedbackUrl, privacyUrl, termsUrl } = extra;
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -32,7 +32,7 @@ const InfoScreen = ({ navigation }) => {
     <LogoHeaderBackground>
       <TapsCounter onTapsReached={() => { navigation.navigate('DebugNav'); }}>
         <Text size="M" center>
-          {`${I18n.t('infoScreen.appVersion')} ${packageJSONVersion}`}
+          {`${I18n.t('infoScreen.appVersion')} ${version}`}
           {/* {`${I18n.t('infoScreen.appVersion')} ${packageJSONVersion} ${codePushMetaData ? codePushMetaData.label : ''}`} */}
         </Text>
       </TapsCounter>

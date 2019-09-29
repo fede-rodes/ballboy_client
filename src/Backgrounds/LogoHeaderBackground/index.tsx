@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
@@ -6,6 +7,10 @@ import Spacer from '../../Components/Common/Spacer';
 import Logo from '../../Components/Common/Logo';
 import Text from '../../Components/Common/Text';
 
+//------------------------------------------------------------------------------
+// CONSTANTS:
+//------------------------------------------------------------------------------
+const { brand } = Constants.manifest.extra;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -41,7 +46,7 @@ const LogoHeaderBackground = ({
               color={isWhiteTheme ? 'black' : 'white'}
               bold
             >
-              SPORTYSPOTS
+              {brand}
             </Text>
           </View>,
           <Spacer key="spacer" size="XL" />,
