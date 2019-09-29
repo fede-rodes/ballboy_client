@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import ErrorHandling from 'error-handling-utils';
+import get from 'lodash/get';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import I18n from '../../../I18n';
 import { withUser, userPropTypes } from '../../../Context/User';
 import FormProps from '../../../RenderProps/form-props';
@@ -20,6 +22,10 @@ import ChatInputToolbar from '../../../Components/Chat/ChatInputToolbar';
 import ChatComposer from '../../../Components/Chat/ChatComposer';
 import ChatSend from '../../../Components/Chat/ChatSend';
 
+//------------------------------------------------------------------------------
+// STYLE:
+//------------------------------------------------------------------------------
+const { chatkitReadOnlyUser } = Constants.manifest.extra;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -47,7 +53,7 @@ const GameChatScreen = ({ user, navigation }) => {
         handleServerError,
         handleSuccess,
       }) => (
-        <ChatManagerProps userId={Constants.manifest.extra.chatkitReadOnlyUser} roomId={roomId}>
+        <ChatManagerProps userId={chatkitReadOnlyUser} roomId={roomId}>
           {chatHandler => (
             <ChatManagerProps userId={user._id} roomId={roomId}>
               {(userHandler) => {
@@ -68,45 +74,50 @@ const GameChatScreen = ({ user, navigation }) => {
                     onError={handleServerError}
                   >
                     {({ sendMessage }) => (
-                      <Relative>
-                        {chatHandler.loading && (
-                          <AbsoluteCenteredActivityIndicator />
-                        )}
-                        <GiftedChat
-                          user={user}
-                          messages={chatHandler.messages.length > 0 ? chatHandler.messages : noMessages}
-                          renderAvatarOnTop
-                          isAnimated
-                          alignTop
-                          renderUsernameOnMessage
-                          renderBubble={props => <ChatBubble {...props} />}
-                          renderDay={props => <ChatDay {...props} locale={I18n.locale.substr(0, 2)} />}
-                          renderInputToolbar={props => <ChatInputToolbar {...props} />}
-                          minInputToolbarHeight={50}
-                          renderSystemMessage={props => <ChatSystemMessage {...props} />}
-                          maxComposerHeight={70}
-                          keyboardShouldPersistTaps="never"
-                          renderComposer={props => <ChatComposer {...props} />}
-                          placeholder={I18n.t('chatInputField.placeholder')}
-                          textInputProps={{ editable: !disabled }}
-                          renderSend={props => <ChatSend {...props} disabled={disabled} />}
-                          alwaysShowSend
-                          onSend={(messages) => {
-                            handleBefore(); // set disable props to true
-                            sendMessage(messages);
-                          }}
-                          // Display server side errors if any
-                          renderChatFooter={() => (
-                            serverErrors.length > 0 ? (
-                              <Row>
-                                <Spacer row size="ML" />
-                                <Text color="error">{serverErrors}</Text>
-                              </Row>
-                            ) : null
-                          )}
-                        />
-                        <Spacer size="ML" />
-                      </Relative>
+                      <KeyboardAwareScrollView
+                        extraHeight={70}
+                        enableOnAndroid
+                        keyboardShouldPersistTaps="handled"
+                        contentContainerStyle={{ flex: 1 }}
+                      >
+                        <Relative>
+                          {chatHandler.loading && <AbsoluteCenteredActivityIndicator />}
+                          <GiftedChat
+                            user={user}
+                            messages={get(chatHandler, 'messages.length', 0) > 0 ? chatHandler.messages : noMessages}
+                            renderAvatarOnTop
+                            isAnimated
+                            alignTop
+                            renderUsernameOnMessage
+                            renderBubble={props => <ChatBubble {...props} />}
+                            renderDay={props => <ChatDay {...props} locale={I18n.locale.substr(0, 2)} />}
+                            renderInputToolbar={props => <ChatInputToolbar {...props} />}
+                            minInputToolbarHeight={50}
+                            renderSystemMessage={props => <ChatSystemMessage {...props} />}
+                            maxComposerHeight={70}
+                            keyboardShouldPersistTaps="never"
+                            renderComposer={props => <ChatComposer {...props} />}
+                            placeholder={I18n.t('chatInputField.placeholder')}
+                            textInputProps={{ editable: !disabled }}
+                            renderSend={props => <ChatSend {...props} disabled={disabled} />}
+                            alwaysShowSend
+                            onSend={(messages) => {
+                              handleBefore(); // set disable props to true
+                              sendMessage(messages);
+                            }}
+                            // Display server side errors if any
+                            renderChatFooter={() => (
+                              serverErrors.length > 0 ? (
+                                <Row>
+                                  <Spacer row size="ML" />
+                                  <Text color="error">{serverErrors}</Text>
+                                </Row>
+                              ) : null
+                            )}
+                          />
+                          <Spacer size="ML" />
+                        </Relative>
+                      </KeyboardAwareScrollView>
                     )}
                   </ChatkitApiCall>
                 );
