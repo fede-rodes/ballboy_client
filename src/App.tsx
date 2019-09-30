@@ -229,6 +229,7 @@ class App extends Component {
 
 export default App;
 
+
 // import React from 'react';
 // import { StyleSheet, Text, View } from 'react-native';
 // import {

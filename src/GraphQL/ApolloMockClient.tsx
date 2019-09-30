@@ -1,5 +1,5 @@
 import ApolloClient from 'apollo-client';
-import ApolloProvider from 'react-apollo/ApolloProvider';
+import { ApolloProvider } from 'react-apollo';
 import { SchemaLink } from 'apollo-link-schema';
 import { buildClientSchema } from 'graphql';
 import { addMockFunctionsToSchema } from 'graphql-tools';
