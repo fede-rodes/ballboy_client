@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import ErrorHandling from 'error-handling-utils';
+import styled from 'styled-components';
 import I18n from '../../../I18n';
+import Row from '../../Common/Row';
 import Block from '../../Common/Block';
 import TextField from '../../Common/TextField';
 import RaisedButton from '../../Common/RaisedButton';
 
 //------------------------------------------------------------------------------
-// COMPONENT:
+// CONSTANTS:
 //------------------------------------------------------------------------------
 // export const PASS_CODE_LENGTH = 6;
 
@@ -21,6 +22,12 @@ const INIT_STATE = {
 const INIT_ERRORS = {
   passcode: [],
 };
+//------------------------------------------------------------------------------
+// STYLE:
+//------------------------------------------------------------------------------
+const FlexOne = styled.View`
+  flex: 1; /* full-width */
+`;
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
@@ -119,31 +126,33 @@ class PasscodeForm extends React.Component {
     const passcodeErrors = ErrorHandling.getFieldErrors(errors, 'passcode', I18n.t);
 
     return (
-      <View testID="LoginScreen">
-        <Block midHeight>
-          <TextField
-            // id="passcode"
-            type="text"
-            placeholder={placeholder}
-            value={passcode}
-            error={passcodeErrors}
-            size="ML"
-            disabled={disabled}
-            keyboardType="number-pad"
-            onChangeText={(value) => {
-              this.handleChange({ fieldName: 'passcode', value });
-            }}
-          />
-        </Block>
-        <Block>
-          <RaisedButton
-            variant="primary"
-            label={btnLabel}
-            disabled={disabled}
-            onPress={this.handleSubmit}
-          />
-        </Block>
-      </View>
+      <Row testID="LoginScreen">
+        <FlexOne>
+          <Block midHeight>
+            <TextField
+              // id="passcode"
+              type="text"
+              placeholder={placeholder}
+              value={passcode}
+              error={passcodeErrors}
+              size="ML"
+              disabled={disabled}
+              keyboardType="number-pad"
+              onChangeText={(value) => {
+                this.handleChange({ fieldName: 'passcode', value });
+              }}
+            />
+          </Block>
+          <Block>
+            <RaisedButton
+              variant="primary"
+              label={btnLabel}
+              disabled={disabled}
+              onPress={this.handleSubmit}
+            />
+          </Block>
+        </FlexOne>
+      </Row>
     );
   }
 }

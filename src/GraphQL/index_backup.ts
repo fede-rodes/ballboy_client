@@ -1,6 +1,6 @@
 // import { InMemoryCache } from 'apollo-cache-inmemory';
 // import ApolloClient from 'apollo-client';
-// import ApolloProvider from 'react-apollo/ApolloProvider';
+// import { ApolloProvider } from 'react-apollo';
 // import { ApolloLink } from 'apollo-link';
 // import { onError } from 'apollo-link-error';
 // import { HttpLink } from 'apollo-link-http';

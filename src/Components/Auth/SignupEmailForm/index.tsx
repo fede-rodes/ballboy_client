@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native';
@@ -18,6 +19,8 @@ import RaisedButton from '../../Common/RaisedButton';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
+const { feedbackUrl, privacyUrl, termsUrl } = Constants.manifest.extra;
+
 export const MAX_CHARS = 74;
 
 const INIT_STATE = {
@@ -152,11 +155,7 @@ class SignupEmailForm extends React.PureComponent {
 
   render() {
     const { disabled } = this.props;
-    const {
-      name,
-      email,
-      errors,
-    } = this.state;
+    const { name, email, errors } = this.state;
 
     // Apply translation and concatenate field errors (string)
     const nameErrors = ErrorHandling.getFieldErrors(errors, 'name', I18n.t);
@@ -212,23 +211,23 @@ class SignupEmailForm extends React.PureComponent {
           <Block>
             <Row style={{ flexWrap: 'wrap' }}>
               <Text size="M">
-                {I18n.t('signupEmailForm.terms.prefix')}
+                {I18n.t('signupEmailForm.legal.prefix')}
               </Text>
               <Spacer row size="S" />
               <LinkOpenURL
-                text={I18n.t('signupEmailForm.terms.termsLink')}
-                href="https://www.sportyspots.com/terms.html"
+                text={I18n.t('signupEmailForm.legal.termsLink')}
+                href={termsUrl}
                 color="actionYellow"
                 underline
               />
               <Spacer row size="S" />
               <Text size="M">
-                {I18n.t('signupEmailForm.terms.and')}
+                {I18n.t('signupEmailForm.legal.and')}
               </Text>
               <Spacer row size="S" />
               <LinkOpenURL
-                text={I18n.t('signupEmailForm.terms.privacyLink')}
-                href="https://www.sportyspots.com/privacy.html"
+                text={I18n.t('signupEmailForm.legal.privacyLink')}
+                href={privacyUrl}
                 color="actionYellow"
                 underline
               />

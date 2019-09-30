@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AsyncStorage, Image, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
 import I18n from '../../../I18n';
+import Colors from '../../../Themes/Colors';
 import client from '../../../GraphQL/ApolloClient';
 import FormProps from '../../../RenderProps/form-props';
 import Images from '../../../Themes/Images';
@@ -22,7 +24,7 @@ export const CHECK_EMAIL_ACTIONS = {
 // STYLE:
 //------------------------------------------------------------------------------
 // TODO: introduce/use DefaultLayout instead
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -40,8 +42,17 @@ const CheckEmailScreen = ({ navigation }) => {
   const { action, email } = navigation.state.params;
 
   return (
-    <Container>
-      <View>
+    <KeyboardAwareScrollView
+      // extraHeight={70}
+      enableOnAndroid
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.concrete,
+      }}
+    >
         <Center>
           <Image
             style={{ height: 121, width: 121 }}
@@ -94,8 +105,7 @@ const CheckEmailScreen = ({ navigation }) => {
             </PasscodeFormApiCall>
           )}
         </FormProps>
-      </View>
-    </Container>
+    </KeyboardAwareScrollView>
   );
 };
 

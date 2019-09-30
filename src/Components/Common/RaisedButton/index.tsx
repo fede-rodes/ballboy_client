@@ -53,7 +53,7 @@ const RaisedButton = ({
 
   return (
     <Root
-      accessibilityLabel={label}
+      accessibilityLabel={label.toString()}
       {...rest}
     >
       <StyledRow

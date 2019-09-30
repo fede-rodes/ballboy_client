@@ -6,8 +6,8 @@ import styled from 'styled-components/native';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import I18n from '../../../I18n';
-import Images from '../../../Themes/Images';
-import ImageBackground from '../../../Backgrounds/ImageBackground';
+// import Images from '../../../Themes/Images';
+// import ImageBackground from '../../../Backgrounds/ImageBackground';
 import Footer from '../../Common/DarkFooter';
 import LocationSlide, { INIT_STATE as LOCATION_INIT_STATE } from '../LocationSlide';
 
@@ -15,36 +15,36 @@ import LocationSlide, { INIT_STATE as LOCATION_INIT_STATE } from '../LocationSli
 // CONSTANTS:
 //------------------------------------------------------------------------------
 const SLIDES = [
-  {
-    id: 'welcomeSlide',
-    Comp: () => (
-      <ImageBackground
-        title={I18n.t('onboardingScreen.welcome.title')}
-        text={I18n.t('onboardingScreen.welcome.text')}
-        image={Images.illustrationWizard1}
-      />
-    ),
-  },
-  {
-    id: 'joinGameSlide',
-    Comp: () => (
-      <ImageBackground
-        title={I18n.t('onboardingScreen.joinGame.title')}
-        text={I18n.t('onboardingScreen.joinGame.text')}
-        image={Images.illustrationWizard2}
-      />
-    ),
-  },
-  {
-    id: 'planGameSlide',
-    Comp: () => (
-      <ImageBackground
-        title={I18n.t('onboardingScreen.planGame.title')}
-        text={I18n.t('onboardingScreen.planGame.text')}
-        image={Images.illustrationWizard3}
-      />
-    ),
-  },
+  // {
+  //   id: 'welcomeSlide',
+  //   Comp: () => (
+  //     <ImageBackground
+  //       title={I18n.t('onboardingScreen.welcome.title')}
+  //       text={I18n.t('onboardingScreen.welcome.text')}
+  //       image={Images.illustrationWizard1}
+  //     />
+  //   ),
+  // },
+  // {
+  //   id: 'joinGameSlide',
+  //   Comp: () => (
+  //     <ImageBackground
+  //       title={I18n.t('onboardingScreen.joinGame.title')}
+  //       text={I18n.t('onboardingScreen.joinGame.text')}
+  //       image={Images.illustrationWizard2}
+  //     />
+  //   ),
+  // },
+  // {
+  //   id: 'planGameSlide',
+  //   Comp: () => (
+  //     <ImageBackground
+  //       title={I18n.t('onboardingScreen.planGame.title')}
+  //       text={I18n.t('onboardingScreen.planGame.text')}
+  //       image={Images.illustrationWizard3}
+  //     />
+  //   ),
+  // },
   {
     id: 'locationSlide',
     Comp: LocationSlide,
