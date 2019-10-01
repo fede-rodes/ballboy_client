@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ballboy",
-    "slug": "bb",
+    "name": "brand",
+    "slug": "brand",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -23,11 +23,22 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "entryPoint": "./index.ts",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "comgooglemaps",
+          "citymapper",
+          "uber",
+          "lyft",
+          "waze"
+        ]
+      }
     },
     "extra": {
       "graphqlServer": "http://192.168.56.1:3001/graphql",
+      "isStorybook": false,
       "chatkitAuthEndpoint": "http://192.168.56.1:3001/chatkit-auth",
       "chatkitReadOnlyUser": "xxx",
       "chatkitInstanceLocator": "xxx",
@@ -37,6 +48,10 @@
       "cloudinaryApiKey": "xxx",
       "cloudinaryApiSecret": "xxx",
       "cloudinaryUploadPreset": "xxx",
+      "brand": "BRAND",
+      "feedbackUrl": "https://goo.gl/forms/123",
+      "privacyUrl": "https://brand.com/privacy",
+      "termsUrl": "https://brand.com/terms",
       "cities": [
         {
           "id": "amsterdam",

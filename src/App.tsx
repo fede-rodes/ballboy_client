@@ -199,13 +199,6 @@ class App extends Component {
                   <AppRootView>
                     <StatusBar barStyle="light-content" />
                     {/* <ConnectionCheck /> */}
-                    {/* <View>
-                      <Text>Open up App.tsx to start working on your app! HELLOOOOO TIOT</Text>
-                      <Text>{JSON.stringify(SPORTS)}</Text>
-                      <Text>{JSON.stringify(ACTIVITY_STATUSES)}</Text>
-                      <Text>{JSON.stringify(ATTENDEE_ACTIONS)}</Text>
-                      <Text>{JSON.stringify(CITIES)}</Text>
-                    </View> */}
                     <AppNavigation
                       // ref={(ref) => { this.router = ref; }}
                       // See: https://reactnavigation.org/docs/en/screen-tracking.html
