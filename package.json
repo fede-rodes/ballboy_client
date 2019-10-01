@@ -10,7 +10,7 @@
     "graphql:updateSchema": "get-graphql-schema http://192.168.56.1:3001/graphql > schema.graphql",
     "graphql:updateSchemaJSON": "get-graphql-schema http://192.168.56.1:3001/graphql > schema.graphql.json --json",
     "prestorybook": "rnstl",
-    "storybook": "yarn prestorybook && start-storybook -p 7007"
+    "storybook": "start-storybook -p 7007"
   },
   "dependencies": {
     "@pusher/chatkit-client": "^1.13.0",
