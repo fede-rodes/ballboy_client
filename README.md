@@ -3,9 +3,10 @@
 Clone the repo:
 
 ```
->> mkdir bb
->> cd bb (you can call it whatever you want; bb stands for ballboy)
+>> mkdir bb (you can call you project's folder whatever you want; bb stands for ballboy)
+>> cd bb
 >> git clone git@github.com:fede-rodes/ballboy_client.git client
+>> yarn run install (install dependencies)
 ```
 
 ### Install Expo
@@ -132,6 +133,7 @@ Storybook is an open source tool for developing UI components in isolation for R
 To run storybook:
 - Stop `expo` in case it's running, open the emulator in case it's closed and close the app from the emulator in case it's running;
 - Go to `app.json` and set `expo.extra.isStorybook` to `true`. This tells expo to run storybook instead of the real app.
+- Load/update stories: `yarn run storybook`. Wait until `/storybook/storyloader.ts` gets created/updated. Then stop storybook `ctrl + C` on Linux.
 - Run expo as usual: `expo start`. Storybook should open automatically on the emulator.
 
 
