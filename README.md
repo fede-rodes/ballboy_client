@@ -6,7 +6,7 @@ Clone the repo:
 >> mkdir bb (you can call you project's folder whatever you want; bb stands for ballboy)
 >> cd bb
 >> git clone git@github.com:fede-rodes/ballboy_client.git client
->> yarn run install (install dependencies)
+>> yarn run install (install dependencies, please use yarn not npm!)
 ```
 
 ### Install Expo
@@ -121,6 +121,17 @@ Find out more about expo env vars:
 - [https://stackoverflow.com/questions/52546254/react-native-with-expo-how-to-use-a-env-local-config-file](https://stackoverflow.com/questions/52546254/react-native-with-expo-how-to-use-a-env-local-config-file)
 - [https://docs.expo.io/versions/latest/workflow/configuration/](https://docs.expo.io/versions/latest/workflow/configuration/)
 - [https://docs.expo.io/versions/latest/sdk/constants/](https://docs.expo.io/versions/latest/sdk/constants/)
+
+### Run expo
+
+- Start the emulator (genymotion or whatever)
+- Open a new terminal start expo:
+
+```
+>> cd /bb/client
+>> expo start
+```
+- Once expo is open, set `Local` as the type of `CONNECTION` and finally hit the `Run on Android (iOS) emulator`. After a little while (could take several minutes) the app should start on your emulator.
 
 ### Storybook
 
