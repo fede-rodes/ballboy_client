@@ -124,10 +124,6 @@ Find out more about expo env vars:
 
 ### Storybook
 
-```
-Storybook is an open source tool for developing UI components in isolation for React, Vue, and Angular. It makes building stunning UIs organized and efficient.
-```
-
 [https://storybook.js.org/](https://storybook.js.org/)
 
 To run storybook:
