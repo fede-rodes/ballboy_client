@@ -128,6 +128,7 @@ Find out more about expo env vars:
 
 ### Run expo
 
+- First go to [https://vast-beach-90080.herokuapp.com](https://vast-beach-90080.herokuapp.com) in order to weak up the free hosting
 - Start the emulator (genymotion or whatever)
 - Open a new terminal start expo:
 
