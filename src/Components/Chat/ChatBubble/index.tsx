@@ -50,7 +50,7 @@ const usernameStyle = {
 // COMPONENT:
 //------------------------------------------------------------------------------
 // See: https://github.com/FaridSafi/react-native-gifted-chat/blob/master/src/Bubble.tsx
-const ChatBubble = props => (
+const ChatBubble = (props) => (
   <Bubble
     {...props}
     wrapperStyle={wrapperStyle}
