@@ -9,7 +9,11 @@ Clone the repo:
 >> yarn run install (install dependencies, please use yarn not npm!)
 ```
 
-### Install Expo
+### Install Expo CLI
+
+```
+>> npm install -g expo-cli
+```
 
 [https://docs.expo.io/versions/latest/introduction/installation/](https://docs.expo.io/versions/latest/introduction/installation/)
 

@@ -1017,7 +1017,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.4.tgz#622a72bebd1e3f48d921563b4b60a762295a81fc"
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
-"@expo/react-native-action-sheet@^3.1.0":
+"@expo/react-native-action-sheet@^3.0.3":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-3.2.0.tgz#1254adf0f633f557dfc343324fb7e39f293badf4"
   integrity sha512-fpHLhSvhG6/oxH5r25SyeZ4Q/t0/vCqHCBObT7KgnxOxzp2kxMcF3nqAjsd2a/i1CB4lQaiabfYTzpeFmZkFfw==
@@ -4500,6 +4500,14 @@ expo-asset@~7.0.0:
     blueimp-md5 "^2.10.0"
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
+
+expo-av@~7.0.0:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-7.0.1.tgz#c25cb66f20333157ae65110aa9faef68b34cc7a8"
+  integrity sha512-wsSMqvkvVvYMsqTrgCDO8xsDVsv201kg+LTO1j6/HfKRLLKcTapZZVSSl4rqMCEWRzdTP4L/hCyOo19jf8PdKQ==
+  dependencies:
+    lodash "^4.17.15"
+    nullthrows "^1.1.0"
 
 expo-constants@~7.0.0:
   version "7.0.0"
@@ -8524,12 +8532,13 @@ react-native-gesture-handler@~1.3.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-gifted-chat@^0.10.1:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-0.10.2.tgz#c3b25a75e602b6991d31f9bd9f1effd310431280"
-  integrity sha512-ESMwOMzSEXA0b3dLSpnYXGxRQBRiOEJc7+a5cMmJonrKm/A49g+fRdGM4feyIkR5cXj2RI5NijvzUTjuAmc5vw==
+react-native-gifted-chat@0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-0.10.1.tgz#d320381d9c0e60f143a7a3a1de23184824eef3be"
+  integrity sha512-jFt6O/YANUWbQf60nvsevkh3STbIK9iZiwM5XQ53pu9zKuOetc1SgnpCmfWCQSiyiymnMXH218VJpXf0D+cnxQ==
   dependencies:
-    "@expo/react-native-action-sheet" "^3.1.0"
+    "@expo/react-native-action-sheet" "^3.0.3"
+    expo-av "~7.0.0"
     moment "^2.19.0"
     prop-types "15.7.2"
     react-native-communications "2.2.1"
@@ -8640,9 +8649,9 @@ react-native-modal@^11.0.2:
     prop-types "^15.6.2"
     react-native-animatable "^1.3.1"
 
-"react-native-parsed-text@https://github.com/EvanBacon/react-native-parsed-text.git":
+"react-native-parsed-text@git+https://github.com/EvanBacon/react-native-parsed-text.git":
   version "0.0.22"
-  resolved "https://github.com/EvanBacon/react-native-parsed-text.git#24939951b13a8223882c74610d758903eed652ab"
+  resolved "git+https://github.com/EvanBacon/react-native-parsed-text.git#24939951b13a8223882c74610d758903eed652ab"
   dependencies:
     prop-types "^15.5.10"
 
