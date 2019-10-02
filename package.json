@@ -10,7 +10,11 @@
     "graphql:updateSchema": "get-graphql-schema http://192.168.56.1:3001/graphql > schema.graphql",
     "graphql:updateSchemaJSON": "get-graphql-schema http://192.168.56.1:3001/graphql > schema.graphql.json --json",
     "prestorybook": "rnstl",
-    "storybook": "start-storybook -p 7007"
+    "storybook": "start-storybook -p 7007",
+    "test": "jest --watch --coverage=false",
+    "testDebug": "jest -o --watch --coverage=false",
+    "testFinal": "jest",
+    "updateSnapshots": "jest -u --coverage=false"
   },
   "dependencies": {
     "@pusher/chatkit-client": "^1.13.0",
@@ -83,6 +87,8 @@
     "faker": "^4.1.0",
     "get-graphql-schema": "^2.1.2",
     "graphql-tools": "^4.0.5",
+    "jest-expo": "^35.0.0",
+    "jest-expo-enzyme": "^0.0.0",
     "node-fetch": "^2.6.0",
     "react-native-storybook-loader": "^1.8.1",
     "typescript": "^3.4.5"
