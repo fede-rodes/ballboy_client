@@ -30,19 +30,6 @@ export function makeNumGenerator() {
   };
 }
 
-// const convertS3ToImgix = ({ image, height, width }) => (
-//   image.replace('https://s3.amazonaws.com/sportyspots-prd', 'http://sportyspots.imgix.net')
-//     .concat('?auto=compress')
-//     // .concat(height ? `&h=${height}` : '')
-//     .concat(width ? `&w=${width}` : '')
-// );
-
-// const getImageUrl = ({ image, height, width }) => (
-//   image.startsWith('http') // TODO: this should be https://s3.amazonaws.com/sportyspots-
-//     ? convertS3ToImgix({ image, height, width })
-//     : `${Config.SEEDORF_HOST}${image}`
-// );
-
 export const getImageUrl = ({ image, height, width }) => (
   image.replace('/upload', `/upload${width ? `/w_${parseInt(width, 10)}` : ''}`)
   // .concat('?auto=compress')
@@ -59,7 +46,7 @@ export const getSpotImages = ({ images, height, width }) => {
   }
 
   return images && images.length > 0
-    ? images.map(image => getImageUrl({ image, height, width }))
+    ? images.map((image) => getImageUrl({ image, height, width }))
     : getImageUrl({ image: DEFAULT_SPOT_IMG, height, width });
 };
 
@@ -76,10 +63,10 @@ export const getSpotImages = ({ images, height, width }) => {
 const routeToString = (route, depth = 0) => {
   let str = route.routeName || 'ROOT';
   if (route.routes) {
-    str += '\n' + route.routes.map((subRoute, idx) => {
+    str += `\n${  route.routes.map((subRoute, idx) => {
       const isActive = (idx === route.index);
       return ' '.repeat(3 * depth) + (isActive ? ' * ' : '   ') + routeToString(subRoute, depth + 1);
-    }).join('\n');
+    }).join('\n')}`;
   }
   return str;
 };
@@ -118,7 +105,7 @@ export const curateErrors = (curateFieldName, curateErrorMsg) => (errors) => {
 
   keys.forEach((key) => {
     const arrayError = castArray(errs[key]);
-    const curatedArray = arrayError.map(errorMsg => (curateErrorMsg(errorMsg)));
+    const curatedArray = arrayError.map((errorMsg) => (curateErrorMsg(errorMsg)));
     curatedErrors[curateFieldName(key)] = curatedArray;
   });
 
@@ -131,4 +118,3 @@ export const curateErrors = (curateFieldName, curateErrorMsg) => (errors) => {
 //   }
 //   return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
 // };
-

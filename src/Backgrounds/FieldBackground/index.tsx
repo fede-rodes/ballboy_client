@@ -15,12 +15,12 @@ const { width: fullWidth, height: fullHeight } = Dimensions.get('window');
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
-const BgContainer = styled.View`
-  background-color: ${({ theme }) => theme.colors.primaryGreen}
-  position: absolute;
-  left: 0;
-  top: 0;
-`;
+// const BgContainer = styled.View`
+//   background-color: ${({ theme }) => theme.colors.primaryGreen}
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+// `;
 //------------------------------------------------------------------------------
 const FlexGrow = styled.View`
   flex-grow: 1;
@@ -30,8 +30,8 @@ const FlexGrow = styled.View`
 //------------------------------------------------------------------------------
 const FieldBackground = ({ children }) => (
   <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: Colors.primaryGreen }}>
-    <BgContainer>
-      {/* <Svg width={fullWidth} height={fullHeight}>
+    {/* <BgContainer>
+      <Svg width={fullWidth} height={fullHeight}>
         <Path
           d={`M${0.2 * fullWidth} 0 h ${0.08 * fullWidth} L ${-0.1 *
           fullWidth} ${fullHeight} h ${-0.12 * fullWidth} Z`}
@@ -42,14 +42,15 @@ const FieldBackground = ({ children }) => (
           fill={Colors.secondaryDarkBlueGreen}
           opacity=".84"
         />
-      </Svg> */}
-    </BgContainer>
+      </Svg>
+    </BgContainer> */}
     <Spacer size="XXXL" />
     <Spacer size="XXXL" />
-    <View alignItems="center">
+    <Spacer size="XXXL" />
+    <View alignItems="center" style={{ flex: 1 }}>
       <Logo scale={1} />
     </View>
-    <Spacer size="XXXL" />
+    {/* <Spacer size="XXXL" /> */}
     <FlexGrow>
       {children}
     </FlexGrow>

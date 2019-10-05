@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Linking, Share } from 'react-native';
@@ -8,6 +9,8 @@ import RoundButton from '../../Common/RoundButton';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
+const { brand } = Constants.manifest;
+
 const iconStyle = {
   facebook: {
     iconSet: 'FontAwesome',
@@ -37,7 +40,7 @@ class ShareGameButton extends React.PureComponent {
   handlePress = async () => {
     const { variant, shareLink } = this.props;
 
-    const title = 'SportySpots';
+    const title = brand;
     const message = `${I18n.t('shareGameButton.msg')} ${shareLink}`;
 
     if (variant === 'native') {
