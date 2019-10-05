@@ -128,15 +128,15 @@ Find out more about expo env vars:
 
 ### Run expo
 
-- First go to [https://vast-beach-90080.herokuapp.com](https://vast-beach-90080.herokuapp.com) in order to weak up the free hosting
-- Start the emulator (genymotion or whatever)
+- First, visit [https://vast-beach-90080.herokuapp.com/graphql](https://vast-beach-90080.herokuapp.com/graphql) in order to 'wake up' the server. I don't want to pay a single pennie for now, so the server is hosted on a Heroku-free-tire, which goes to sleep when inactive. Booting the server up takes a few minutes.
+- Start the emulator (genymotion is the emulator I use on Linux)
 - Open a new terminal start expo:
 
 ```
 >> cd /bb/client
 >> expo start
 ```
-- Once expo is open, set `Local` as the type of `CONNECTION` and finally hit the `Run on Android (iOS) emulator`. After a little while (could take several minutes) the app should start on your emulator.
+- Once expo is open, set `Local` as the type of `CONNECTION` and finally hit the `Run on Android (iOS) emulator` button. After a little while (could take several minutes) the app should start on your emulator.
 
 ### Storybook
 
