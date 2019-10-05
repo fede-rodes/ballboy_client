@@ -17,7 +17,8 @@
     ],
     "react/jsx-filename-extension": 0,
     "react/no-did-mount-set-state": 0,
-    "react/sort-comp": 0,
+    "react/state-in-constructor": 0,
+    // "react/sort-comp": 0,
     "function-paren-newline": ["error", "consistent"],
     "no-console": 0,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": ["@storybook/react-native"] }]

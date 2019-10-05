@@ -1,6 +1,6 @@
 // leave off @2x/@3x
 const images = {
-  logo: require('../../assets/images/sportyspots-logo.png'),
+  logo: require('../../assets/images/logo.png'),
   illustrationWizard1: require('../../assets/images/illustration-wizard-1.png'),
   illustrationWizard2: require('../../assets/images/illustration-wizard-2.png'),
   illustrationWizard3: require('../../assets/images/illustration-wizard-3.png'),

@@ -1,7 +1,8 @@
 // import { Svg } from 'expo';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
+import Images from '../../../Themes/Images';
 // import Svg, { G, Path, Polygon } from 'react-native-svg';
 
 // const { G, Path, Polygon } = Svg;
@@ -37,7 +38,13 @@ import { Text } from 'react-native';
 //   </Svg>
 // );
 
-const Logo = ({ scale }) => <Text>LOGO</Text>;
+const Logo = ({ scale }) => (
+  <Image
+    source={Images.logo}
+    resizeMode="contain"
+    style={{ flex: 1 }}
+  />
+);
 
 Logo.propTypes = {
   scale: PropTypes.number,

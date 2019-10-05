@@ -10,7 +10,7 @@ import Text from '../../Components/Common/Text';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const { brand } = Constants.manifest.extra;
+const { name } = Constants.manifest;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -40,13 +40,13 @@ const LogoHeaderBackground = ({
             alignItems="center"
           >
             <Logo scale={1} />
-            <Spacer size="L" />
+            {/* <Spacer size="L" /> */}
             <Text
               size="L"
               color={isWhiteTheme ? 'black' : 'white'}
               bold
             >
-              {brand}
+              {name.toUpperCase()}
             </Text>
           </View>,
           <Spacer key="spacer" size="XL" />,
