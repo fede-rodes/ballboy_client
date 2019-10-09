@@ -55,7 +55,7 @@
     "react-navigation": "3.9.1",
     "recompose": "^0.30.0",
     "sha1": "^1.1.1",
-    "styled-components": "^4.3.2",
+    "styled-components": "5.0.0-beta.8",
     "superagent": "^5.1.0",
     "validator": "^11.1.0"
   },

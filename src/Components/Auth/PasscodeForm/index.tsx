@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import ErrorHandling from 'error-handling-utils';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import I18n from '../../../I18n';
 import Row from '../../Common/Row';
 import Block from '../../Common/Block';

@@ -130,7 +130,7 @@ Find out more about expo env vars:
 
 - First, visit [https://vast-beach-90080.herokuapp.com/graphql](https://vast-beach-90080.herokuapp.com/graphql) in order to 'wake up' the server. I don't want to pay a single pennie for now, so the server is hosted on a Heroku-free-tire, which goes to sleep when inactive. Booting the server up takes a few minutes.
 - Start the emulator (genymotion is the emulator I use on Linux)
-- Open a new terminal start expo:
+- Open a new terminal and start expo:
 
 ```
 >> cd /bb/client

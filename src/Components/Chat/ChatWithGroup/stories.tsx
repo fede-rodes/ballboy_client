@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import ChatWithGroup from '.';
 
 const Box = styled.View`
