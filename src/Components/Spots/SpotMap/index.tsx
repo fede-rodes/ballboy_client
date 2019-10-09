@@ -20,7 +20,8 @@ import {
 // -----------------------------------------------------------------------------
 const { width: windowWidth } = Dimensions.get('window');
 // -----------------------------------------------------------------------------
-const { googleMapsAndroidApiKey, googleMapsIosApiKey } = Constants.manifest.extra;
+const googleMapsIosApiKey = Constants.manifest.ios.config.googleMapsApiKey;
+const googleMapsAndroidApiKey = Constants.manifest.android.config.googleMaps.apiKey;
 const GOOGLE_MAPS_API_KEY = Platform.OS === 'ios' ? googleMapsIosApiKey : googleMapsAndroidApiKey;
 // -----------------------------------------------------------------------------
 // STYLE:

@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "brand",
-    "slug": "brand",
+    "name": "Ballboy",
+    "description": "Find and organize sport activities with ease",
+    "slug": "bb",
+    "owner": "federodes",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -15,7 +17,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffff14"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +27,9 @@
     ],
     "entryPoint": "./index.ts",
     "ios": {
-      "supportsTablet": true,
+      "bundleIdentifier": "app.ballboy.ios",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false,
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
           "comgooglemaps",
@@ -34,59 +38,99 @@
           "lyft",
           "waze"
         ]
+      },
+      "config": {
+        "googleMapsApiKey": "xxx"
       }
+    },
+    "android": {
+      "package": "app.ballboy.android",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA_ROLL"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "xxx"
+        }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "https",
+            "host": "*.ballboy.app"
+          },
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "extra": {
       "graphqlServer": "http://192.168.56.1:3001/graphql",
       "isStorybook": false,
       "chatkitAuthEndpoint": "http://192.168.56.1:3001/chatkit-auth",
-      "chatkitReadOnlyUser": "xxx",
+      "chatkitReadOnlyUser": "readonly",
       "chatkitInstanceLocator": "xxx",
-      "googleMapsAndroidApiKey": "xxx",
-      "googleMapsIosApiKey": "xxx",
       "cloudinaryCloudname": "xxx",
       "cloudinaryApiKey": "xxx",
       "cloudinaryApiSecret": "xxx",
-      "cloudinaryUploadPreset": "xxx",
-      "brand": "BRAND",
+      "cloudinaryUploadPreset": "default",
       "feedbackUrl": "https://goo.gl/forms/123",
-      "privacyUrl": "https://brand.com/privacy",
-      "termsUrl": "https://brand.com/terms",
+      "privacyUrl": "https://ballboy.app/privacy",
+      "termsUrl": "https://ballboy.app/terms",
       "cities": [
         {
           "id": "amsterdam",
           "city": "Amsterdam",
           "country": "Netherlands",
           "formattedAddress": "Amsterdam, Netherlands",
-          "coordinates": [52.354733, 4.8284116]
+          "coordinates": [
+            52.354733,
+            4.8284116
+          ]
         },
         {
           "id": "enschede",
           "city": "Enschede",
           "country": "Netherlands",
           "formattedAddress": "Enschede, Netherlands",
-          "coordinates": [52.220615, 6.895782]
+          "coordinates": [
+            52.220615,
+            6.895782
+          ]
         },
         {
           "id": "rotterdam",
           "city": "Rotterdam",
           "country": "Netherlands",
           "formattedAddress": "Rotterdam, Netherlands",
-          "coordinates": [51.92806, 4.420195]
+          "coordinates": [
+            51.92806,
+            4.420195
+          ]
         },
         {
           "id": "barcelona",
           "city": "Barcelona",
           "country": "Spain",
           "formattedAddress": "Barcelona, Spain",
-          "coordinates": [41.394897, 2.0785563]
+          "coordinates": [
+            41.394897,
+            2.0785563
+          ]
         },
         {
-          "id":"buenosAires",
-          "city":"Buenos Aires",
-          "country":"Argentina",
+          "id": "buenosAires",
+          "city": "Buenos Aires",
+          "country": "Argentina",
           "formattedAddress": "Buenos Aires, Argentina",
-          "coordinates": [-34.61566, -58.50351]
+          "coordinates": [
+            -34.61566,
+            -58.50351
+          ]
         }
       ]
     }
