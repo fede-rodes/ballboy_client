@@ -160,3 +160,8 @@ Thanks to [https://thenounproject.com](https://thenounproject.com)
 ### TS tests config
 
 https://medium.com/@ch1ll0ut1/how-to-setup-react-native-with-typescript-the-new-way-6c1f1cce6ed3
+
+
+### RN web navigation
+
+https://blog.bitsrc.io/how-to-react-native-web-app-a-happy-struggle-aea7906f4903

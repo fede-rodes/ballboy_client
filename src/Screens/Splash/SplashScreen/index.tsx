@@ -19,8 +19,10 @@ const FlexOne = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SplashScreen = ({ navigation }) => (
-  <FieldBackground>
+const SplashScreen = ({ navigation }) => {
+  console.log('navigation', navigation);
+  return (
+    <FieldBackground>
     <Block>
       <TapsCounter onTapsReached={() => { navigation.navigate('DebugNav'); }}>
         <Text
@@ -43,7 +45,7 @@ const SplashScreen = ({ navigation }) => (
       />
       <Spacer size="XL" />
       <Button
-        variant="transparent"
+        // variant="transparent"
         title={I18n.t('splashScreen.loginBtnLabel')}
         onPress={() => {
           console.log('LOGIN!!!!');
@@ -61,7 +63,8 @@ const SplashScreen = ({ navigation }) => (
     </Block>
     <Spacer size="XL" />
   </FieldBackground>
-);
+  );
+};
 
 SplashScreen.propTypes = {
   navigation: PropTypes.shape({
