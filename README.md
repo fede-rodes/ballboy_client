@@ -150,3 +150,8 @@ To run storybook:
 
 
 https://pusher.com/tutorials/storybook-react-native
+
+
+### Icons
+
+Thanks to [https://thenounproject.com](https://thenounproject.com)
