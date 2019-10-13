@@ -1,9 +1,19 @@
+import { Platform } from 'react-native';
+import { createBrowserApp } from '@react-navigation/web';
+import {
+  createAppContainer,
+  createSwitchNavigator,
+} from 'react-navigation';
 import {
   createStackNavigator,
-  createSwitchNavigator,
+  // createSwitchNavigator,
+  // createBottomTabNavigator,
+} from 'react-navigation-stack';
+import {
+  // createStackNavigator,
+  // createSwitchNavigator,
   createBottomTabNavigator,
-  createAppContainer,
-} from 'react-navigation';
+} from 'react-navigation-tabs';
 import {
   OnboardingNav,
   SplashNav,
@@ -48,7 +58,7 @@ const AppNavigation = createSwitchNavigator({
   tabBarComponent: () => null,
 });
 
-export default createAppContainer(AppNavigation);
+export default Platform.OS === 'web' ? createBrowserApp(AppNavigation) : createAppContainer(AppNavigation);
 
 // const createRootNavigator = (loggedIn = false) => (
 // const createRootNavigator = ({ loadingUser, user }) => (

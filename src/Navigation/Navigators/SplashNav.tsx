@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import SplashScreen from '../../Screens/Splash/SplashScreen';
 import LoggedOutRoute from '../LoggedOutRoute';
 import AuthScreens from './AuthScreens';

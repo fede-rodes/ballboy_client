@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import I18n from '../../I18n';
 import StackBackHeader from '../StackBackHeader';
 import SpotsListScreen from '../../Screens/Spots/SpotsListScreen';
@@ -12,7 +12,7 @@ import { headerTitleStyle } from './style';
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
 //------------------------------------------------------------------------------
-const backBtn = navigation => (
+const backBtn = (navigation) => (
   <StackBackHeader
     onPress={() => { navigation.goBack(null); }}
   />

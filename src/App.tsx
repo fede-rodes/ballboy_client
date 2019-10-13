@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 // import Crashes from 'appcenter-crashes';
 // import codePush from 'react-native-code-push';
 import { ApolloProvider } from 'react-apollo';
-// import { StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 // import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
-import { Text } from 'react-native';
+// import { Text } from 'react-native';
 // import { createAppContainer } from 'react-navigation';
 import client from './GraphQL/ApolloClient';
-// import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
+import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 // import createRootNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 import { getBottomSpace, ifIphoneX } from './iphoneHelpers';
 import { UserProvider } from './Context/User';
@@ -138,10 +138,9 @@ class App extends Component {
               <MenuProvider>
                 <LoadAssets>
                   <AppRootView>
-                    <Text>WORKINGGG!!</Text>
-                    {/* <StatusBar barStyle="light-content" />  */}
+                    <StatusBar barStyle="light-content" />
                     {/* <ConnectionCheck /> */}
-                    {/* <AppNavigation
+                    <AppNavigation
                         // ref={(ref) => { this.router = ref; }}
                         // See: https://reactnavigation.org/docs/en/screen-tracking.html
                       onNavigationStateChange={(prevState, currState) => {
@@ -151,7 +150,7 @@ class App extends Component {
                         //   firebase.analytics().setCurrentScreen(currScreen);
                         // }
                       }}
-                    /> */}
+                    />
                   </AppRootView>
                 </LoadAssets>
               </MenuProvider>

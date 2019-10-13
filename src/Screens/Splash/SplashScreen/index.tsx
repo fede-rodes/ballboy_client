@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-native';
 import styled from 'styled-components/native';
 import I18n from '../../../I18n';
 import FieldBackground from '../../../Backgrounds/FieldBackground';
@@ -41,11 +42,22 @@ const SplashScreen = ({ navigation }) => (
         onPress={() => { navigation.navigate('SignupEmailScreen'); }}
       />
       <Spacer size="XL" />
-      <RaisedButton
+      <Button
+        variant="transparent"
+        title={I18n.t('splashScreen.loginBtnLabel')}
+        onPress={() => {
+          console.log('LOGIN!!!!');
+          navigation.navigate('LoginScreen');
+        }}
+      />
+      {/* <RaisedButton
         variant="transparent"
         label={I18n.t('splashScreen.loginBtnLabel')}
-        onPress={() => { navigation.navigate('LoginScreen'); }}
-      />
+        onPress={() => {
+          console.log('login!');
+          navigation.navigate('LoginScreen');
+        }}
+      /> */}
     </Block>
     <Spacer size="XL" />
   </FieldBackground>

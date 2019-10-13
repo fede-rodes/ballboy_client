@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import PlanGameScreen from '../../Screens/Plan/PlanGameScreen';
 import ShareGameScreen from '../../Screens/Plan/ShareGameScreen';
 
