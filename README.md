@@ -155,3 +155,8 @@ https://pusher.com/tutorials/storybook-react-native
 ### Icons
 
 Thanks to [https://thenounproject.com](https://thenounproject.com)
+
+
+### TS tests config
+
+https://medium.com/@ch1ll0ut1/how-to-setup-react-native-with-typescript-the-new-way-6c1f1cce6ed3
