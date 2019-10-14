@@ -164,4 +164,12 @@ https://medium.com/@ch1ll0ut1/how-to-setup-react-native-with-typescript-the-new-
 
 ### RN web navigation
 
-https://blog.bitsrc.io/how-to-react-native-web-app-a-happy-struggle-aea7906f4903
+- https://github.com/expo/web-examples/blob/29d2eeed96d936d7feb1f29e35bee684b6519dfb/docs/FEATURES.md
+- https://blog.bitsrc.io/how-to-react-native-web-app-a-happy-struggle-aea7906f4903
+- https://github.com/expo/expo/tree/master/apps
+- https://reactnavigation.org/docs/en/auth-flow.html (see also v5)
+- https://github.com/react-native-elements/react-native-elements-app/blob/master/src/views/profile/screen1.js
+- https://react-native-elements.github.io/react-native-elements-app/
+- https://blog.bitsrc.io/how-to-react-native-web-app-a-happy-struggle-aea7906f4903
+- https://github.com/inspmoore/rnw_boilerplate?source=post_page-----aea7906f4903----------------------
+- https://pickering.org/using-react-native-react-native-web-and-react-navigation-in-a-single-project-cfd4bcca16d0
