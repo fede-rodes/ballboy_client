@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native';
 import styled from 'styled-components/native';
 import I18n from '../../../I18n';
 import FieldBackground from '../../../Backgrounds/FieldBackground';
@@ -19,10 +18,8 @@ const FlexOne = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SplashScreen = ({ navigation }) => {
-  console.log('navigation', navigation);
-  return (
-    <FieldBackground>
+const SplashScreen = ({ navigation }) => (
+  <FieldBackground>
     <Block>
       <TapsCounter onTapsReached={() => { navigation.navigate('DebugNav'); }}>
         <Text
@@ -44,27 +41,15 @@ const SplashScreen = ({ navigation }) => {
         onPress={() => { navigation.navigate('SignupEmailScreen'); }}
       />
       <Spacer size="XL" />
-      <Button
-        // variant="transparent"
-        title={I18n.t('splashScreen.loginBtnLabel')}
-        onPress={() => {
-          console.log('LOGIN!!!!');
-          navigation.navigate('LoginScreen');
-        }}
-      />
-      {/* <RaisedButton
+      <RaisedButton
         variant="transparent"
         label={I18n.t('splashScreen.loginBtnLabel')}
-        onPress={() => {
-          console.log('login!');
-          navigation.navigate('LoginScreen');
-        }}
-      /> */}
+        onPress={() => { navigation.navigate('LoginScreen'); }}
+      />
     </Block>
     <Spacer size="XL" />
   </FieldBackground>
-  );
-};
+);
 
 SplashScreen.propTypes = {
   navigation: PropTypes.shape({
