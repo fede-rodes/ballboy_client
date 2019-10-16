@@ -1,15 +1,9 @@
-import React from 'react';
 import { Platform } from 'react-native';
 import { createBrowserApp } from '@react-navigation/web';
 import {
   createAppContainer,
   createSwitchNavigator,
 } from 'react-navigation';
-import {
-  createNavigator,
-  SwitchRouter,
-  SceneView,
-} from '@react-navigation/core';
 import {
   createStackNavigator,
   // createSwitchNavigator,
@@ -37,25 +31,25 @@ import LoginScreen from '../Screens/Auth/LoginScreen';
 import SignupScreen from '../Screens/Auth/SignupEmailScreen';
 
 
-// const MainTabsNav = createBottomTabNavigator({
-//   SpotSearchTab: { screen: SpotSearchNav },
-//   GameSearchTab: { screen: GameSearchNav },
-//   ProfileTab: { screen: ProfileNav },
-//   InfoTab: { screen: InfoNav },
-// }, {
-//   tabBarComponent: NavBar,
-//   tabBarPosition: 'bottom',
-//   animationEnabled: false,
-//   swipeEnabled: false,
-//   initialRouteName: 'GameSearchTab',
-// });
+const MainTabsNav = createBottomTabNavigator({
+  SpotSearchTab: { screen: SpotSearchNav },
+  GameSearchTab: { screen: GameSearchNav },
+  ProfileTab: { screen: ProfileNav },
+  InfoTab: { screen: InfoNav },
+}, {
+  tabBarComponent: NavBar,
+  tabBarPosition: 'bottom',
+  animationEnabled: false,
+  swipeEnabled: false,
+  initialRouteName: 'GameSearchTab',
+});
 
-// const MainNav = createStackNavigator({
-//   MainTabs: { screen: MainTabsNav, navigationOptions: { header: null } },
-//   PlanScreen: { screen: PlanGameNav, navigationOptions: { header: null } },
-// }, {
-//   initialRouteName: 'MainTabs',
-// });
+const MainNav = createStackNavigator({
+  MainTabs: { screen: MainTabsNav, navigationOptions: { header: null } },
+  PlanScreen: { screen: PlanGameNav, navigationOptions: { header: null } },
+}, {
+  initialRouteName: 'MainTabs',
+});
 
 // const AppNavigation = createSwitchNavigator({
 //   SplashScreen: { screen: SplashNav }, // LoggedOut
@@ -69,36 +63,75 @@ import SignupScreen from '../Screens/Auth/SignupEmailScreen';
 //   tabBarComponent: () => null,
 // });
 
-// export default Platform.OS === 'web' ? createBrowserApp(AppNavigation) : createAppContainer(AppNavigation);
-
-const createApp = Platform.select({
-  web: createBrowserApp,
-  default: createAppContainer,
+const NativeAppNavigation = createSwitchNavigator({
+  SplashScreen: { screen: SplashNav }, // LoggedOut
+  OnboardingScreen: { screen: OnboardingNav }, // LoggedIn
+  MainNav: { screen: MainNav }, // LoggedIn
+  DebugNav: { screen: DebugScreen },
+}, {
+  // Default config for all screens
+  headerMode: 'none',
+  initialRouteName: 'SplashScreen',
+  tabBarComponent: () => null,
 });
 
-const AppContainer = createApp(
-  createSwitchNavigator(
-    {
-      SplashScreen: {
-        screen: SplashScreen,
-        path: '',
-      },
-      LoginScreen: {
-        screen: LoginScreen,
-        path: 'login',
-      },
-      SignupEmailScreen: {
-        screen: SignupScreen,
-        path: 'signup',
-      },
+const WebAppNavigation = createSwitchNavigator(
+  {
+    SplashScreen: {
+      screen: SplashScreen,
+      path: '',
     },
-    {
-      initialRouteName: 'SplashScreen',
+    LoginScreen: {
+      screen: LoginScreen,
+      path: 'login',
     },
-  ),
+    SignupEmailScreen: {
+      screen: SignupScreen,
+      path: 'signup',
+    },
+  },
+  {
+    initialRouteName: 'SplashScreen',
+  },
 );
 
-export default AppContainer;
+// const AppNavigation = Platform.select({
+//   web: createBrowserApp(WebAppNavigation),
+//   default: createAppContainer(NativeAppNavigation),
+// });
+
+// export default AppNavigation;
+
+export default Platform.OS === 'web' ? createBrowserApp(WebAppNavigation) : createAppContainer(NativeAppNavigation);
+
+// const createApp = Platform.select({
+//   web: createBrowserApp,
+//   default: createAppContainer,
+// });
+
+// const AppContainer = createApp(
+//   createSwitchNavigator(
+//     {
+//       SplashScreen: {
+//         screen: SplashScreen,
+//         path: '',
+//       },
+//       LoginScreen: {
+//         screen: LoginScreen,
+//         path: 'login',
+//       },
+//       SignupEmailScreen: {
+//         screen: SignupScreen,
+//         path: 'signup',
+//       },
+//     },
+//     {
+//       initialRouteName: 'SplashScreen',
+//     },
+//   ),
+// );
+
+// export default AppContainer;
 
 
 // const createRootNavigator = (loggedIn = false) => (
