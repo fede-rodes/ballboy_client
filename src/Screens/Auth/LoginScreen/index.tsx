@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import styled from 'styled-components/native';
+import { CHECK_EMAIL_ACTIONS } from '../../../constants';
 import I18n from '../../../I18n';
 import FormProps from '../../../RenderProps/form-props';
 import LoginEmailApiCall from '../../../Components/Auth/LoginEmailApiCall';
@@ -30,7 +31,7 @@ const Bottom = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LoginScreen = ({ navigation, onSuccessHook }) => (
+const LoginScreen = ({ navigation }) => (
   <Container>
     <Top>
       <FormProps>
@@ -45,9 +46,9 @@ const LoginScreen = ({ navigation, onSuccessHook }) => (
         }) => (
           <LoginEmailApiCall
             onError={handleServerError}
-            onSuccess={(params) => {
+            onSuccess={({ email }) => {
               handleSuccess(() => {
-                onSuccessHook(params);
+                navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
               });
             }}
           >
@@ -87,11 +88,6 @@ LoginScreen.propTypes = {
       }),
     }),
   }).isRequired,
-  onSuccessHook: PropTypes.func,
-};
-
-LoginScreen.defaultProps = {
-  onSuccessHook: () => {},
 };
 
 export default LoginScreen;

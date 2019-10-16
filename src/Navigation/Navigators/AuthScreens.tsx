@@ -5,7 +5,7 @@ import LoggedOutRoute from '../LoggedOutRoute';
 import LoginScreen from '../../Screens/Auth/LoginScreen';
 import SignupScreen from '../../Screens/Auth/SignupScreen';
 import SignupEmailScreen from '../../Screens/Auth/SignupEmailScreen';
-import CheckEmailScreen, { CHECK_EMAIL_ACTIONS } from '../../Screens/Auth/CheckEmailScreen';
+import CheckEmailScreen from '../../Screens/Auth/CheckEmailScreen';
 import { headerTitleStyle } from './style';
 
 //------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const handleLoggedIn = (navigation) => {
   navigation.goBack(null);
 };
 //------------------------------------------------------------------------------
-const backBtn = navigation => (
+const backBtn = (navigation) => (
   <StackBackHeader
     onPress={() => { navigation.goBack(null); }}
   />
@@ -46,9 +46,9 @@ const AuthScreens = {
         component={LoginScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
-        onSuccessHook={({ email }) => {
-          navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
-        }}
+        // onSuccessHook={({ email }) => {
+        //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
+        // }}
       />
     ),
     navigationOptions: ({ navigation }) => ({
@@ -64,9 +64,9 @@ const AuthScreens = {
         component={SignupEmailScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
-        onSuccessHook={({ email }) => {
-          navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
-        }}
+        // onSuccessHook={({ email }) => {
+        //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
+        // }}
       />
     ),
     navigationOptions: ({ navigation }) => ({

@@ -1,8 +1,9 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import CheckEmailScreen, { CHECK_EMAIL_ACTIONS } from '.';
+import { CHECK_EMAIL_ACTIONS } from '../../../constants';
+import CheckEmailScreen from '.';
 
-const navigation = action => ({
+const navigation = (action) => ({
   state: {
     params: {
       action,
