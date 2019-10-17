@@ -19,7 +19,7 @@ import Spacer from '../../Common/Spacer';
 //------------------------------------------------------------------------------
 export const INIT_STATE = {
   sport: null,
-  date: null,
+  date: moment(), // null,
   time: null,
   duration: 90, // null,
   capacity: null,
