@@ -188,7 +188,7 @@ const WebAppNavigation = createSwitchNavigator(
         />
       ),
       // path: 'activities',
-      path: 'spots',
+      path: 'plan-activity',
     },
   },
   {
