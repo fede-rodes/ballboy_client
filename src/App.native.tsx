@@ -7,6 +7,7 @@ import { StatusBar } from 'react-native';
 // import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
+
 // import { createAppContainer } from 'react-navigation';
 import client from './GraphQL/ApolloClient';
 import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
@@ -19,7 +20,6 @@ import scTheme from './Themes/scTheme'; // styled-components theme
 // import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
 import LoadAssets from './Components/Common/LoadAssets';
-import Row from './Components/Common/Row';
 
 //------------------------------------------------------------------------------
 // STYLE:

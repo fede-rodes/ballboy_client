@@ -53,7 +53,12 @@ class SpotsList extends React.PureComponent {
         variables={variables}
         fetchPolicy="cache-and-network"
       >
-        {({ loading, data, refetch, fetchMore }) => {
+        {({
+          loading, data, refetch, fetchMore,
+        }) => {
+          console.log({
+            loading, data, refetch, fetchMore,
+          });
           const loadMore = () => {
             fetchMore({
               variables: {
@@ -64,9 +69,7 @@ class SpotsList extends React.PureComponent {
                   this.setState({ hasNewResults: false }); // fix/hack for persistent loading indicator (loading never gets set to false when fetchMoreResult doesn't return new data)
                   return prev;
                 }
-                return Object.assign({}, prev, {
-                  spots: [...prev.spots, ...fetchMoreResult.spots],
-                });
+                return { ...prev, spots: [...prev.spots, ...fetchMoreResult.spots] };
               },
             });
           };
@@ -76,7 +79,7 @@ class SpotsList extends React.PureComponent {
           return (
             <FlatList
               data={spots}
-              keyExtractor={item => item._id}
+              keyExtractor={(item) => item._id}
               renderItem={({ item: spot }) => (
                 <TouchableOpacity
                   key={spot._id}
@@ -116,7 +119,7 @@ class SpotsList extends React.PureComponent {
       </Query>
     );
   }
-};
+}
 
 SpotsList.propTypes = {
   cardComponent: PropTypes.oneOf(['SpotListCard', 'SpotListCardSmall']).isRequired,

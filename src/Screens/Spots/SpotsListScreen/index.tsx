@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 import { spotFiltersPropTypes, withSpotFilters } from '../../../Context/SpotFilters';
 import { TopLayout, BottomLayout } from '../../../Components/Layouts/FixedTopLayout';
@@ -32,34 +33,34 @@ class SpotsListScreen extends React.Component {
     const { maxDistance, allSports, selectedSports } = this.props;
 
     return (
-      <FlexOne testID="SpotsListScreen">
-        {(!allSports || maxDistance < 20) && (
-          <TopLayout>
-            <SpotsFilterFlap
-              maxDistance={maxDistance}
-              allSports={allSports}
-              selectedSports={selectedSports}
-            />
-          </TopLayout>
-        )}
-        <BottomLayout
-          contentContainerStyle={{
-            flex: 1,
-            display: 'flex',
-          }}
-        >
-          <Inner>
-            <SpotsList
-              cardComponent="SpotListCard"
-              sports={allSports ? [] : selectedSports} // empty array will return all spots
-              maxDistance={maxDistance} // km
-              onCardPress={this.handleCardPress}
+    // <FlexOne testID="SpotsListScreen">
+    //   {(!allSports || maxDistance < 20) && (
+    //     <TopLayout>
+    //       <SpotsFilterFlap
+    //         maxDistance={maxDistance}
+    //         allSports={allSports}
+    //         selectedSports={selectedSports}
+    //       />
+    //     </TopLayout>
+    //   )}
+    //   <BottomLayout
+    //     contentContainerStyle={{
+    //       flex: 1,
+    //       display: 'flex',
+    //     }}
+    //   >
+      <Inner>
+        <SpotsList
+        cardComponent="SpotListCard"
+        sports={allSports ? [] : selectedSports} // empty array will return all spots
+        maxDistance={maxDistance} // km
+        onCardPress={this.handleCardPress}
               // FlatList props
-              onScroll={this.handleScroll}
-            />
-          </Inner>
-        </BottomLayout>
-      </FlexOne>
+        onScroll={this.handleScroll}
+      />
+      </Inner>
+    //   </BottomLayout>
+    // </FlexOne>
     );
   }
 }

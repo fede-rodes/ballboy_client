@@ -1,17 +1,36 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createBrowserApp } from '@react-navigation/web';
+import { View } from 'react-native';
+import { createBrowserApp, Link } from '@react-navigation/web';
 import { createSwitchNavigator } from 'react-navigation';
+
+import {
+  createNavigator,
+  SwitchRouter,
+  getActiveChildNavigationOptions,
+  SceneView,
+} from '@react-navigation/core';
+
 
 import SplashScreen from '../Screens/Splash/SplashScreen';
 import LoginScreen from '../Screens/Auth/LoginScreen';
 import SignupEmailScreen from '../Screens/Auth/SignupEmailScreen';
 import CheckEmailScreen from '../Screens/Auth/CheckEmailScreen';
+
 import GamesListScreen from '../Screens/Games/GamesListScreen';
 import GameDetailsScreen from '../Screens/Games/GameDetailsScreen';
+import CancelGameScreen from '../Screens/Games/CancelGameScreen';
+import EditGameScreen from '../Screens/Games/EditGameScreen';
+
+import SpotsListScreen from '../Screens/Spots/SpotsListScreen';
+import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
+
+import PlanGameScreen from '../Screens/Plan/PlanGameScreen';
+import ShareGameScreen from '../Screens/Plan/ShareGameScreen';
 
 import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
+
+// See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
 
 const WebAppLoggedOutScreensNavigation = createSwitchNavigator(
   {
@@ -37,8 +56,76 @@ const WebAppLoggedOutScreensNavigation = createSwitchNavigator(
   },
 );
 
-const WebAppLoggedInScreensNavigation = createSwitchNavigator(
-  {
+// const WebAppLoggedInScreensNavigation = createSwitchNavigator(
+//   {
+//     GamesListScreen: {
+//       screen: GamesListScreen,
+//       path: 'activities',
+//     },
+//     GameDetailsScreen: {
+//       screen: GameDetailsScreen,
+//       path: 'activities/:_id',
+//     },
+//     CancelGameScreen: {
+//       screen: CancelGameScreen,
+//       path: 'activities/cancel/:_id',
+//     },
+//     EditGameScreen: {
+//       screen: EditGameScreen,
+//       path: 'activities/edit/:_id',
+//     },
+//     SpotsListScreen: {
+//       screen: SpotsListScreen,
+//       path: 'spots',
+//     },
+//     SpotDetailsScreen: {
+//       screen: SpotDetailsScreen,
+//       path: 'spots/:_id',
+//     },
+//   },
+//   {
+//     initialRouteName: 'GamesListScreen',
+//   },
+// );
+
+class AppView extends React.Component {
+  render() {
+    const { descriptors, navigation } = this.props;
+    const activeKey = navigation.state.routes[navigation.state.index].key;
+    const descriptor = descriptors[activeKey];
+    return (
+      <div style={{ height: '100%' }}>
+        <h1>My Project</h1>
+        <div
+          style={{
+            borderBottom: '1px solid #99b',
+            padding: 20,
+          }}
+        >
+          <Link routeName="GamesListScreen" navigation={navigation}>
+            Activities
+          </Link>
+          <Link routeName="SpotsListScreen" navigation={navigation}>
+            Spots
+          </Link>
+          <Link routeName="PlanGameScreen" navigation={navigation}>
+            Plan game
+          </Link>
+        </div>
+        <div style={{ flex: 1 }}>
+          <SceneView
+            navigation={descriptor.navigation}
+            component={descriptor.getComponent()}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+const WebAppLoggedInScreensNavigation = createNavigator(
+  AppView,
+  SwitchRouter({
     GamesListScreen: {
       screen: GamesListScreen,
       path: 'activities',
@@ -47,18 +134,32 @@ const WebAppLoggedInScreensNavigation = createSwitchNavigator(
       screen: GameDetailsScreen,
       path: 'activities/:_id',
     },
-    // LoginScreen: {
-    //   screen: LoginScreen,
-    //   path: 'login',
-    // },
-    // SignupEmailScreen: {
-    //   screen: SignupScreen,
-    //   path: 'signup',
-    // },
-  },
-  {
-    initialRouteName: 'GamesListScreen',
-  },
+    CancelGameScreen: {
+      screen: CancelGameScreen,
+      path: 'activities/cancel/:_id',
+    },
+    EditGameScreen: {
+      screen: EditGameScreen,
+      path: 'activities/edit/:_id',
+    },
+    SpotsListScreen: {
+      screen: SpotsListScreen,
+      path: 'spots',
+    },
+    SpotDetailsScreen: {
+      screen: SpotDetailsScreen,
+      path: 'spots/:_id',
+    },
+    PlanGameScreen: {
+      screen: PlanGameScreen,
+      path: 'plan-activity',
+    },
+    ShareGameScreen: {
+      screen: ShareGameScreen,
+      path: 'share-activity',
+    },
+  }),
+  {},
 );
 
 const WebAppNavigation = createSwitchNavigator(
@@ -93,9 +194,116 @@ const WebAppNavigation = createSwitchNavigator(
   },
 );
 
-// const WebAppNavigation = Platform.select({
-//   web: createBrowserApp(WebAppNavigation),
-//   default: null,
-// });
-
 export default WebAppNavigation;
+
+
+// import React from 'react';
+// import { View } from 'react-native';
+// import { createBrowserApp } from '@react-navigation/web';
+// import { createSwitchNavigator } from 'react-navigation';
+
+// import SplashScreen from '../Screens/Splash/SplashScreen';
+// import LoginScreen from '../Screens/Auth/LoginScreen';
+// import SignupEmailScreen from '../Screens/Auth/SignupEmailScreen';
+// import CheckEmailScreen from '../Screens/Auth/CheckEmailScreen';
+
+// import GamesListScreen from '../Screens/Games/GamesListScreen';
+// import GameDetailsScreen from '../Screens/Games/GameDetailsScreen';
+// import CancelGameScreen from '../Screens/Games/CancelGameScreen';
+// import EditGameScreen from '../Screens/Games/EditGameScreen';
+
+// import SpotsListScreen from '../Screens/Spots/SpotsListScreen';
+// import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
+
+// import LoggedOutRoute from './LoggedOutRoute';
+// import LoggedInRoute from './LoggedInRoute';
+
+// const WebAppLoggedOutScreensNavigation = createSwitchNavigator(
+//   {
+//     SplashScreen: {
+//       screen: SplashScreen,
+//       path: '',
+//     },
+//     LoginScreen: {
+//       screen: LoginScreen,
+//       path: 'login',
+//     },
+//     SignupEmailScreen: {
+//       screen: SignupEmailScreen,
+//       path: 'signup',
+//     },
+//     CheckEmailScreen: {
+//       screen: CheckEmailScreen,
+//       path: 'verify-email',
+//     },
+//   },
+//   {
+//     initialRouteName: 'SplashScreen',
+//   },
+// );
+
+// const WebAppLoggedInScreensNavigation = createSwitchNavigator(
+//   {
+//     GamesListScreen: {
+//       screen: GamesListScreen,
+//       path: 'activities',
+//     },
+//     GameDetailsScreen: {
+//       screen: GameDetailsScreen,
+//       path: 'activities/:_id',
+//     },
+//     CancelGameScreen: {
+//       screen: CancelGameScreen,
+//       path: 'activities/cancel/:_id',
+//     },
+//     EditGameScreen: {
+//       screen: EditGameScreen,
+//       path: 'activities/edit/:_id',
+//     },
+//     SpotsListScreen: {
+//       screen: SpotsListScreen,
+//       path: 'spots',
+//     },
+//     SpotDetailsScreen: {
+//       screen: SpotDetailsScreen,
+//       path: 'spots/:_id',
+//     },
+//   },
+//   {
+//     initialRouteName: 'GamesListScreen',
+//   },
+// );
+
+// const WebAppNavigation = createSwitchNavigator(
+//   {
+//     LoggedOutScreens: {
+//       screen: ({ navigation }) => (
+//         <LoggedOutRoute
+//           component={createBrowserApp(WebAppLoggedOutScreensNavigation)}
+//           onLoggedIn={() => {
+//             console.log('handle logged in!');
+//             navigation.navigate('LoggedInScreens');
+//           }} // TODO: if history is defined, goBAck, otherwise redirect to Activities
+//         />
+//       ),
+//       path: '',
+//     },
+//     LoggedInScreens: {
+//       screen: ({ navigation }) => (
+//         <LoggedInRoute
+//           component={createBrowserApp(WebAppLoggedInScreensNavigation)}
+//           onLoggedOut={() => {
+//             console.log('handle logged out!');
+//             navigation.navigate('LoggedOutScreens');
+//           }}
+//         />
+//       ),
+//       path: 'activities',
+//     },
+//   },
+//   {
+//     initialRouteName: 'LoggedOutScreens',
+//   },
+// );
+
+// export default WebAppNavigation;
