@@ -27,6 +27,8 @@ import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
 import PlanGameScreen from '../Screens/Plan/PlanGameScreen';
 import ShareGameScreen from '../Screens/Plan/ShareGameScreen';
 
+import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
+
 import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
 
@@ -112,6 +114,9 @@ class AppView extends React.Component {
           <Link routeName="PlanGameScreen" navigation={navigation}>
             Plan game
           </Link>
+          <Link routeName="ProfileEditScreen" navigation={navigation}>
+            Profile
+          </Link>
         </View>
         <View style={{ flex: 1 }}>
           <SceneView
@@ -158,6 +163,10 @@ const WebAppLoggedInScreensNavigation = createNavigator(
     ShareGameScreen: {
       screen: ShareGameScreen,
       path: 'share-activity',
+    },
+    ProfileEditScreen: {
+      screen: ProfileEditScreen,
+      path: 'profile-edit',
     },
   }),
   {},
