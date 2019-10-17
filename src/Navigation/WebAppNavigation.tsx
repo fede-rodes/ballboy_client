@@ -93,10 +93,11 @@ class AppView extends React.Component {
     const { descriptors, navigation } = this.props;
     const activeKey = navigation.state.routes[navigation.state.index].key;
     const descriptor = descriptors[activeKey];
+
     return (
-      <div style={{ height: '100%' }}>
+      <View style={{ flex: 1 }}>
         <h1>My Project</h1>
-        <div
+        <View
           style={{
             borderBottom: '1px solid #99b',
             padding: 20,
@@ -111,14 +112,14 @@ class AppView extends React.Component {
           <Link routeName="PlanGameScreen" navigation={navigation}>
             Plan game
           </Link>
-        </div>
-        <div style={{ flex: 1 }}>
+        </View>
+        <View style={{ flex: 1 }}>
           <SceneView
             navigation={descriptor.navigation}
             component={descriptor.getComponent()}
           />
-        </div>
-      </div>
+        </View>
+      </View>
     );
   }
 }
@@ -186,7 +187,8 @@ const WebAppNavigation = createSwitchNavigator(
           }}
         />
       ),
-      path: 'activities',
+      // path: 'activities',
+      path: 'spots',
     },
   },
   {

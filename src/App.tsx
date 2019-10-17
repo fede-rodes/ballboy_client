@@ -26,7 +26,7 @@ import Row from './Components/Common/Row';
 //------------------------------------------------------------------------------
 const AppRootView = styled.View`
   flex: 1;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: ${({ theme }) => theme.colors.white};
   margin-bottom: ${getBottomSpace()}px;
   margin-top: ${ifIphoneX() ? 30 : 0}px;
