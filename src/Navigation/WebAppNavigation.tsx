@@ -20,6 +20,9 @@ import GamesListScreen from '../Screens/Games/GamesListScreen';
 import GameDetailsScreen from '../Screens/Games/GameDetailsScreen';
 import CancelGameScreen from '../Screens/Games/CancelGameScreen';
 import EditGameScreen from '../Screens/Games/EditGameScreen';
+import GameChatScreen from '../Screens/Games/GameChatScreen';
+import PlayersListScreen from '../Screens/Games/PlayersListScreen';
+
 
 import SpotsListScreen from '../Screens/Spots/SpotsListScreen';
 import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
@@ -148,6 +151,14 @@ const WebAppLoggedInScreensNavigation = createNavigator(
       screen: EditGameScreen,
       path: 'activities/edit/:_id',
     },
+    GameChatScreen: {
+      screen: GameChatScreen,
+      path: 'activities/:roomId',
+    },
+    PlayersListScreen: {
+      screen: EditGameScreen,
+      path: 'activities/players/:_id',
+    },
     SpotsListScreen: {
       screen: SpotsListScreen,
       path: 'spots',
@@ -196,8 +207,8 @@ const WebAppNavigation = createSwitchNavigator(
           }}
         />
       ),
-      // path: 'activities',
-      path: 'plan-activity',
+      path: 'activities',
+      // path: 'plan-activity',
     },
   },
   {
