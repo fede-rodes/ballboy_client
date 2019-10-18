@@ -1,4 +1,5 @@
-import { createStackNavigator } from 'react-navigation';
+// import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import I18n from '../../I18n';
 // import AuthScreens from './AuthScreens';
 import GameDetailsScreens from './GameDetailsScreens';

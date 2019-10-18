@@ -29,7 +29,7 @@ const Text = ({
   const lineHeight = parseInt(1.5 * font.fontSize, 10);
   const color = clr ? Colors[clr] : Colors.black;
   const textAlign = center ? 'center' : 'left';
-  const style = Object.assign({}, baseStyle, font, { lineHeight, color, textAlign });
+  const style = { ...baseStyle, ...font, lineHeight, color, textAlign};
 
   if (regular) {
     style.fontFamily = FontFamilies.regular;
@@ -50,7 +50,8 @@ const Text = ({
   }
 
   return (
-    <NativeText style={Object.assign({}, style, styl)} {...rest}>
+    // <NativeText style={Object.assign({}, style, styl)} {...rest}>
+    <NativeText>
       {children}
     </NativeText>
   );

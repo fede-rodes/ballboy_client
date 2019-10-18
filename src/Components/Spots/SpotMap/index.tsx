@@ -4,6 +4,7 @@ import { Platform, Dimensions } from 'react-native';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components/native';
 import GoogleStaticMap from 'react-native-google-static-map';
+import get from 'lodash/get';
 import spotDetailsFragment from '../../../GraphQL/Spots/Fragments/spotDetails';
 import Block from '../../Common/Block';
 import Row from '../../Common/Row';
@@ -20,9 +21,26 @@ import {
 // -----------------------------------------------------------------------------
 const { width: windowWidth } = Dimensions.get('window');
 // -----------------------------------------------------------------------------
-const googleMapsIosApiKey = Constants.manifest.ios.config.googleMapsApiKey;
-const googleMapsAndroidApiKey = Constants.manifest.android.config.googleMaps.apiKey;
-const GOOGLE_MAPS_API_KEY = Platform.OS === 'ios' ? googleMapsIosApiKey : googleMapsAndroidApiKey;
+const googleMapsIosApiKey = get(Constants, 'manifest.ios.config.googleMapsApiKey', '');
+const googleMapsAndroidApiKey = get(Constants, 'manifest.android.config.googleMaps.apiKey', '');
+
+let GOOGLE_MAPS_API_KEY;
+
+console.log('Platform.OS', Platform.OS);
+
+switch (Platform.OS) {
+  case 'ios':
+    GOOGLE_MAPS_API_KEY = googleMapsIosApiKey;
+    break;
+  case 'android':
+    GOOGLE_MAPS_API_KEY = googleMapsAndroidApiKey;
+    break;
+  case 'web':
+    GOOGLE_MAPS_API_KEY = 'xxx';
+    break;
+  default:
+    break;
+}
 // -----------------------------------------------------------------------------
 // STYLE:
 // -----------------------------------------------------------------------------

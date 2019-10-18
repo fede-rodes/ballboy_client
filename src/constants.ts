@@ -29,3 +29,7 @@ export const ATTENDEE_ACTIONS = {
 // TODO: apply i18n
 export const CITIES = Constants.manifest.extra.cities;
 
+export const CHECK_EMAIL_ACTIONS = {
+  LOGIN: 'LOGIN',
+  SIGNUP: 'SIGNUP',
+};

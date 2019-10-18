@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { CHECK_EMAIL_ACTIONS } from '../../../constants';
 import I18n from '../../../I18n';
 import FormProps from '../../../RenderProps/form-props';
 import SignupEmailApiCall from '../../../Components/Auth/SignupEmailApiCall';
@@ -29,7 +30,7 @@ const Bottom = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SignupEmailScreen = ({ navigation, onSuccessHook }) => (
+const SignupEmailScreen = ({ navigation }) => (
   <Container>
     <Top>
       <FormProps>
@@ -44,9 +45,9 @@ const SignupEmailScreen = ({ navigation, onSuccessHook }) => (
         }) => (
           <SignupEmailApiCall
             onError={handleServerError}
-            onSuccess={(params) => {
+            onSuccess={({ email }) => {
               handleSuccess(() => {
-                onSuccessHook(params);
+                navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
               });
             }}
           >
@@ -79,11 +80,6 @@ SignupEmailScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-  onSuccessHook: PropTypes.func,
-};
-
-SignupEmailScreen.defaultProps = {
-  onSuccessHook: () => {},
 };
 
 export default SignupEmailScreen;

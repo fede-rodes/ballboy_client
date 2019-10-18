@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AsyncStorage, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
+import { CHECK_EMAIL_ACTIONS } from '../../../constants';
 import I18n from '../../../I18n';
 import Colors from '../../../Themes/Colors';
 import client from '../../../GraphQL/ApolloClient';
@@ -13,13 +14,6 @@ import Text from '../../../Components/Common/Text';
 import PasscodeFormApiCall from '../../../Components/Auth/PasscodeFormApiCall';
 import PasscodeForm from '../../../Components/Auth/PasscodeForm';
 
-//------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-export const CHECK_EMAIL_ACTIONS = {
-  LOGIN: 'LOGIN',
-  SIGNUP: 'SIGNUP',
-};
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -53,23 +47,23 @@ const CheckEmailScreen = ({ navigation }) => {
         backgroundColor: Colors.concrete,
       }}
     >
-        <Center>
-          <Image
+      <Center>
+        <Image
             style={{ height: 121, width: 121 }}
             resizeMode="contain"
             source={Images.checkEmail}
           />
-        </Center>
-        <Spacer size="XL" />
-        <Text size="L" center>
-          {I18n.t(`checkEmailScreen.${action.toLowerCase()}.title`)}
-        </Text>
-        <Spacer size="XL" />
-        <Text size="M" center style={{ maxWidth: 300 }}>
-          {I18n.t(`checkEmailScreen.${action.toLowerCase()}.subtitle`, { email })}
-        </Text>
-        <FormProps>
-          {({
+      </Center>
+      <Spacer size="XL" />
+      <Text size="L" center>
+        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.title`)}
+      </Text>
+      <Spacer size="XL" />
+      <Text size="M" center style={{ maxWidth: 300 }}>
+        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.subtitle`, { email })}
+      </Text>
+      <FormProps>
+        {({
             disabled,
             errors,
             handleBefore,
@@ -104,7 +98,7 @@ const CheckEmailScreen = ({ navigation }) => {
               )}
             </PasscodeFormApiCall>
           )}
-        </FormProps>
+      </FormProps>
     </KeyboardAwareScrollView>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import styled from 'styled-components/native';
 import Colors from '../../../Themes/Colors';
 import I18n from '../../../I18n';

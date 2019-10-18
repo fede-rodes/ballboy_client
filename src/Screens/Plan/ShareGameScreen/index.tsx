@@ -35,10 +35,14 @@ class ShareGameScreen extends React.Component {
 
     const { navigation } = this.props;
 
-    // Go back to the begining of the stack
-    navigation.popToTop();
-    // Go back to main tabs navigation
-    navigation.goBack(null);
+    if (Platform.OS === 'web') {
+      navigation.goBack(null);
+    } else {
+      // Go back to the begining of the stack
+      navigation.popToTop();
+      // Go back to main tabs navigation
+      navigation.goBack(null);
+    }
 
     // Alert.alert(
     //   I18n.t('shareGameScreen.leaveAlert.header'),
@@ -104,14 +108,18 @@ class ShareGameScreen extends React.Component {
                   onClientErrorHook={handleClientError}
                   onSuccessHook={() => {
                     handleSuccess(() => {
-                      // Go back to the beginning of the stack
-                      navigation.popToTop();
-                      // Go back to main tabs navigation
-                      navigation.goBack(null);
-                      // Go to games list screen
-                      navigation.navigate('GameSearchTab');
-                      // Finally go to recently created game
-                      navigation.navigate('GameDetailsScreen', { _id: activityId });
+                      if (Platform.OS === 'web') {
+                        navigation.navigate('GameDetailsScreen', { _id: activityId });
+                      } else {
+                        // Go back to the beginning of the stack
+                        navigation.popToTop();
+                        // Go back to main tabs navigation
+                        navigation.goBack(null);
+                        // Go to games list screen
+                        navigation.navigate('GameSearchTab');
+                        // Finally go to recently created game
+                        navigation.navigate('GameDetailsScreen', { _id: activityId });
+                      }
                     });
                   }}
                 />

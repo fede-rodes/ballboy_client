@@ -52,7 +52,7 @@ const SLIDES = [
 
 let INIT_STATE;
 
-const getInitState = username => ({
+const getInitState = (username) => ({
   ...cloneDeep(SPORT_DATE_TIME_INIT_STATE),
   ...cloneDeep(SPOT_INIT_STATE),
   ...cloneDeep(titleDescriptionGetInitState(username)),
@@ -64,7 +64,7 @@ const INIT_ERRORS = {
   ...cloneDeep(TITLE_DESCRIPTION_INIT_ERRORS),
 };
 
-const { width: WINDOW_WIDTH } = Dimensions.get('window');
+const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ class PlanGameForm extends React.Component {
         this.swiper.scrollToIndex({ index: curSlide - 1 });
       } else {
         // else clause is only for tests
-        this.setState(prevState => ({ curSlide: prevState.curSlide - 1 }));
+        this.setState((prevState) => ({ curSlide: prevState.curSlide - 1 }));
       }
     }
   }
@@ -250,7 +250,7 @@ class PlanGameForm extends React.Component {
         this.swiper.scrollToIndex({ index: curSlide + 1 });
       } else {
         // else clause is only for tests
-        this.setState(prevState => ({ curSlide: prevState.curSlide + 1 }));
+        this.setState((prevState) => ({ curSlide: prevState.curSlide + 1 }));
       }
 
       return;
@@ -298,9 +298,9 @@ class PlanGameForm extends React.Component {
           onScroll={this.handleScroll}
           data={FILTERED_SLIDES}
           extraData={FILTERED_SLIDES.length}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={({ item: { id, Comp, section } }) => (
-            <FlexOne key={id} style={{ width: WINDOW_WIDTH }}>
+            <FlexOne key={id} style={{ width: WINDOW_WIDTH, height: WINDOW_HEIGHT }}>
               <ClosableLayout
                 theme="white"
                 title={I18n.t(section)}
