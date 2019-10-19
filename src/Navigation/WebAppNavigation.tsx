@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Link } from '@react-navigation/web';
-import { createNavigator, SwitchRouter, SceneView } from '@react-navigation/core';
+import { createNavigator, SwitchRouter } from '@react-navigation/core';
 import extend from 'lodash/extend';
 import get from 'lodash/get';
 import SplashScreen from '../Screens/Splash/SplashScreen';
@@ -23,6 +21,7 @@ import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
 import InfoScreen from '../Screens/Info/InfoScreen';
 import LoggedInRoute from './LoggedInRoute';
 import OnboardedRoute from './OnboardedRoute';
+import WebAppView from './WebAppView';
 
 // See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
 
@@ -67,48 +66,6 @@ const Auth = () => {
     default:
       return null;
   }
-};
-
-const AppView = ({ descriptors, navigation }) => {
-  const activeKey = navigation.state.routes[navigation.state.index].key;
-  const descriptor = descriptors[activeKey];
-
-  console.log({ activeKey, descriptor });
-
-  return (
-    <View style={{ flex: 1 }}>
-      <h1>My Project</h1>
-      <View
-        style={{
-          borderBottomWidth: '1px',
-          borderBottomColor: '#99b',
-          padding: 20,
-        }}
-      >
-        <Link routeName="GamesListScreen" navigation={navigation}>
-            Activities
-        </Link>
-        <Link routeName="SpotsListScreen" navigation={navigation}>
-            Spots
-        </Link>
-        <Link routeName="PlanGameScreen" navigation={navigation}>
-            Plan game
-        </Link>
-        <Link routeName="ProfileEditScreen" navigation={navigation}>
-            Profile
-        </Link>
-        <Link routeName="InfoScreen" navigation={navigation}>
-            About
-        </Link>
-      </View>
-      <View style={{ flex: 1 }}>
-        <SceneView
-          navigation={descriptor.navigation}
-          component={descriptor.getComponent()}
-        />
-      </View>
-    </View>
-  );
 };
 
 const ROUTES = [
@@ -180,7 +137,7 @@ const ROUTES = [
 ];
 
 const WebAppLoggedInScreensNavigation = createNavigator(
-  AppView,
+  WebAppView,
   SwitchRouter(ROUTES.reduce((res, { name, screen: Screen, path }) => (
     extend(res, {
       [name]: {
