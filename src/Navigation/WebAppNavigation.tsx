@@ -16,13 +16,14 @@ import LoginScreen from '../Screens/Auth/LoginScreen';
 import SignupEmailScreen from '../Screens/Auth/SignupEmailScreen';
 import CheckEmailScreen from '../Screens/Auth/CheckEmailScreen';
 
+import OnboardingScreen from '../Screens/Onboarding/OnboardingScreen';
+
 import GamesListScreen from '../Screens/Games/GamesListScreen';
 import GameDetailsScreen from '../Screens/Games/GameDetailsScreen';
 import CancelGameScreen from '../Screens/Games/CancelGameScreen';
 import EditGameScreen from '../Screens/Games/EditGameScreen';
 import GameChatScreen from '../Screens/Games/GameChatScreen';
 import PlayersListScreen from '../Screens/Games/PlayersListScreen';
-
 
 import SpotsListScreen from '../Screens/Spots/SpotsListScreen';
 import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
@@ -31,6 +32,8 @@ import PlanGameScreen from '../Screens/Plan/PlanGameScreen';
 import ShareGameScreen from '../Screens/Plan/ShareGameScreen';
 
 import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
+
+import InfoScreen from '../Screens/Info/InfoScreen';
 
 import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
@@ -104,7 +107,9 @@ class AppView extends React.Component {
         <h1>My Project</h1>
         <View
           style={{
-            borderBottom: '1px solid #99b',
+            borderBottomWidth: '1px',
+            borderBottomStyle: 'solid',
+            borderBottomColor: '#99b',
             padding: 20,
           }}
         >
@@ -119,6 +124,9 @@ class AppView extends React.Component {
           </Link>
           <Link routeName="ProfileEditScreen" navigation={navigation}>
             Profile
+          </Link>
+          <Link routeName="InfoScreen" navigation={navigation}>
+            About
           </Link>
         </View>
         <View style={{ flex: 1 }}>
@@ -135,6 +143,10 @@ class AppView extends React.Component {
 const WebAppLoggedInScreensNavigation = createNavigator(
   AppView,
   SwitchRouter({
+    OnboardingScreen: {
+      screen: OnboardingScreen,
+      path: 'onboarding',
+    },
     GamesListScreen: {
       screen: GamesListScreen,
       path: 'activities',
@@ -179,6 +191,10 @@ const WebAppLoggedInScreensNavigation = createNavigator(
       screen: ProfileEditScreen,
       path: 'profile-edit',
     },
+    InfoScreen: {
+      screen: InfoScreen,
+      path: 'about',
+    },
   }),
   {},
 );
@@ -189,9 +205,10 @@ const WebAppNavigation = createSwitchNavigator(
       screen: ({ navigation }) => (
         <LoggedOutRoute
           component={createBrowserApp(WebAppLoggedOutScreensNavigation)}
-          onLoggedIn={() => {
-            console.log('handle logged in!');
+          onLoggedIn={({ location }) => {
+            console.log('handle logged in!', { location });
             navigation.navigate('LoggedInScreens');
+            navigation.navigate(location ? 'GamesListScreen' : 'OnboardingScreen');
           }} // TODO: if history is defined, goBAck, otherwise redirect to Activities
         />
       ),
