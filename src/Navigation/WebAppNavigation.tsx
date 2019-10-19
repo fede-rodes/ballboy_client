@@ -37,8 +37,8 @@ import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
 
 import InfoScreen from '../Screens/Info/InfoScreen';
 
-import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
+import OnboardedRoute from './OnboardedRoute';
 
 // See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
 
@@ -267,14 +267,23 @@ const WebAppLoggedInScreensNavigation = createNavigator(
   SwitchRouter(ROUTES.reduce((res, { name, screen: Screen, path }) => (
     extend(res, {
       [name]: {
-        screen: () => (
+        screen: ({ navigation }) => (
           <LoggedInRoute
-            component={Screen}
+            component={() => (
+              <OnboardedRoute
+                component={Screen}
+                overlay={() => <OnboardingScreen navigation={navigation} />}
+                // Child component props
+                navigation={navigation}
+              />
+            )}
             onLoggedOut={() => {
               console.log('handle logged out!');
               // navigation.navigate('LoggedOutScreens');
             }}
             overlay={Auth}
+            // Child component props
+            // navigation={navigation}
           />
         ),
         path,
