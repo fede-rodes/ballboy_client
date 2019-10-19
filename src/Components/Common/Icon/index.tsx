@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicon from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Ionicons,
+  FontAwesome,
+} from '@expo/vector-icons';
 import Colors from '../../../Themes/Colors';
 
 //------------------------------------------------------------------------------
@@ -20,13 +22,13 @@ const Icon = ({
 
   switch (iconSet) {
     case 'MaterialIcons':
-      IconNative = MaterialIcon;
+      IconNative = MaterialIcons;
       break;
     case 'MaterialCommunityIcons':
-      IconNative = MaterialCommunityIcon;
+      IconNative = MaterialCommunityIcons;
       break;
     case 'Ionicons':
-      IconNative = Ionicon;
+      IconNative = Ionicons;
       break;
     case 'FontAwesome':
       IconNative = FontAwesome;
