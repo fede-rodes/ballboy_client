@@ -156,7 +156,7 @@ const WebAppLoggedInScreensNavigation = createNavigator(
       path: 'activities/:roomId',
     },
     PlayersListScreen: {
-      screen: EditGameScreen,
+      screen: PlayersListScreen,
       path: 'activities/players/:_id',
     },
     SpotsListScreen: {
