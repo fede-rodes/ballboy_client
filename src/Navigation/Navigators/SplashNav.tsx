@@ -20,9 +20,11 @@ const SplashNav = createStackNavigator({
   SplashScreen: {
     screen: ({ navigation }) => (
       <LoggedOutRoute
-        navigation={navigation}
         component={SplashScreen}
         onLoggedIn={({ location }) => { handleLoggedIn(navigation, location); }}
+        // Child component props
+        // navigation={navigation}
+        onNavigate={({ screen }) => { navigation.navigate(screen); }}
       />
     ),
     navigationOptions: { header: null },

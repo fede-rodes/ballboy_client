@@ -80,7 +80,11 @@ class OnboardingScreen extends React.Component {
                 // client.resetStore();
                 // No need to reset store, we are refetching privateUserQuery
                 // inside the API call
-                navigation.navigate('MainNav');
+                if (Platform.OS === 'web') {
+                  navigation.navigate('GamesListScreen');
+                } else {
+                  navigation.navigate('MainNav');
+                }
               });
             }}
           >

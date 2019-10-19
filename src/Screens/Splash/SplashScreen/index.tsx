@@ -18,10 +18,15 @@ const FlexOne = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SplashScreen = ({ navigation }) => (
+const SplashScreen = ({ /* navigation, */ onNavigate }) => (
   <FieldBackground>
     <Block>
-      <TapsCounter onTapsReached={() => { navigation.navigate('DebugNav'); }}>
+      <TapsCounter
+        onTapsReached={
+          // () => { navigation.navigate('DebugNav'); }
+          () => { onNavigate({ screen: 'DebugNav' }); }
+        }
+      >
         <Text
           testID="splashText"
           size="L"
@@ -38,13 +43,19 @@ const SplashScreen = ({ navigation }) => (
       <RaisedButton
         variant="default"
         label={I18n.t('splashScreen.signupBtnLabel')}
-        onPress={() => { navigation.navigate('SignupEmailScreen'); }}
+        onPress={
+          // () => { navigation.navigate('SignupEmailScreen'); }
+          () => { onNavigate({ screen: 'SignupEmailScreen' }); }
+        }
       />
       <Spacer size="XL" />
       <RaisedButton
         variant="transparent"
         label={I18n.t('splashScreen.loginBtnLabel')}
-        onPress={() => { navigation.navigate('LoginScreen'); }}
+        onPress={
+          // () => { navigation.navigate('LoginScreen'); }
+          () => { onNavigate({ screen: 'LoginScreen' }); }
+        }
       />
     </Block>
     <Spacer size="XL" />
@@ -52,9 +63,14 @@ const SplashScreen = ({ navigation }) => (
 );
 
 SplashScreen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+  // navigation: PropTypes.shape({
+  //   navigate: PropTypes.func.isRequired,
+  // }).isRequired,
+  onNavigate: PropTypes.func,
+};
+
+SplashScreen.defaultProps = {
+  onNavigate: () => {},
 };
 
 export default SplashScreen;

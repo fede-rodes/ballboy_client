@@ -3,7 +3,7 @@ import I18n from '../../I18n';
 import StackBackHeader from '../StackBackHeader';
 import LoggedOutRoute from '../LoggedOutRoute';
 import LoginScreen from '../../Screens/Auth/LoginScreen';
-import SignupScreen from '../../Screens/Auth/SignupScreen';
+// import SignupScreen from '../../Screens/Auth/SignupScreen';
 import SignupEmailScreen from '../../Screens/Auth/SignupEmailScreen';
 import CheckEmailScreen from '../../Screens/Auth/CheckEmailScreen';
 import { headerTitleStyle } from './style';
@@ -28,9 +28,10 @@ const AuthScreens = {
   CheckEmailScreen: {
     screen: ({ navigation }) => (
       <LoggedOutRoute
-        navigation={navigation}
         component={CheckEmailScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
+        // Child component props
+        navigation={navigation}
       />
     ),
     navigationOptions: ({ navigation }) => ({
@@ -42,10 +43,11 @@ const AuthScreens = {
   LoginScreen: {
     screen: ({ navigation }) => (
       <LoggedOutRoute
-        navigation={navigation}
         component={LoginScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
+        // navigation={navigation}
+        onNavigate={({ screen, params = {} }) => { navigation.navigate(screen, params); }}
         // onSuccessHook={({ email }) => {
         //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
         // }}
@@ -60,10 +62,11 @@ const AuthScreens = {
   SignupEmailScreen: {
     screen: ({ navigation }) => (
       <LoggedOutRoute
-        navigation={navigation}
         component={SignupEmailScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
+        onNavigate={({ screen, params = {} }) => { navigation.navigate(screen, params); }}
+        // navigation={navigation}
         // onSuccessHook={({ email }) => {
         //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
         // }}
@@ -75,20 +78,20 @@ const AuthScreens = {
       headerLeft: backBtn(navigation),
     }),
   },
-  SignupScreen: {
-    screen: ({ navigation }) => (
-      <LoggedOutRoute
-        navigation={navigation}
-        component={SignupScreen}
-        onLoggedIn={() => { handleLoggedIn(navigation); }}
-      />
-    ),
-    navigationOptions: ({ navigation }) => ({
-      headerTitle: I18n.t('signupScreen.navigation.title'),
-      headerTitleStyle,
-      headerLeft: backBtn(navigation),
-    }),
-  },
+  // SignupScreen: {
+  //   screen: ({ navigation }) => (
+  //     <LoggedOutRoute
+  //       navigation={navigation}
+  //       component={SignupScreen}
+  //       onLoggedIn={() => { handleLoggedIn(navigation); }}
+  //     />
+  //   ),
+  //   navigationOptions: ({ navigation }) => ({
+  //     headerTitle: I18n.t('signupScreen.navigation.title'),
+  //     headerTitleStyle,
+  //     headerLeft: backBtn(navigation),
+  //   }),
+  // },
 };
 
 export default AuthScreens;

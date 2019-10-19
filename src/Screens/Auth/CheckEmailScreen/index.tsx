@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AsyncStorage, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import get from 'lodash/get';
 import styled from 'styled-components/native';
 import { CHECK_EMAIL_ACTIONS } from '../../../constants';
 import I18n from '../../../I18n';
@@ -32,8 +33,9 @@ const Center = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const CheckEmailScreen = ({ navigation }) => {
-  const { action, email } = navigation.state.params;
+const CheckEmailScreen = ({ navigation, action, email }) => {
+  const _action = action || get(navigation, 'state.params.action', ''); // eslint-disable-line no-underscore-dangle
+  const _email = email || get(navigation, 'state.params.email', ''); // eslint-disable-line no-underscore-dangle
 
   return (
     <KeyboardAwareScrollView
@@ -49,55 +51,55 @@ const CheckEmailScreen = ({ navigation }) => {
     >
       <Center>
         <Image
-            style={{ height: 121, width: 121 }}
-            resizeMode="contain"
-            source={Images.checkEmail}
-          />
+          style={{ height: 121, width: 121 }}
+          resizeMode="contain"
+          source={Images.checkEmail}
+        />
       </Center>
       <Spacer size="XL" />
       <Text size="L" center>
-        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.title`)}
+        {I18n.t(`checkEmailScreen.${_action.toLowerCase()}.title`)}
       </Text>
       <Spacer size="XL" />
       <Text size="M" center style={{ maxWidth: 300 }}>
-        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.subtitle`, { email })}
+        {I18n.t(`checkEmailScreen.${_action.toLowerCase()}.subtitle`, { email: _email })}
       </Text>
       <FormProps>
         {({
-            disabled,
-            errors,
-            handleBefore,
-            handleClientCancel,
-            handleClientError,
-            handleServerError,
-            handleSuccess,
-          }) => (
-            <PasscodeFormApiCall
-              email={email}
-              onError={handleServerError}
-              onSuccess={({ token }) => {
-                // Extend formProps.handleSuccess' default functionality
-                handleSuccess(async () => {
-                  // Store token into browser and resetStore to update client data
-                  await AsyncStorage.setItem('x-auth-token', token);
-                  client.resetStore();
-                });
-              }}
-            >
-              {({ validatePasscode }) => (
-                <PasscodeForm
-                  placeholder={I18n.t('checkEmailScreen.placeholder')}
-                  btnLabel={I18n.t('checkEmailScreen.btnLabel')}
-                  errors={errors}
-                  disabled={disabled}
-                  onBeforeHook={handleBefore}
-                  handleClientCancelHook={handleClientCancel}
-                  onClientErrorHook={handleClientError}
-                  onSuccessHook={validatePasscode}
-                />
-              )}
-            </PasscodeFormApiCall>
-          )}
+          disabled,
+          errors,
+          handleBefore,
+          handleClientCancel,
+          handleClientError,
+          handleServerError,
+          handleSuccess,
+        }) => (
+          <PasscodeFormApiCall
+            email={email}
+            onError={handleServerError}
+            onSuccess={({ token }) => {
+              // Extend formProps.handleSuccess' default functionality
+              handleSuccess(async () => {
+                // Store token into browser and resetStore to update client data
+                await AsyncStorage.setItem('x-auth-token', token);
+                client.resetStore();
+              });
+            }}
+          >
+            {({ validatePasscode }) => (
+              <PasscodeForm
+                placeholder={I18n.t('checkEmailScreen.placeholder')}
+                btnLabel={I18n.t('checkEmailScreen.btnLabel')}
+                errors={errors}
+                disabled={disabled}
+                onBeforeHook={handleBefore}
+                handleClientCancelHook={handleClientCancel}
+                onClientErrorHook={handleClientError}
+                onSuccessHook={validatePasscode}
+              />
+            )}
+          </PasscodeFormApiCall>
+        )}
       </FormProps>
     </KeyboardAwareScrollView>
   );
@@ -107,11 +109,18 @@ CheckEmailScreen.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)).isRequired,
-        email: PropTypes.string.isRequired,
+        action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)),
+        email: PropTypes.string,
       }).isRequired,
     }).isRequired,
   }).isRequired,
+  action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)),
+  email: PropTypes.string,
+};
+
+CheckEmailScreen.defaultProps = {
+  action: '',
+  email: '',
 };
 
 export default CheckEmailScreen;
