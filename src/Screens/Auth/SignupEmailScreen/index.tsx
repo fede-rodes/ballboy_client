@@ -30,7 +30,7 @@ const Bottom = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const SignupEmailScreen = ({ onNavigate }) => (
+const SignupEmailScreen = ({ navigation }) => (
   <Container>
     <Top>
       <FormProps>
@@ -47,8 +47,7 @@ const SignupEmailScreen = ({ onNavigate }) => (
             onError={handleServerError}
             onSuccess={({ email }) => {
               handleSuccess(() => {
-                // navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
-                onNavigate({ screen: 'CheckEmailScreen', params: { action: CHECK_EMAIL_ACTIONS.SIGNUP, email } });
+                navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
               });
             }}
           >
@@ -68,25 +67,18 @@ const SignupEmailScreen = ({ onNavigate }) => (
     </Top>
     <Bottom>
       <LinkNavigate
-        // navigation={navigation}
-        // to="LoginScreen"
         text={I18n.t('signupEmailScreen.loginLink')}
         underline
-        onPress={() => { onNavigate({ screen: 'LoginScreen' }); }}
+        onPress={() => { navigation.navigate('LoginScreen'); }}
       />
     </Bottom>
   </Container>
 );
 
 SignupEmailScreen.propTypes = {
-  // navigation: PropTypes.shape({
-  //   navigate: PropTypes.func.isRequired,
-  // }).isRequired,
-  onNavigate: PropTypes.func,
-};
-
-SignupEmailScreen.defaultProps = {
-  onNavigate: () => {},
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default SignupEmailScreen;

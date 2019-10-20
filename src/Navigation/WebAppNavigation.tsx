@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createNavigator, SwitchRouter } from '@react-navigation/core';
 import extend from 'lodash/extend';
-import get from 'lodash/get';
 import SplashScreen from '../Screens/Splash/SplashScreen';
 import LoginScreen from '../Screens/Auth/LoginScreen';
 import SignupEmailScreen from '../Screens/Auth/SignupEmailScreen';
@@ -19,61 +18,45 @@ import PlanGameScreen from '../Screens/Plan/PlanGameScreen';
 import ShareGameScreen from '../Screens/Plan/ShareGameScreen';
 import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
 import InfoScreen from '../Screens/Info/InfoScreen';
+import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
 import OnboardedRoute from './OnboardedRoute';
 import WebAppView from './WebAppView';
 
 // See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
 
-const VIEWS = {
-  SPLASH: 'SPLASH',
-  LOGIN: 'LOGIN',
-  SIGNUP: 'SIGNUP',
-  CHECK_EMAIL: 'CHECK_EMAIL',
-};
+const LOGGED_OUT_ROUTES = [
+  {
+    name: 'SplashScreen',
+    screen: SplashScreen,
+    path: '', // home
+  },
+  {
+    name: 'SignupEmailScreen',
+    screen: SignupEmailScreen,
+    path: 'signup',
+  },
+  {
+    name: 'LoginScreen',
+    screen: LoginScreen,
+    path: 'login',
+  },
+  {
+    name: 'CheckEmailScreen',
+    screen: CheckEmailScreen,
+    path: 'check-email',
+  },
+];
 
-const Auth = () => {
-  const [view, setView] = useState(VIEWS.SPLASH);
-  const [params, setParams] = useState({});
-
-  const handleNavigate = (payload) => {
-    switch (payload.screen) {
-      case 'SignupEmailScreen':
-        setView(VIEWS.SIGNUP);
-        break;
-      case 'LoginScreen':
-        setView(VIEWS.LOGIN);
-        break;
-      case 'CheckEmailScreen':
-        setView(VIEWS.CHECK_EMAIL);
-        break;
-      default:
-        break;
-    }
-
-    setParams(payload.params);
-  };
-
-  switch (view) {
-    case VIEWS.SPLASH:
-      return <SplashScreen onNavigate={handleNavigate} />;
-    case VIEWS.SIGNUP:
-      return <SignupEmailScreen onNavigate={handleNavigate} />;
-    case VIEWS.LOGIN:
-      return <LoginScreen onNavigate={handleNavigate} email={get(params, 'email', '')} />;
-    case VIEWS.CHECK_EMAIL:
-      return <CheckEmailScreen action={get(params, 'action', '')} email={get(params, 'email', '')} />;
-    default:
-      return null;
-  }
-};
-
-const ROUTES = [
+const ONBOARD_ROUTES = [
   {
     name: 'OnboardingScreen',
     screen: OnboardingScreen,
     path: 'onboarding',
   },
+];
+
+const LOGGED_IN_ROUTES = [
   {
     name: 'GamesListScreen',
     screen: GamesListScreen,
@@ -138,26 +121,73 @@ const ROUTES = [
 
 const WebAppLoggedInScreensNavigation = createNavigator(
   WebAppView,
-  SwitchRouter(ROUTES.reduce((res, { name, screen: Screen, path }) => (
-    extend(res, {
-      [name]: {
-        screen: ({ navigation }) => (
-          <LoggedInRoute
-            component={() => (
-              <OnboardedRoute
-                component={Screen}
-                overlay={() => <OnboardingScreen navigation={navigation} />}
-                // Child component props
-                navigation={navigation}
-              />
-            )}
-            overlay={Auth}
-          />
-        ),
-        path,
-      },
-    })
-  ), {})),
+  SwitchRouter((() => {
+    const routes = {};
+
+    LOGGED_OUT_ROUTES.forEach(({ name, screen: Screen, path }) => (
+      extend(routes, {
+        [name]: {
+          screen: ({ navigation }) => (
+            <LoggedOutRoute
+              component={Screen}
+              onLoggedIn={({ location }) => { navigation.navigate(location ? 'GamesLisScreen' : 'OnboardingScreen'); }}
+              // Child component props
+              navigation={navigation}
+            />
+          ),
+          path,
+        },
+      })
+    ));
+
+    ONBOARD_ROUTES.forEach(({ name, screen: Screen, path }) => (
+      extend(routes, {
+        [name]: {
+          screen: ({ navigation }) => (
+            <LoggedInRoute
+              component={Screen}
+              // TODO: wrap screen comp using NotOnboardedRoute
+              // component={() => (
+              //   <OnboardedRoute
+              //     component={Screen}
+              //     onNotOnboarded={() => { navigation.navigate('OnboardingScreen'); }}
+              //     // Child component props
+              //     navigation={navigation}
+              //   />
+              // )}
+              onLoggedOut={() => { navigation.navigate('SplashScreen'); }}
+              // Child component props
+              navigation={navigation}
+            />
+          ),
+          path,
+        },
+      })
+    ));
+
+    LOGGED_IN_ROUTES.forEach(({ name, screen: Screen, path }) => (
+      extend(routes, {
+        [name]: {
+          screen: ({ navigation }) => (
+            <LoggedInRoute
+              component={() => (
+                <OnboardedRoute
+                  component={Screen}
+                  onNotOnboarded={() => { navigation.navigate('OnboardingScreen'); }}
+                  // Child component props
+                  navigation={navigation}
+                />
+              )}
+              onLoggedOut={() => { navigation.navigate('SplashScreen'); }}
+            />
+          ),
+          path,
+        },
+      })
+    ));
+
+    return routes;
+  })()),
   {},
 );
 

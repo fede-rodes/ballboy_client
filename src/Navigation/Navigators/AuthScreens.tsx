@@ -46,11 +46,7 @@ const AuthScreens = {
         component={LoginScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
-        // navigation={navigation}
-        onNavigate={({ screen, params = {} }) => { navigation.navigate(screen, params); }}
-        // onSuccessHook={({ email }) => {
-        //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
-        // }}
+        navigation={navigation}
       />
     ),
     navigationOptions: ({ navigation }) => ({
@@ -65,11 +61,7 @@ const AuthScreens = {
         component={SignupEmailScreen}
         onLoggedIn={() => { handleLoggedIn(navigation); }}
         // Child component props
-        onNavigate={({ screen, params = {} }) => { navigation.navigate(screen, params); }}
-        // navigation={navigation}
-        // onSuccessHook={({ email }) => {
-        //   navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.SIGNUP, email });
-        // }}
+        navigation={navigation}
       />
     ),
     navigationOptions: ({ navigation }) => ({

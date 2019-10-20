@@ -3,6 +3,8 @@ import { View } from 'react-native';
 import { Link } from '@react-navigation/web';
 import { SceneView } from '@react-navigation/core';
 
+// See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
+
 const WebAppView = ({ descriptors, navigation }) => {
   const activeKey = navigation.state.routes[navigation.state.index].key;
   const descriptor = descriptors[activeKey];

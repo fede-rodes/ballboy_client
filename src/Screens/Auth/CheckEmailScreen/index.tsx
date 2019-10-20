@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AsyncStorage, Image, View } from 'react-native';
+import { AsyncStorage, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import get from 'lodash/get';
 import styled from 'styled-components/native';
@@ -33,9 +33,9 @@ const Center = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const CheckEmailScreen = ({ navigation, action, email }) => {
-  const _action = action || get(navigation, 'state.params.action', ''); // eslint-disable-line no-underscore-dangle
-  const _email = email || get(navigation, 'state.params.email', ''); // eslint-disable-line no-underscore-dangle
+const CheckEmailScreen = ({ navigation }) => {
+  const action = get(navigation, 'state.params.action', '');
+  const email = get(navigation, 'state.params.email', '');
 
   return (
     <KeyboardAwareScrollView
@@ -58,11 +58,11 @@ const CheckEmailScreen = ({ navigation, action, email }) => {
       </Center>
       <Spacer size="XL" />
       <Text size="L" center>
-        {I18n.t(`checkEmailScreen.${_action.toLowerCase()}.title`)}
+        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.title`)}
       </Text>
       <Spacer size="XL" />
       <Text size="M" center style={{ maxWidth: 300 }}>
-        {I18n.t(`checkEmailScreen.${_action.toLowerCase()}.subtitle`, { email: _email })}
+        {I18n.t(`checkEmailScreen.${action.toLowerCase()}.subtitle`, { email })}
       </Text>
       <FormProps>
         {({
@@ -109,18 +109,11 @@ CheckEmailScreen.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)),
-        email: PropTypes.string,
+        action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)).isRequired,
+        email: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  action: PropTypes.oneOf(Object.values(CHECK_EMAIL_ACTIONS)),
-  email: PropTypes.string,
-};
-
-CheckEmailScreen.defaultProps = {
-  action: '',
-  email: '',
 };
 
 export default CheckEmailScreen;

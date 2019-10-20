@@ -31,8 +31,8 @@ const Bottom = styled.View`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LoginScreen = ({ navigation, email, onNavigate }) => {
-  const _email = email || get(navigation, 'state.params.email', ''); // eslint-disable-line no-underscore-dangle
+const LoginScreen = ({ navigation }) => {
+  const email = get(navigation, 'state.params.email', '');
 
   return (
     <Container>
@@ -51,17 +51,13 @@ const LoginScreen = ({ navigation, email, onNavigate }) => {
               onError={handleServerError}
               onSuccess={(res) => {
                 handleSuccess(() => {
-                  // navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email });
-                  onNavigate({
-                    screen: 'CheckEmailScreen',
-                    params: { action: CHECK_EMAIL_ACTIONS.LOGIN, email: res.email },
-                  });
+                  navigation.navigate('CheckEmailScreen', { action: CHECK_EMAIL_ACTIONS.LOGIN, email: res.email });
                 });
               }}
             >
               {({ loginUser }) => (
                 <LoginEmailForm
-                  email={_email}
+                  email={email}
                   disabled={disabled}
                   errors={errors}
                   onBeforeHook={handleBefore}
@@ -77,11 +73,9 @@ const LoginScreen = ({ navigation, email, onNavigate }) => {
       </Top>
       <Bottom>
         <LinkNavigate
-          // navigation={navigation}
-          // to="SignupEmailScreen"
           text={I18n.t('loginScreen.signupLink')}
           underline
-          onPress={() => { onNavigate({ screen: 'SignupEmailScreen' }); }}
+          onPress={() => { navigation.navigate('SignupEmailScreen'); }}
         />
       </Bottom>
     </Container>
@@ -90,20 +84,13 @@ const LoginScreen = ({ navigation, email, onNavigate }) => {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({
-    // navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
     state: PropTypes.shape({
       params: PropTypes.shape({
         email: PropTypes.string,
       }),
     }),
   }).isRequired,
-  email: PropTypes.string,
-  onNavigate: PropTypes.func,
-};
-
-LoginScreen.defaultProps = {
-  email: '',
-  onNavigate: () => {},
 };
 
 export default LoginScreen;
