@@ -1,6 +1,12 @@
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Ionicons,
+  FontAwesome,
+} from '@expo/vector-icons';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -35,6 +41,10 @@ const loadResourcesAsync = async () => {
       'Rajdhani-Regular': require('../../../../assets/fonts/Rajdhani-Regular.ttf'),
       'Rajdhani-SemiBold': require('../../../../assets/fonts/Rajdhani-SemiBold.ttf'),
       'Rajdhani-Bold': require('../../../../assets/fonts/Rajdhani-Bold.ttf'),
+      ...MaterialIcons.font,
+      ...MaterialCommunityIcons.font,
+      ...Ionicons.font,
+      ...FontAwesome.font,
     }),
   ]);
 };

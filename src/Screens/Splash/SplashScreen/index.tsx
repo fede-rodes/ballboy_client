@@ -21,7 +21,9 @@ const FlexOne = styled.View`
 const SplashScreen = ({ navigation }) => (
   <FieldBackground>
     <Block>
-      <TapsCounter onTapsReached={() => { navigation.navigate('DebugNav'); }}>
+      <TapsCounter
+        onTapsReached={() => { navigation.navigate('DebugNav'); }}
+      >
         <Text
           testID="splashText"
           size="L"

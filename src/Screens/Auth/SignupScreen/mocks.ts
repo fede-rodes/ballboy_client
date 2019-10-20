@@ -1,5 +1,5 @@
-const navigation = {
-  navigate: () => null,
-};
+// const navigation = {
+//   navigate: () => null,
+// };
 
-export default navigation;
+// export default navigation;

@@ -34,13 +34,13 @@ const handleEditGameLeave = (navigation) => {
   );
 };
 //------------------------------------------------------------------------------
-const backBtn = navigation => (
+const backBtn = (navigation) => (
   <StackBackHeader
     onPress={() => { navigation.goBack(null); }}
   />
 );
 //------------------------------------------------------------------------------
-const backBtnConfirm = navigation => (
+const backBtnConfirm = (navigation) => (
   <StackBackHeader
     onPress={() => {
       handleEditGameLeave(navigation);
@@ -80,7 +80,7 @@ const GameDetailsScreens = {
       headerLeft: backBtnConfirm(navigation),
     }),
   },
-  GamePlayersScreen: {
+  PlayersListScreen: {
     screen: PlayersListScreen,
     navigationOptions: ({ navigation }) => ({
       headerTitle: I18n.t('playersListScreen.navigation.title'),

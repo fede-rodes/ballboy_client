@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AsyncStorage, Image, View } from 'react-native';
+import { AsyncStorage, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import get from 'lodash/get';
 import styled from 'styled-components/native';
 import { CHECK_EMAIL_ACTIONS } from '../../../constants';
 import I18n from '../../../I18n';
@@ -33,7 +34,8 @@ const Center = styled.View`
 // COMPONENT:
 //------------------------------------------------------------------------------
 const CheckEmailScreen = ({ navigation }) => {
-  const { action, email } = navigation.state.params;
+  const action = get(navigation, 'state.params.action', '');
+  const email = get(navigation, 'state.params.email', '');
 
   return (
     <KeyboardAwareScrollView
@@ -49,10 +51,10 @@ const CheckEmailScreen = ({ navigation }) => {
     >
       <Center>
         <Image
-            style={{ height: 121, width: 121 }}
-            resizeMode="contain"
-            source={Images.checkEmail}
-          />
+          style={{ height: 121, width: 121 }}
+          resizeMode="contain"
+          source={Images.checkEmail}
+        />
       </Center>
       <Spacer size="XL" />
       <Text size="L" center>
@@ -64,40 +66,40 @@ const CheckEmailScreen = ({ navigation }) => {
       </Text>
       <FormProps>
         {({
-            disabled,
-            errors,
-            handleBefore,
-            handleClientCancel,
-            handleClientError,
-            handleServerError,
-            handleSuccess,
-          }) => (
-            <PasscodeFormApiCall
-              email={email}
-              onError={handleServerError}
-              onSuccess={({ token }) => {
-                // Extend formProps.handleSuccess' default functionality
-                handleSuccess(async () => {
-                  // Store token into browser and resetStore to update client data
-                  await AsyncStorage.setItem('x-auth-token', token);
-                  client.resetStore();
-                });
-              }}
-            >
-              {({ validatePasscode }) => (
-                <PasscodeForm
-                  placeholder={I18n.t('checkEmailScreen.placeholder')}
-                  btnLabel={I18n.t('checkEmailScreen.btnLabel')}
-                  errors={errors}
-                  disabled={disabled}
-                  onBeforeHook={handleBefore}
-                  handleClientCancelHook={handleClientCancel}
-                  onClientErrorHook={handleClientError}
-                  onSuccessHook={validatePasscode}
-                />
-              )}
-            </PasscodeFormApiCall>
-          )}
+          disabled,
+          errors,
+          handleBefore,
+          handleClientCancel,
+          handleClientError,
+          handleServerError,
+          handleSuccess,
+        }) => (
+          <PasscodeFormApiCall
+            email={email}
+            onError={handleServerError}
+            onSuccess={({ token }) => {
+              // Extend formProps.handleSuccess' default functionality
+              handleSuccess(async () => {
+                // Store token into browser and resetStore to update client data
+                await AsyncStorage.setItem('x-auth-token', token);
+                client.resetStore();
+              });
+            }}
+          >
+            {({ validatePasscode }) => (
+              <PasscodeForm
+                placeholder={I18n.t('checkEmailScreen.placeholder')}
+                btnLabel={I18n.t('checkEmailScreen.btnLabel')}
+                errors={errors}
+                disabled={disabled}
+                onBeforeHook={handleBefore}
+                handleClientCancelHook={handleClientCancel}
+                onClientErrorHook={handleClientError}
+                onSuccessHook={validatePasscode}
+              />
+            )}
+          </PasscodeFormApiCall>
+        )}
       </FormProps>
     </KeyboardAwareScrollView>
   );

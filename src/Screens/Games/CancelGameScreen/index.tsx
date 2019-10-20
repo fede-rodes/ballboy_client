@@ -30,7 +30,7 @@ class CancelGameScreen extends React.PureComponent {
 
   handleAttendeesPress = () => {
     const { navigation } = this.props;
-    navigation.navigate('GamePlayersScreen', { _id: this.activityId });
+    navigation.navigate('PlayersListScreen', { _id: this.activityId });
   }
 
   render() {

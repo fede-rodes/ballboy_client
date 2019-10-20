@@ -62,6 +62,7 @@ class OnboardingScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
+    console.log({ navigation });
 
     return (
       <FormProps>
@@ -80,7 +81,11 @@ class OnboardingScreen extends React.Component {
                 // client.resetStore();
                 // No need to reset store, we are refetching privateUserQuery
                 // inside the API call
-                navigation.navigate('MainNav');
+                if (Platform.OS === 'web') {
+                  navigation.navigate('GamesListScreen');
+                } else {
+                  navigation.navigate('MainNav');
+                }
               });
             }}
           >
@@ -102,7 +107,6 @@ class OnboardingScreen extends React.Component {
 
 OnboardingScreen.propTypes = {
   navigation: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
   }).isRequired,
   client: PropTypes.shape({

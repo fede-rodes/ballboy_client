@@ -12,18 +12,20 @@ import CenteredActivityIndicator from '../Components/Common/CenteredActivityIndi
  * is NOT authenticated. In case she is, call onLoggedIn callback.
  */
 class LoggedOutRoute extends React.PureComponent {
-  handleLoggedIn = ({ loadingUser, user, onLoggedIn }) => {
-    if (!loadingUser && user && user._id) {
-      onLoggedIn({ location: user.location }); // might be undefined
-    }
-  }
-
   componentWillMount() {
     this.handleLoggedIn(this.props);
   }
 
   componentWillUpdate(nextProps) {
     this.handleLoggedIn(nextProps);
+  }
+
+  handleLoggedIn = ({ loadingUser, user }) => {
+    const { onLoggedIn } = this.props;
+
+    if (!loadingUser && user && user._id) {
+      onLoggedIn({ location: user.location }); // might be undefined
+    }
   }
 
   render() {
