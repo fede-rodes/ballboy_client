@@ -130,7 +130,10 @@ const WebAppLoggedInScreensNavigation = createNavigator(
           screen: ({ navigation }) => (
             <LoggedOutRoute
               component={Screen}
-              onLoggedIn={({ location }) => { navigation.navigate(location ? 'GamesLisScreen' : 'OnboardingScreen'); }}
+              onLoggedIn={({ location }) => {
+                console.log('HANDLE LOGGED IN!', location);
+                navigation.navigate(location ? 'GamesListScreen' : 'OnboardingScreen');
+              }}
               // Child component props
               navigation={navigation}
             />
