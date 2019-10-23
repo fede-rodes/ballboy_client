@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Platform, View } from 'react-native';
-// import TimePickerModal from 'react-native-modal-datetime-picker';
-// import { TimePicker } from '@material-ui/pickers';
 import I18n from '../../../I18n';
 import ModalProps from '../../../RenderProps/modal-props';
 import InputField from '../InputField';
