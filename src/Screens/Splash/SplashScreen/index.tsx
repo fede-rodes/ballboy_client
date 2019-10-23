@@ -29,8 +29,7 @@ const SplashScreen = ({ navigation }) => (
           size="L"
           color="white"
           center
-          // style={{ fontSize: 30 }}
-          style={{ color: 'red' }}
+          style={{ fontSize: 30 }}
         >
           {I18n.t('splashScreen.title')}
         </Text>
