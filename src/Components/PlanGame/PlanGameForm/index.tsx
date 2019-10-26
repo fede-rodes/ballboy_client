@@ -110,7 +110,7 @@ class PlanGameForm extends React.Component {
 
   clearErrors = () => {
     this.setState({ errors: cloneDeep(INIT_ERRORS) });
-  };
+  }
 
   handleChange = ({ fieldName, value }) => {
     const { errors } = this.state;

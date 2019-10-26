@@ -109,7 +109,7 @@ class NavBar extends React.Component {
     }
 
     return (
-      <StyledRow alignItems="flex-end">
+      <StyledRow>
         {buttons.map((btn) => (
           <NavBarButton
             testID={`navbarButton_${btn.id}`}
@@ -117,7 +117,6 @@ class NavBar extends React.Component {
             btnLabel={I18n.t(btn.label)}
             icon={btn.icon}
             active={this.curRoute === btn.route}
-            main={!!btn.main}
             onPress={() => { this.handlePress(btn); }}
           />
         ))}
