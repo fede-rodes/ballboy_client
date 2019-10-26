@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Link } from '@react-navigation/web';
 import { SceneView } from '@react-navigation/core';
+import Header from '../Components/Common/Header';
 import NavBar from '../Components/Common/NavBar';
 
 // See: https://github.com/react-navigation/web-server-example/blob/d83b0de60eece0cba9287b5924292fd08c049e3d/src/AppView.js
@@ -20,8 +21,8 @@ const WebAppView = ({ descriptors, navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <h1>My Project</h1>
-      <View
+      <Header navigation={navigation} />
+      {/* <View
         style={{
           borderBottomWidth: '1px',
           borderBottomColor: '#99b',
@@ -43,7 +44,7 @@ const WebAppView = ({ descriptors, navigation }) => {
         <Link routeName="InfoScreen" navigation={navigation}>
             About
         </Link>
-      </View>
+      </View> */}
       <View style={{ flex: 1 }}>
         <SceneView
           navigation={descriptor.navigation}
