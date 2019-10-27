@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
 import { SPORTS } from '../../../constants';
 import { withSpotFilters, spotFiltersPropTypes } from '../../../Context/SpotFilters';
 import FormProps from '../../../RenderProps/form-props';
@@ -27,7 +28,11 @@ const SpotsFilterScreen = ({
           // Extend formProps.handleSuccess' default functionality
           handleSuccess(() => {
             // Go back to spots screen
-            navigation.goBack(null);
+            if (Platform.OS === 'web') {
+              navigation.navigate('SpotsListScreen');
+            } else {
+              navigation.goBack(null);
+            }
           });
         }}
       >
@@ -50,6 +55,7 @@ const SpotsFilterScreen = ({
 
 SpotsFilterScreen.propTypes = {
   navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
   }).isRequired,
   maxDistance: spotFiltersPropTypes.maxDistance.isRequired,

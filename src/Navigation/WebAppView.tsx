@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Link } from '@react-navigation/web';
 import { SceneView } from '@react-navigation/core';
 import Header from '../Components/Common/Header';
 import NavBar from '../Components/Common/NavBar';
@@ -22,29 +21,6 @@ const WebAppView = ({ descriptors, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      {/* <View
-        style={{
-          borderBottomWidth: '1px',
-          borderBottomColor: '#99b',
-          padding: 20,
-        }}
-      >
-        <Link routeName="GamesListScreen" navigation={navigation}>
-            Activities
-        </Link>
-        <Link routeName="SpotsListScreen" navigation={navigation}>
-            Spots
-        </Link>
-        <Link routeName="PlanGameScreen" navigation={navigation}>
-            Plan game
-        </Link>
-        <Link routeName="ProfileEditScreen" navigation={navigation}>
-            Profile
-        </Link>
-        <Link routeName="InfoScreen" navigation={navigation}>
-            About
-        </Link>
-      </View> */}
       <View style={{ flex: 1 }}>
         <SceneView
           navigation={descriptor.navigation}

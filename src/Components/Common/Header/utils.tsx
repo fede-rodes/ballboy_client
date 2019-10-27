@@ -1,9 +1,10 @@
 import React from 'react';
 import StackBackHeader from '../../../Navigation/StackBackHeader';
+import UserMenu from '../../Profile/UserMenu';
 import HeaderBtn from '../HeaderBtn';
 
 const BackBtn = () => (
-  <StackBackHeader onPress={window.history.back} />
+  <StackBackHeader onPress={() => { window.history.back(); }} />
 );
 
 const ROUTES = {
@@ -24,6 +25,16 @@ const ROUTES = {
   GameDetailsScreen: {
     title: 'gameDetailsScreen.navigation.title',
     leftComponent: BackBtn,
+    // leftComponent: () => <BackBtn />,
+    // leftComponent: ({ navigation }) => (
+    //   <HeaderBtn
+    //     iconSet="MaterialIcons"
+    //     iconName="arrow-back"
+    //     size={24}
+    //     // onPress={() => { navigation.navigate('GamesListScreen'); }}
+    //     onPress={() => { window.history.back(); }}
+    //   />
+    // ),
   },
   GameChatScreen: {
     title: 'gameChatScreen.navigation.title',
@@ -32,6 +43,14 @@ const ROUTES = {
   PlayersListScreen: {
     title: 'playersListScreen.navigation.title',
     leftComponent: BackBtn,
+    // leftComponent: ({ params, navigation }) => (
+    //   <HeaderBtn
+    //     iconSet="MaterialIcons"
+    //     iconName="arrow-back"
+    //     size={24}
+    //     onPress={() => { navigation.navigate('GameDetailsScreen', params); }}
+    //   />
+    // ),
   },
   EditGameScreen: {
     title: 'editGameScreen.navigation.title',
@@ -43,7 +62,7 @@ const ROUTES = {
   },
   SpotsListScreen: {
     title: 'spotsListScreen.navigation.title',
-    rightComponent: () => (
+    rightComponent: ({ navigation }) => (
       <HeaderBtn
         iconName="filter-list"
         onPress={() => { navigation.navigate('SpotsFilterScreen'); }}
@@ -53,14 +72,22 @@ const ROUTES = {
   SpotDetailsScreen: {
     title: 'spotDetailsScreen.navigation.title',
     leftComponent: BackBtn,
+    // leftComponent: ({ navigation }) => (
+    //   <HeaderBtn
+    //     iconSet="MaterialIcons"
+    //     iconName="arrow-back"
+    //     size={24}
+    //     onPress={() => { navigation.navigate('SpotsListScreen'); }}
+    //   />
+    // ),
   },
   SpotsFilterScreen: {
     title: 'spotsFilterScreen.navigation.title',
-    leftComponent: BackBtn,
+    // leftComponent: BackBtn,
     rightComponent: () => (
       <HeaderBtn
         iconName="close"
-        onPress={window.history.back}
+        onPress={() => { window.history.back(); }}
       />
     ),
   },
@@ -69,20 +96,27 @@ const ROUTES = {
   },
   ProfileEditScreen: {
     title: 'profileScreen.navigation.title',
+    rightComponent: ({ navigation }) => (
+      <UserMenu navigation={navigation} />
+    ),
   },
   InfoScreen: {
     title: 'infoScreen.title',
   },
 };
 
-export const getTitle = (activeKey: string): string => (
+export const getTitle = ({ activeKey }): string => (
   ROUTES[activeKey] ? ROUTES[activeKey].title : ''
 );
 
-export const getLeftComponent = (activeKey: string, navigation) => (
-  ROUTES[activeKey] ? ROUTES[activeKey].leftComponent : null
+export const getLeftComponent = ({ activeKey, params, navigation }) => (
+  ROUTES[activeKey] && ROUTES[activeKey].leftComponent
+    ? ROUTES[activeKey].leftComponent({ navigation, params })
+    : null
 );
 
-export const getRightComponent = (activeKey: string, navigation) => (
-  ROUTES[activeKey] ? ROUTES[activeKey].rightComponent : null
+export const getRightComponent = ({ activeKey, params, navigation }) => (
+  ROUTES[activeKey] && ROUTES[activeKey].rightComponent
+    ? ROUTES[activeKey].rightComponent({ navigation, params })
+    : null
 );

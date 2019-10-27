@@ -7,11 +7,15 @@ import Text from '../Text';
 import { getTitle, getLeftComponent, getRightComponent } from './utils';
 
 const Header = ({ navigation }) => {
-  const activeKey = navigation.state.routes[navigation.state.index].key;
+  const activeRoute = navigation.state.routes[navigation.state.index];
+  const activeKey = activeRoute.key;
+  const params = activeRoute.params || {};
 
-  const title = getTitle(activeKey);
-  const LeftComponent = getLeftComponent(activeKey, navigation);
-  const RightComponent = getRightComponent(activeKey, navigation);
+  console.log('activeRoute', JSON.stringify(activeRoute));
+
+  const title = getTitle({ activeKey });
+  const LeftComponent = getLeftComponent({ activeKey, params, navigation });
+  const RightComponent = getRightComponent({ activeKey, params, navigation });
 
   if (isEmpty(title)) return null;
 
