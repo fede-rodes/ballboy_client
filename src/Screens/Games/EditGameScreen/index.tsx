@@ -49,6 +49,8 @@ class EditGameScreen extends React.PureComponent {
     const { navigation } = this.props;
     const editDoneModal = this.modals.editDone;
 
+    const activityId = navigation.state.params._id;
+
     return (
       <FormProps>
         {({
@@ -62,7 +64,7 @@ class EditGameScreen extends React.PureComponent {
         }) => (
           <Query
             query={activityDetailsQuery}
-            variables={{ _id: navigation.state.params._id }}
+            variables={{ _id: activityId }}
             fetchPolicy="network-only"
           >
             {({ loading, error, data }) => {
@@ -86,7 +88,11 @@ class EditGameScreen extends React.PureComponent {
                 // Refetch activity data
                 // refetch();
                 // Redirect user to activity display screen
-                navigation.goBack(null);
+                if (Platform.OS === 'web') {
+                  navigation.navigate('GameDetailsScreen', { _id: activityId });
+                } else {
+                  navigation.goBack(null);
+                }
               };
 
               return (
