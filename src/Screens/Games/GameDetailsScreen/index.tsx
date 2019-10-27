@@ -13,7 +13,7 @@ import GameDetails from '../../../Components/Games/GameDetails';
 // STYLE:
 //------------------------------------------------------------------------------
 const Container = styled(ScrollView)`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.concrete};
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:

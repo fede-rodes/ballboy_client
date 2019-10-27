@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { View } from 'react-native';
 import get from 'lodash/get';
+import styled from 'styled-components/native';
 import I18n from '../../../I18n';
 import { ACTIVITY_STATUSES } from '../../../constants';
 // import { withUser, userPropTypes } from '../../../Context/User';
@@ -24,7 +25,11 @@ import ShareGameButtons from '../ShareGameButtons';
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
-const Label = props => (
+const Container = styled.View`
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+//------------------------------------------------------------------------------
+const Label = (props) => (
   <Text
     size="M"
     color="black"
@@ -61,49 +66,52 @@ const GameDetails = ({
   const isFinished = status === ACTIVITY_STATUSES.FINISHED;
   const isFull = capacity > 0 && capacity === attendees.length;
 
+  console.log({ spot });
+
   return (
     <View style={{ flex: 1 }}>
       <SpotImages images={get(spot, 'images', [])} />
-      {isCanceled && (
+      <Container>
+        {isCanceled && (
         <Block>
           <AlertMsg
             value={I18n.t('gameDetails.cancelMsg')}
             status="error"
           />
         </Block>
-      )}
-      {isFinished && (
+        )}
+        {isFinished && (
         <Block>
           <AlertMsg
             value={I18n.t('gameDetails.finishMsg')}
             status="error"
           />
         </Block>
-      )}
-      <Block>
-        <GameProperties
-          activity={activity}
-          onSpotPress={onSpotPress}
-        />
-      </Block>
-      <SpotMapWithLinkFallback spot={spot} />
-      <Block>
-        <Label>{I18n.t('gameDetails.organizer')}</Label>
-        <Organizer
-          organizer={organizer}
-          description={description}
-        />
-      </Block>
-      {!!description && description.length > 0 && (
+        )}
+        <Block>
+          <GameProperties
+            activity={activity}
+            onSpotPress={onSpotPress}
+          />
+        </Block>
+        <SpotMapWithLinkFallback spot={spot} />
+        <Block>
+          <Label>{I18n.t('gameDetails.organizer')}</Label>
+          <Organizer
+            organizer={organizer}
+            description={description}
+          />
+        </Block>
+        {!!description && description.length > 0 && (
         <Block>
           <Label>{I18n.t('gameDetails.description')}</Label>
           <DescriptionReadMore description={description} />
         </Block>
-      )}
-      <Block>
-        <ChatWithGroup onChatPress={onChatPress} />
-      </Block>
-      {attendees.length > 0 && (
+        )}
+        <Block>
+          <ChatWithGroup onChatPress={onChatPress} />
+        </Block>
+        {attendees.length > 0 && (
         <Block>
           <Label>{I18n.t('gameDetails.attending')}</Label>
           <ClickableAttendees
@@ -111,8 +119,8 @@ const GameDetails = ({
             onAttendeesPress={onAttendeesPress}
           />
         </Block>
-      )}
-      {hasCapacity && (
+        )}
+        {hasCapacity && (
         <Block>
           <Label>{I18n.t('gameDetails.openSpots')}</Label>
           <OpenSpots activity={activity} />
@@ -122,21 +130,17 @@ const GameDetails = ({
             </Text>
           )}
         </Block>
-      )}
-      <RSVP
-        activity={activity}
-        joinLabel={() => <Label>{I18n.t('gameDetails.join')}</Label>}
-        editPresenceLabel={() => <Label>{I18n.t('gameDetails.edit')}</Label>}
-        // user={user}
-        // userRSVP={userRSVP}
-        // userStatus={userStatus}
-        // onRSVPLoggedOut={onRSVPLoggedOut}
-        // onRSVPSuccess={onRSVPSuccess}
-      />
-      <Block key="share">
-        <Label>{I18n.t('gameDetails.share')}</Label>
-        <ShareGameButtons shareLink={shareLink} />
-      </Block>
+        )}
+        <RSVP
+          activity={activity}
+          joinLabel={() => <Label>{I18n.t('gameDetails.join')}</Label>}
+          editPresenceLabel={() => <Label>{I18n.t('gameDetails.edit')}</Label>}
+        />
+        <Block key="share">
+          <Label>{I18n.t('gameDetails.share')}</Label>
+          <ShareGameButtons shareLink={shareLink} />
+        </Block>
+      </Container>
     </View>
   );
 };
