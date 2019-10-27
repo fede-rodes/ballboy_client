@@ -1,6 +1,7 @@
 import React from 'react';
 import StackBackHeader from '../../../Navigation/StackBackHeader';
 import UserMenu from '../../Profile/UserMenu';
+import AdminMenu from '../../Games/AdminMenu';
 import HeaderBtn from '../HeaderBtn';
 
 const BackBtn = () => (
@@ -25,6 +26,9 @@ const ROUTES = {
   GameDetailsScreen: {
     title: 'gameDetailsScreen.navigation.title',
     leftComponent: BackBtn,
+    rightComponent: ({ navigation, params }) => (
+      <AdminMenu navigation={navigation} activityId={params._id} />
+    ),
     // leftComponent: () => <BackBtn />,
     // leftComponent: ({ navigation }) => (
     //   <HeaderBtn
