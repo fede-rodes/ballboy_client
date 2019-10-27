@@ -10,22 +10,20 @@ import Menu from '../../Common/Menu';
 // COMPONENT:
 //------------------------------------------------------------------------------
 class AdminMenu extends React.PureComponent {
-  get activityId() {
-    const { navigation } = this.props;
-    return navigation.state.params._id;
-  }
-
   handleEdit = () => {
-    const { navigation } = this.props;
-    navigation.navigate('EditGameScreen', { _id: this.activityId });
+    const { navigation, activityId } = this.props;
+    navigation.navigate('EditGameScreen', { _id: activityId });
   }
 
   handleCancel = () => {
-    const { navigation } = this.props;
-    navigation.navigate('CancelGameScreen', { _id: this.activityId });
+    const { navigation, activityId } = this.props;
+    navigation.navigate('CancelGameScreen', { _id: activityId });
   }
 
   render() {
+    const { activityId } = this.props;
+    console.log('AdminMenu.activityId', activityId);
+
     const OPTIONS = [
       {
         id: 'edit',
@@ -43,7 +41,7 @@ class AdminMenu extends React.PureComponent {
     return (
       <Query
         query={activityDetailsQuery}
-        variables={{ _id: this.activityId }}
+        variables={{ _id: activityId }}
         fetchPolicy="network-only"
       >
         {({ loading, error, data }) => {
@@ -75,13 +73,9 @@ class AdminMenu extends React.PureComponent {
 
 AdminMenu.propTypes = {
   navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  activityId: PropTypes.string.isRequired,
 };
 
 export default AdminMenu;

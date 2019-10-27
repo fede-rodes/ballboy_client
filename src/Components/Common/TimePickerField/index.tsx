@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import TimePickerModal from 'react-native-modal-datetime-picker';
+import { Platform, View } from 'react-native';
 import I18n from '../../../I18n';
 import ModalProps from '../../../RenderProps/modal-props';
 import InputField from '../InputField';
+
+const TimePickerModal = Platform.select({
+  web: () => require('@material-ui/pickers').TimePicker,
+  default: () => require('react-native-modal-datetime-picker'),
+})();
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -12,28 +17,43 @@ import InputField from '../InputField';
 // in/output are UTC moments
 const TimePickerField = ({ value, onChange, ...rest }) => (
   <ModalProps>
-    {({ visible, openModal, closeModal }) => [
-      <InputField
-        key="input-field"
-        comp="TextField"
-        value={value ? value.clone().local().format('HH:mm') : I18n.t('timePickerField.defaultValue')}
-        focusable={false}
-        onPress={openModal}
-        {...rest}
-      />,
-      <TimePickerModal
-        key="modal"
-        mode="time"
-        date={value ? value.clone().local().toDate() : new Date()}
-        isVisible={visible}
-        onConfirm={(date) => {
-          // Pass event up to parent component
-          onChange(moment(date).utc());
-          closeModal();
-        }}
-        onCancel={closeModal}
-      />,
-    ]}
+    {({ visible, openModal, closeModal }) => (
+      <View>
+        <InputField
+          comp="TextField"
+          value={value ? value.clone().local().format('HH:mm') : I18n.t('timePickerField.defaultValue')}
+          focusable={false}
+          onPress={openModal}
+          {...rest}
+        />
+        {Platform.OS === 'web' ? (
+          <TimePickerModal
+            ampm={false}
+            value={value ? value.clone().local().toDate() : new Date()}
+            open={visible}
+            onChange={(date) => {
+              // Pass event up to parent component
+              onChange(moment(date).utc());
+              closeModal();
+            }}
+            onClose={closeModal}
+            TextFieldComponent={() => null}
+          />
+        ) : (
+          <TimePickerModal
+            mode="time"
+            date={value ? value.clone().local().toDate() : new Date()}
+            isVisible={visible}
+            onConfirm={(date) => {
+              // Pass event up to parent component
+              onChange(moment(date).utc());
+              closeModal();
+            }}
+            onCancel={closeModal}
+          />
+        )}
+      </View>
+    )}
   </ModalProps>
 );
 

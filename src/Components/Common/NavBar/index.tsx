@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard } from 'react-native';
+import { Platform, Keyboard } from 'react-native';
 // import firebase from 'react-native-firebase';
 import styled from 'styled-components/native';
 import I18n from '../../../I18n';
@@ -21,7 +21,7 @@ const StyledRow = styled(Row)`
 const buttons = [{
   id: 'activities',
   label: 'navBar.activities',
-  route: 'GameSearchTab',
+  route: Platform.select({ web: 'GamesListScreen', default: 'GameSearchTab' }),
   icon: {
     set: 'MaterialCommunityIcons',
     name: 'account-group',
@@ -29,7 +29,7 @@ const buttons = [{
 }, {
   id: 'spots',
   label: 'navBar.spots',
-  route: 'SpotSearchTab',
+  route: Platform.select({ web: 'SpotsListScreen', default: 'SpotSearchTab' }),
   icon: {
     set: 'MaterialCommunityIcons',
     name: 'near-me',
@@ -37,7 +37,7 @@ const buttons = [{
 }, {
   id: 'organize',
   label: 'navBar.organize',
-  route: 'PlanScreen',
+  route: Platform.select({ web: 'PlanGameScreen', default: 'PlanScreen' }),
   icon: {
     set: 'MaterialCommunityIcons',
     name: 'plus-box',
@@ -45,7 +45,7 @@ const buttons = [{
 }, {
   id: 'profile',
   label: 'navBar.profile',
-  route: 'ProfileTab',
+  route: Platform.select({ web: 'ProfileEditScreen', default: 'ProfileTab' }),
   icon: {
     set: 'MaterialIcons',
     name: 'account-circle',
@@ -53,7 +53,7 @@ const buttons = [{
 }, {
   id: 'info',
   label: 'navBar.info',
-  route: 'InfoTab',
+  route: Platform.select({ web: 'InfoScreen', default: 'InfoTab' }),
   icon: {
     set: 'MaterialIcons',
     name: 'info',
@@ -77,23 +77,28 @@ class NavBar extends React.Component {
     this.keyboardDidHideListener.remove();
   }
 
-  handleKeyboard = ({ active }) => {
-    this.setState({ keyboardActive: active });
-  };
-
   get curRoute() {
     const { navigation } = this.props;
-    return navigation.state.routes[navigation.state.index].routeName;
+    const curRoute = navigation.state.routes[navigation.state.index];
+    return Platform.OS === 'web' ? curRoute.key : curRoute.routeName;
+  }
+
+  handleKeyboard = ({ active }) => {
+    this.setState({ keyboardActive: active });
   }
 
   handlePress = (btn) => {
     const { navigation } = this.props;
 
     // firebase.analytics().logEvent(`navbar_btn_press_${btn.route}`);
-    // Go back to the begining of the stack
-    navigation.popToTop();
-    // Jump to the requested route.
-    navigation.navigate({ routeName: btn.route });
+    if (Platform.OS === 'web') {
+      navigation.navigate(btn.route);
+    } else {
+      // Go back to the begining of the stack
+      navigation.popToTop();
+      // Jump to the requested route.
+      navigation.navigate({ routeName: btn.route });
+    }
   };
 
   render() {
@@ -104,15 +109,14 @@ class NavBar extends React.Component {
     }
 
     return (
-      <StyledRow alignItems="flex-end">
-        {buttons.map(btn => (
+      <StyledRow>
+        {buttons.map((btn) => (
           <NavBarButton
             testID={`navbarButton_${btn.id}`}
             key={btn.id}
             btnLabel={I18n.t(btn.label)}
             icon={btn.icon}
             active={this.curRoute === btn.route}
-            main={!!btn.main}
             onPress={() => { this.handlePress(btn); }}
           />
         ))}

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal as NativeModal } from 'react-native';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const NativeModal = Platform.select({
+  web: () => require('modal-react-native-web'),
+  default: () => require('react-native').Modal,
+})();
 
 //------------------------------------------------------------------------------
 // STYLE:

@@ -64,14 +64,12 @@ NavBarButton.propTypes = {
     name: PropTypes.string,
   }).isRequired,
   active: PropTypes.bool,
-  main: PropTypes.bool,
   onPress: PropTypes.func,
 };
 
 NavBarButton.defaultProps = {
   btnLabel: '',
   active: false,
-  main: false,
   onPress: () => {},
 };
 

@@ -1,5 +1,6 @@
 // import './polyfills';
 import React, { Component } from 'react';
+import MomentUtils from '@date-io/moment';
 // import Crashes from 'appcenter-crashes';
 // import codePush from 'react-native-code-push';
 import { ApolloProvider } from 'react-apollo';
@@ -7,6 +8,7 @@ import { StatusBar } from 'react-native';
 // import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // import { createAppContainer } from 'react-navigation';
 import client from './GraphQL/ApolloClient';
 import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
@@ -19,7 +21,6 @@ import scTheme from './Themes/scTheme'; // styled-components theme
 // import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
 import LoadAssets from './Components/Common/LoadAssets';
-import Row from './Components/Common/Row';
 
 //------------------------------------------------------------------------------
 // STYLE:
@@ -133,29 +134,31 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={scTheme}>
-          <UserProvider>
-            <SpotFiltersProvider>
-              <MenuProvider>
-                <LoadAssets>
-                  <AppRootView>
-                    <StatusBar barStyle="light-content" />
-                    {/* <ConnectionCheck /> */}
-                    <AppNavigation
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <UserProvider>
+              <SpotFiltersProvider>
+                <MenuProvider>
+                  <LoadAssets>
+                    <AppRootView>
+                      <StatusBar barStyle="light-content" />
+                      {/* <ConnectionCheck /> */}
+                      <AppNavigation
                         // ref={(ref) => { this.router = ref; }}
                         // See: https://reactnavigation.org/docs/en/screen-tracking.html
-                      onNavigationStateChange={(prevState, currState) => {
-                        const currScreen = getActiveRouteName(currState);
-                        const prevScreen = getActiveRouteName(prevState);
+                        onNavigationStateChange={(prevState, currState) => {
+                          const currScreen = getActiveRouteName(currState);
+                          const prevScreen = getActiveRouteName(prevState);
                         // if (prevScreen !== currScreen) {
                         //   firebase.analytics().setCurrentScreen(currScreen);
                         // }
-                      }}
-                    />
-                  </AppRootView>
-                </LoadAssets>
-              </MenuProvider>
-            </SpotFiltersProvider>
-          </UserProvider>
+                        }}
+                      />
+                    </AppRootView>
+                  </LoadAssets>
+                </MenuProvider>
+              </SpotFiltersProvider>
+            </UserProvider>
+          </MuiPickersUtilsProvider>
         </ThemeProvider>
       </ApolloProvider>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text as NativeText } from 'react-native';
 import extend from 'lodash/extend';
+import isArray from 'lodash/isArray';
 import Colors from '../../../Themes/Colors';
 import Fonts, { FontFamilies } from '../../../Themes/Fonts';
 
@@ -29,7 +30,9 @@ const Text = ({
   const lineHeight = parseInt(1.5 * font.fontSize, 10);
   const color = clr ? Colors[clr] : Colors.black;
   const textAlign = center ? 'center' : 'left';
-  const style = { ...baseStyle, ...font, lineHeight, color, textAlign};
+  const style = {
+    ...baseStyle, ...font, lineHeight, color, textAlign,
+  };
 
   if (regular) {
     style.fontFamily = FontFamilies.regular;
@@ -49,9 +52,9 @@ const Text = ({
     });
   }
 
+  // For some reason style (styl) is being passed as an array instead of an object (?)
   return (
-    // <NativeText style={Object.assign({}, style, styl)} {...rest}>
-    <NativeText>
+    <NativeText style={{ ...style, ...(isArray(styl) ? {} : styl) }} {...rest}>
       {children}
     </NativeText>
   );

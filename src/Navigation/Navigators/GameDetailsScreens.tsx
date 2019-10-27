@@ -102,7 +102,12 @@ const GameDetailsScreens = {
       headerTitle: I18n.t('gameDetailsScreen.navigation.title'),
       headerTitleStyle,
       headerLeft: backBtn(navigation),
-      headerRight: <AdminMenu navigation={navigation} />,
+      headerRight: (
+        <AdminMenu
+          navigation={navigation}
+          activityId={navigation.state.params._id}
+        />
+      ),
     }),
   },
 };

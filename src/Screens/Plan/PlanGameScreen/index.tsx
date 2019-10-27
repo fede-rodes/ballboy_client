@@ -37,21 +37,29 @@ class PlanGameScreen extends React.Component {
 
     const { navigation } = this.props;
 
-    Alert.alert(
-      I18n.t('planGameScreen.leaveAlert.header'),
-      I18n.t('planGameScreen.leaveAlert.body'),
-      [
-        {
-          text: I18n.t('planGameScreen.leaveAlert.footer.cancelBtnLabel'),
-          onPress: () => null,
-          style: 'cancel',
-        },
-        {
-          text: I18n.t('planGameScreen.leaveAlert.footer.okBtnLabel'),
-          onPress: () => { navigation.goBack(null); },
-        },
-      ],
-    );
+    if (Platform.OS === 'web') {
+      const res = window.confirm(I18n.t('planGameScreen.leaveAlert.body'));
+      if (res) {
+        // TODO: actually need to make sure history is defined in order to go back. Otherwise we should redirect to home
+        window.history.back(); // navigation.goBAck not working on react-navigation-web
+      }
+    } else {
+      Alert.alert(
+        I18n.t('planGameScreen.leaveAlert.header'),
+        I18n.t('planGameScreen.leaveAlert.body'),
+        [
+          {
+            text: I18n.t('planGameScreen.leaveAlert.footer.cancelBtnLabel'),
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {
+            text: I18n.t('planGameScreen.leaveAlert.footer.okBtnLabel'),
+            onPress: () => { navigation.goBack(null); },
+          },
+        ],
+      );
+    }
 
     // Need this for android back handler btn to work
     return true;

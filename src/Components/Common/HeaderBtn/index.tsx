@@ -14,28 +14,36 @@ const StyledRow = styled(Row)`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const HeaderBtn = ({ iconName, onPress }) => (
+const HeaderBtn = ({
+  iconSet, iconName, size, color, onPress,
+}) => (
   <TouchableOpacity onPress={onPress}>
     <StyledRow
       justifyContent="center"
       alignItems="center"
     >
       <Icon
-        iconSet="MaterialIcons"
+        iconSet={iconSet}
         iconName={iconName}
-        size={32}
-        color="black"
+        size={size}
+        color={color}
       />
     </StyledRow>
   </TouchableOpacity>
 );
 
 HeaderBtn.propTypes = {
+  iconSet: PropTypes.string,
   iconName: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  color: PropTypes.string,
   onPress: PropTypes.func,
 };
 
 HeaderBtn.defaultProps = {
+  iconSet: 'MaterialIcons',
+  size: 32,
+  color: 'black',
   onPress: () => {},
 };
 

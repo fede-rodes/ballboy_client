@@ -24,10 +24,10 @@ import GameCanceledFlag from '../GameCanceledFlag';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const CARD_HEIGHT = 172;
+const CARD_HEIGHT = 182;
 // const CARD_HEIGHT_CANCELED = 252;
 // const CARD_WIDTH = Dimensions.get('window').width; // aprox, we are not considering the padding from the parent container
-const HEADER_HEIGHT = 58;
+const HEADER_HEIGHT = 48;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ const GameListCard = ({ activity }) => {
     <Outer height={cardHeight}>
       <Top alignItems="center">
         <Row>
-          <Image source={sport ? themeIcons[sport.toLowerCase()] : themeIcons.soccer} />
+          <Image source={sport ? themeIcons[sport.toLowerCase()] : themeIcons.football} />
           <Spacer row size="ML" />
           <Text size="M">
             {formattedStartTime}
@@ -95,14 +95,14 @@ const GameListCard = ({ activity }) => {
         </Text> */}
         {/* <DotSpacer /> */}
       </Top>
-      <Bottom>
+      <Bottom style={{ position: 'relative' }}>
         {/* <BackgroundImage
           images={spot.images}
           height={cardHeight - HEADER_HEIGHT}
           width={CARD_WIDTH}
         /> */}
         {isCanceled && (
-          <GameCanceledFlag />
+          <GameCanceledFlag style={{ position: 'absolute', right: 0, top: 0 }} />
         )}
         <Container>
           <Text size="ML" numberOfLines={1}>
@@ -301,4 +301,3 @@ export default GameListCard;
 // };
 
 // export default GameListCard;
-

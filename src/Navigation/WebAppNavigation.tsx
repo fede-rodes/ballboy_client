@@ -14,6 +14,7 @@ import GameChatScreen from '../Screens/Games/GameChatScreen';
 import PlayersListScreen from '../Screens/Games/PlayersListScreen';
 import SpotsListScreen from '../Screens/Spots/SpotsListScreen';
 import SpotDetailsScreen from '../Screens/Spots/SpotDetailsScreen';
+import SpotsFilterScreen from '../Screens/Spots/SpotsFilterScreen';
 import PlanGameScreen from '../Screens/Plan/PlanGameScreen';
 import ShareGameScreen from '../Screens/Plan/ShareGameScreen';
 import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
@@ -98,6 +99,11 @@ const LOGGED_IN_ROUTES = [
     path: 'spots/:_id',
   },
   {
+    name: 'SpotsFilterScreen',
+    screen: SpotsFilterScreen,
+    path: 'spots-filter',
+  },
+  {
     name: 'PlanGameScreen',
     screen: PlanGameScreen,
     path: 'plan-activity',
@@ -130,7 +136,10 @@ const WebAppLoggedInScreensNavigation = createNavigator(
           screen: ({ navigation }) => (
             <LoggedOutRoute
               component={Screen}
-              onLoggedIn={({ location }) => { navigation.navigate(location ? 'GamesLisScreen' : 'OnboardingScreen'); }}
+              onLoggedIn={({ location }) => {
+                console.log('HANDLE LOGGED IN!', location);
+                navigation.navigate(location ? 'GamesListScreen' : 'OnboardingScreen');
+              }}
               // Child component props
               navigation={navigation}
             />
