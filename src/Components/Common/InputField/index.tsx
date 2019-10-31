@@ -19,8 +19,11 @@ const MIN_WIDTH = 80;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
+// const FlexGrow = styled.View`
+//   flex-grow: 1; /* full width */
+// `;
 const FlexGrow = styled.View`
-  flex-grow: 1; /* full width */
+  flex: 1;
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -61,7 +64,9 @@ class InputField extends React.PureComponent {
     const Root = disabled ? View : TouchableOpacity;
     const Comp = isTextField ? TextField : Dropdown;
     const pointerEvents = isTextField ? 'none' : 'auto';
-    const { baseColor, iconColor, disabledColor, errorColor } = getInputPalette(theme); // string to be used Colors[string]
+    const {
+      baseColor, iconColor, disabledColor, errorColor,
+    } = getInputPalette(theme); // string to be used Colors[string]
 
     let iColor = iconColor;
     if (disabled) { iColor = disabledColor; }
@@ -127,6 +132,9 @@ class InputField extends React.PureComponent {
               style={{
                 paddingHorizontal: 8,
                 textAlign: 'center',
+                width,
+                // width: '100%',
+                // maxWidth: width,
               }}
               containerStyle={{ width }}
               theme={theme}

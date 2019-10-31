@@ -60,6 +60,7 @@ const Dropdown = React.forwardRef(({
         fontFamily: Fonts.M.fontFamily,
         fontSize: Fonts.M.fontSize,
         color: disabled ? Colors[disabledColor] : Colors[fontColor],
+        // height: 1.5 * Fonts.M.fontSize,
       },
       focused: {
         borderColor: Colors[tintColor],
@@ -73,7 +74,7 @@ const Dropdown = React.forwardRef(({
         fontFamily: Fonts[size].fontFamily,
         marginTop: 8,
         color: disabled ? Colors[disabledColor] : Colors[fontColor],
-        borderBottom: `1px solid ${disabled ? Colors[disabledColor] : Colors[fontColor]}`,
+        borderBottom: `${disabled ? 0 : lineWidth}px solid ${disabled ? Colors[disabledColor] : Colors[baseColor]}`,
         ...style,
         '&:focus': {
           borderColor: Colors[tintColor],
@@ -82,7 +83,7 @@ const Dropdown = React.forwardRef(({
     }))(InputBase);
 
     return (
-      <View>
+      <View style={{ height: 73, justifyContent: 'center' }}>
         <CustomLabel>{label}</CustomLabel>
         <DropdownMUI
           ref={ref}
@@ -92,6 +93,8 @@ const Dropdown = React.forwardRef(({
           }}
           input={<CustomInput />}
           IconComponent={() => null}
+          disabled={disabled}
+          // {...rest}
         >
           {data.map((item) => (
             <MenuItem value={item.label}>
