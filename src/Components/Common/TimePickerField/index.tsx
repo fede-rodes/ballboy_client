@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { View } from 'react-native';
-import TimePickerModal from '@material-ui/pickers/TimePicker';
+import { TimePicker } from '@material-ui/pickers';
 import I18n from '../../../I18n';
 import ModalProps from '../../../RenderProps/modal-props';
 import InputField from '../InputField';
@@ -22,7 +22,7 @@ const TimePickerField = ({ value, onChange, ...rest }) => (
           onPress={openModal}
           {...rest}
         />
-        <TimePickerModal
+        <TimePicker
           ampm={false}
           value={value ? value.clone().local().toDate() : new Date()}
           open={visible}
