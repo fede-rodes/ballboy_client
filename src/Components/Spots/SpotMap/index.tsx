@@ -23,6 +23,7 @@ const { width: windowWidth } = Dimensions.get('window');
 // -----------------------------------------------------------------------------
 const googleMapsIosApiKey = get(Constants, 'manifest.ios.config.googleMapsApiKey', '');
 const googleMapsAndroidApiKey = get(Constants, 'manifest.android.config.googleMaps.apiKey', '');
+const googleMapsWebApiKey = get(Constants, 'manifest.extra.webGoogleMapsApiKey', '');
 
 let GOOGLE_MAPS_API_KEY;
 
@@ -36,7 +37,7 @@ switch (Platform.OS) {
     GOOGLE_MAPS_API_KEY = googleMapsAndroidApiKey;
     break;
   case 'web':
-    GOOGLE_MAPS_API_KEY = 'xxx';
+    GOOGLE_MAPS_API_KEY = googleMapsWebApiKey;
     break;
   default:
     break;

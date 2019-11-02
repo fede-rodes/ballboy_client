@@ -81,7 +81,7 @@ const LOGGED_IN_ROUTES = [
   {
     name: 'GameChatScreen',
     screen: GameChatScreen,
-    path: 'activities/:roomId',
+    path: 'activities/:_id/:roomId',
   },
   {
     name: 'PlayersListScreen',

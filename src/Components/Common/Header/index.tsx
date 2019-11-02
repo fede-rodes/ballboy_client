@@ -13,10 +13,11 @@ const Header = ({ navigation }) => {
 
   console.log('activeRoute', JSON.stringify(activeRoute));
   console.log('Header.navigation', navigation);
+  console.log('Header.params', params);
 
   const title = getTitle({ activeKey });
-  const LeftComponent = getLeftComponent({ activeKey, params, navigation });
-  const RightComponent = getRightComponent({ activeKey, params, navigation });
+  const LeftComponent = getLeftComponent({ navigation, activeKey, params });
+  const RightComponent = getRightComponent({ navigation, activeKey, params });
 
   if (isEmpty(title)) return null;
 
