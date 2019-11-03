@@ -93,6 +93,8 @@ class PlanGameForm extends React.Component {
       errors: cloneDeep(INIT_ERRORS),
     };
 
+    this.swiper = null; // create ref
+
     // console.log('INIT STATE', this.state);
   }
 
@@ -204,6 +206,7 @@ class PlanGameForm extends React.Component {
     Keyboard.dismiss();
 
     const nextSlide = Math.round(evt.nativeEvent.contentOffset.x / WINDOW_WIDTH);
+    console.log({ nextSlide });
     this.setState({ curSlide: nextSlide });
   }
 
@@ -236,6 +239,7 @@ class PlanGameForm extends React.Component {
 
     // Validate fields
     const errors = this.validateFields(this.state);
+    console.log({ errors });
 
     // In case of errors, display on UI and return handler to parent component
     if (ErrorHandling.hasErrors(errors)) {
@@ -281,7 +285,7 @@ class PlanGameForm extends React.Component {
     const { disabled, onLeave } = this.props;
     const { curSlide, ...rest } = this.state;
 
-    // Load slides dinamically so that we can prevent the user to scroll right
+    // Load slides dynamically so that we can prevent the user to scroll right
     // when the next button is disabled
     const FILTERED_SLIDES = cloneDeep(SLIDES).slice(0, this.nSlides);
 
@@ -293,8 +297,9 @@ class PlanGameForm extends React.Component {
         <FlatList
           ref={(swiper) => { this.swiper = swiper; }}
           horizontal
-          pagingEnabled
+          // pagingEnabled
           showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16} // ~60 events per second
           onScroll={this.handleScroll}
           data={FILTERED_SLIDES}
           extraData={FILTERED_SLIDES.length}
