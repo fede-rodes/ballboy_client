@@ -1,31 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, ScrollView, Dimensions } from 'react-native';
+import get from 'lodash/get';
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const { width: WINDOW_WIDTH } = Dimensions.get('window');
+const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const ImageSwiper = ({ images }) => (
-  <ScrollView
-    horizontal
-    pagingEnabled
-    showsHorizontalScrollIndicator={false}
-  >
-    {images.map(src => (
-      <Image
-        key={src}
-        style={{ flex: 1 }}
-        source={{ uri: src }}
-        width={WINDOW_WIDTH}
-      />
-    ))}
-  </ScrollView>
-);
+const ImageSwiper = ({ images }) => {
+  const src = get(images, '0', '');
+
+  return (
+    <Image
+      key={src}
+      style={{ flex: 1 }}
+      source={{ uri: src }}
+      width={WINDOW_WIDTH}
+      height={WINDOW_HEIGHT}
+    />
+  );
+  // <ScrollView
+  //   horizontal
+  //   pagingEnabled
+  //   showsHorizontalScrollIndicator={false}
+  // >
+  //   {images.map((src) => (
+  //     <Image
+  //       key={src}
+  //       style={{ flex: 1 }}
+  //       source={{ uri: src }}
+  //       width={WINDOW_WIDTH}
+  //       height={WINDOW_HEIGHT}
+  //     />
+  //   ))}
+  // </ScrollView>
+};
 
 ImageSwiper.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),

@@ -28,6 +28,7 @@ class GamesListScreen extends React.PureComponent {
 
   handleGamePress = (activity) => {
     const { navigation } = this.props;
+    console.log('HANDLE GAME PRESS !!!!');
     navigation.navigate('GameDetailsScreen', { _id: activity._id });
   }
 
@@ -40,7 +41,9 @@ class GamesListScreen extends React.PureComponent {
         variables={{ offset: 0, limit: 10 }}
         fetchPolicy="cache-and-network"
       >
-        {({ loading, data, refetch, fetchMore }) => {
+        {({
+          loading, data, refetch, fetchMore,
+        }) => {
           const loadMore = () => {
             fetchMore({
               variables: {
@@ -51,9 +54,7 @@ class GamesListScreen extends React.PureComponent {
                   this.setState({ hasNewResults: false }); // fix/hack for persistent loading indicator (loading never gets set to false when fetchMoreResult doesn't return new data)
                   return prev;
                 }
-                return Object.assign({}, prev, {
-                  activities: [...prev.activities, ...fetchMoreResult.activities],
-                });
+                return { ...prev, activities: [...prev.activities, ...fetchMoreResult.activities] };
               },
             });
           };

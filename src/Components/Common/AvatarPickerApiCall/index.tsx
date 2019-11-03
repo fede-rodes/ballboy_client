@@ -5,6 +5,13 @@ import sha1 from 'sha1';
 import superagent from 'superagent';
 // import curateErrors from './utils';
 
+//------------------------------------------------------------------------------
+// CONSTANTS:
+//------------------------------------------------------------------------------
+const {
+  cloudinaryCloudname, cloudinaryUploadPreset, cloudinaryApiKey, cloudinaryApiSecret,
+} = Constants.manifest.extra;
+
 // See: https://www.youtube.com/watch?v=WOTFmPkWbxo
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -14,26 +21,38 @@ import superagent from 'superagent';
  * data into the DB.
  */
 class AvatarPickerApiCall extends React.PureComponent {
-  handleUpload = async (inputFields) => {
+  handleUpload = (inputFields) => {
     const { onError, onSuccess } = this.props;
     const { file } = inputFields;
 
-    const url = `https://api.cloudinary.com/v1_1/${Constants.manifest.extra.cloudinaryCloudname}/image/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${cloudinaryCloudname}/image/upload`;
     const timestamp = Date.now() / 1000;
 
-    const paramsStr = `timestamp=${timestamp}&upload_preset=${Constants.manifest.extra.cloudinaryUploadPreset}${Constants.manifest.extra.cloudinaryApiSecret}`;
+    const paramsStr = `timestamp=${timestamp}&upload_preset=${cloudinaryUploadPreset}${cloudinaryApiSecret}`;
 
     const signature = sha1(paramsStr);
 
     const params = {
-      api_key: Constants.manifest.extra.cloudinaryApiKey,
+      api_key: cloudinaryApiKey,
       timestamp,
-      upload_preset: Constants.manifest.extra.cloudinaryUploadPreset,
+      upload_preset: cloudinaryUploadPreset,
       signature,
     };
 
-    const req = superagent.post(url);
-    req.attach('file', file);
+    // Prepare the post request
+    let req;
+
+    try {
+      req = superagent.post(url);
+      console.log('superagent req', req);
+      req.attach('file', file);
+      console.log('superagent req.file', req);
+    } catch (exc) {
+      // TODO: add sentry
+      console.log(`Error when posting/attaching using superagent, ${exc}`);
+      onError(exc);
+      return;
+    }
 
     Object.keys(params).forEach((key) => {
       req.field(key, params[key]);
@@ -41,10 +60,13 @@ class AvatarPickerApiCall extends React.PureComponent {
 
     // console.log('HANDLE UPDATE', inputFields);
 
+    // Send the actual request
     req.end((err, res) => {
       if (err) {
-        console.log(err);
+        // TODO: add sentry
+        console.log(`Error when uploading image to Cloudinary, ${err}`);
         onError(err);
+        return;
       }
 
       // console.log('UPDATE RESPONSE', res);
@@ -52,16 +74,6 @@ class AvatarPickerApiCall extends React.PureComponent {
       // console.log('res.body.secureUrl', res.body.secureUrl);
       onSuccess(res.body.secure_url);
     });
-
-    // const res = await SeedorfAPI.sendMagicLoginLink(email);
-
-    // // Pass event up to parent component
-    // if (res && res.problem) {
-    //   console.log('response', res);
-    //   const errors = curateErrors(res.data);
-    //   onError(errors);
-    //   return;
-    // }
   }
 
   render() {

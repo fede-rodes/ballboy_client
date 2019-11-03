@@ -4,18 +4,22 @@ import UserMenu from '../../Profile/UserMenu';
 import AdminMenu from '../../Games/AdminMenu';
 import HeaderBtn from '../HeaderBtn';
 
-const BackBtn = () => (
-  <StackBackHeader onPress={() => { window.history.back(); }} />
+// const BackBtn = () => (
+//   <StackBackHeader onPress={() => { window.history.back(); }} />
+// );
+
+const NavigateBtn = ({ navigation, screen, params = {} }) => (
+  <StackBackHeader onPress={() => { navigation.navigate(screen, params); }} />
 );
 
 const ROUTES = {
   SignupEmailScreen: {
     title: 'signupEmailScreen.navigation.title',
-    leftComponent: BackBtn,
+    // leftComponent: BackBtn,
   },
   LoginScreen: {
     title: 'loginScreen.navigation.title',
-    leftComponent: BackBtn,
+    // leftComponent: BackBtn,
   },
   CheckEmailScreen: {
     title: 'checkEmailScreen.navigation.title',
@@ -25,44 +29,38 @@ const ROUTES = {
   },
   GameDetailsScreen: {
     title: 'gameDetailsScreen.navigation.title',
-    leftComponent: BackBtn,
+    // TODO: check history. If prev screen is SpotDetailsScreen, then navigate to spot details
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="GamesListScreen" />
+    ),
     rightComponent: ({ navigation, params }) => (
       <AdminMenu navigation={navigation} activityId={params._id} />
     ),
-    // leftComponent: () => <BackBtn />,
-    // leftComponent: ({ navigation }) => (
-    //   <HeaderBtn
-    //     iconSet="MaterialIcons"
-    //     iconName="arrow-back"
-    //     size={24}
-    //     // onPress={() => { navigation.navigate('GamesListScreen'); }}
-    //     onPress={() => { window.history.back(); }}
-    //   />
-    // ),
   },
   GameChatScreen: {
     title: 'gameChatScreen.navigation.title',
-    leftComponent: BackBtn,
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="GameDetailsScreen" params={{ _id: params._id }} />
+    ),
   },
   PlayersListScreen: {
     title: 'playersListScreen.navigation.title',
-    leftComponent: BackBtn,
-    // leftComponent: ({ params, navigation }) => (
-    //   <HeaderBtn
-    //     iconSet="MaterialIcons"
-    //     iconName="arrow-back"
-    //     size={24}
-    //     onPress={() => { navigation.navigate('GameDetailsScreen', params); }}
-    //   />
-    // ),
+    // TODO: if previous screen is CancelGameScreen then go back to that screen rather than game details
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="GameDetailsScreen" params={{ _id: params._id }} />
+    ),
   },
   EditGameScreen: {
     title: 'editGameScreen.navigation.title',
-    leftComponent: BackBtn,
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="GameDetailsScreen" params={{ _id: params._id }} />
+    ),
   },
   CancelGameScreen: {
     title: 'cancelGameScreen.navigation.title',
-    leftComponent: BackBtn,
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="GameDetailsScreen" params={{ _id: params._id }} />
+    ),
   },
   SpotsListScreen: {
     title: 'spotsListScreen.navigation.title',
@@ -75,23 +73,16 @@ const ROUTES = {
   },
   SpotDetailsScreen: {
     title: 'spotDetailsScreen.navigation.title',
-    leftComponent: BackBtn,
-    // leftComponent: ({ navigation }) => (
-    //   <HeaderBtn
-    //     iconSet="MaterialIcons"
-    //     iconName="arrow-back"
-    //     size={24}
-    //     onPress={() => { navigation.navigate('SpotsListScreen'); }}
-    //   />
-    // ),
+    leftComponent: ({ navigation, params }) => (
+      <NavigateBtn navigation={navigation} screen="SpotsListScreen" />
+    ),
   },
   SpotsFilterScreen: {
     title: 'spotsFilterScreen.navigation.title',
-    // leftComponent: BackBtn,
     rightComponent: () => (
       <HeaderBtn
         iconName="close"
-        onPress={() => { window.history.back(); }}
+        onPress={() => { navigation.navigate('SpotsListScreen'); }}
       />
     ),
   },

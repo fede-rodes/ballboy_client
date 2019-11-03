@@ -19,8 +19,8 @@ const MIN_WIDTH = 80;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
-const FlexGrow = styled.View`
-  flex-grow: 1; /* full width */
+const FlexOne = styled.View`
+  flex: 1;
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -61,7 +61,9 @@ class InputField extends React.PureComponent {
     const Root = disabled ? View : TouchableOpacity;
     const Comp = isTextField ? TextField : Dropdown;
     const pointerEvents = isTextField ? 'none' : 'auto';
-    const { baseColor, iconColor, disabledColor, errorColor } = getInputPalette(theme); // string to be used Colors[string]
+    const {
+      baseColor, iconColor, disabledColor, errorColor,
+    } = getInputPalette(theme); // string to be used Colors[string]
 
     let iColor = iconColor;
     if (disabled) { iColor = disabledColor; }
@@ -80,10 +82,10 @@ class InputField extends React.PureComponent {
       return (
         <Root onPress={this.handlePress} testID={testID}>
           <Row>
-            <FlexGrow pointerEvents={pointerEvents}>
+            <FlexOne pointerEvents={pointerEvents}>
               <Comp
                 ref={(field) => { this.field = field; }}
-                containerStyle={{ width: '100%' }}
+                containerStyle={{ width: '100%', pointerEvents }}
                 value={value}
                 disabled={disabled}
                 theme={theme}
@@ -91,7 +93,7 @@ class InputField extends React.PureComponent {
                 error={error}
                 {...rest}
               />
-            </FlexGrow>
+            </FlexOne>
             {/* Add custom carret */}
             <View>
               <Spacer size="XXL" />
@@ -127,8 +129,9 @@ class InputField extends React.PureComponent {
               style={{
                 paddingHorizontal: 8,
                 textAlign: 'center',
+                width,
               }}
-              containerStyle={{ width }}
+              containerStyle={{ width, pointerEvents }}
               theme={theme}
               size={size}
               error={error}

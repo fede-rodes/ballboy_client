@@ -61,7 +61,7 @@ class UpdateUserApiCall extends React.PureComponent {
             query: spotsQuery,
             variables: {
               sports: allSports ? [] : selectedSports, // empty array will return all spots
-              distance: parseFloat(maxDistance * 1000, 10), // km to mt
+              distance: maxDistance * 1000, // km to mt
               offset: 0,
               limit: 10,
             },

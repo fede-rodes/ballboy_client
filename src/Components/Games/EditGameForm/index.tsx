@@ -87,7 +87,7 @@ class EditGameForm extends React.PureComponent {
       errors: cloneDeep(INIT_ERRORS),
       // Keep track of field position in order to 'scroll to' on error
       offsetY: Object.keys(INIT_ERRORS).reduce((output, key) => (
-        Object.assign({}, output, { [key]: 0 })
+        { ...output, [key]: 0 }
       ), {}),
     };
 

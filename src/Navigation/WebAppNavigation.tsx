@@ -21,6 +21,7 @@ import ProfileEditScreen from '../Screens/Profile/ProfileEditScreen';
 import InfoScreen from '../Screens/Info/InfoScreen';
 import LoggedOutRoute from './LoggedOutRoute';
 import LoggedInRoute from './LoggedInRoute';
+import NotOnboardedRoute from './NotOnboardedRoute';
 import OnboardedRoute from './OnboardedRoute';
 import WebAppView from './WebAppView';
 
@@ -81,7 +82,7 @@ const LOGGED_IN_ROUTES = [
   {
     name: 'GameChatScreen',
     screen: GameChatScreen,
-    path: 'activities/:roomId',
+    path: 'activities/:_id/:roomId',
   },
   {
     name: 'PlayersListScreen',
@@ -137,7 +138,6 @@ const WebAppLoggedInScreensNavigation = createNavigator(
             <LoggedOutRoute
               component={Screen}
               onLoggedIn={({ location }) => {
-                console.log('HANDLE LOGGED IN!', location);
                 navigation.navigate(location ? 'GamesListScreen' : 'OnboardingScreen');
               }}
               // Child component props
@@ -154,19 +154,15 @@ const WebAppLoggedInScreensNavigation = createNavigator(
         [name]: {
           screen: ({ navigation }) => (
             <LoggedInRoute
-              component={Screen}
-              // TODO: wrap screen comp using NotOnboardedRoute
-              // component={() => (
-              //   <OnboardedRoute
-              //     component={Screen}
-              //     onNotOnboarded={() => { navigation.navigate('OnboardingScreen'); }}
-              //     // Child component props
-              //     navigation={navigation}
-              //   />
-              // )}
+              component={() => (
+                <NotOnboardedRoute
+                  component={Screen}
+                  onOnboarded={() => { navigation.navigate('GamesListScreen'); }}
+                  // Child component props
+                  navigation={navigation}
+                />
+              )}
               onLoggedOut={() => { navigation.navigate('SplashScreen'); }}
-              // Child component props
-              navigation={navigation}
             />
           ),
           path,

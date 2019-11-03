@@ -40,8 +40,8 @@ class PlanGameScreen extends React.Component {
     if (Platform.OS === 'web') {
       const res = window.confirm(I18n.t('planGameScreen.leaveAlert.body'));
       if (res) {
-        // TODO: actually need to make sure history is defined in order to go back. Otherwise we should redirect to home
-        window.history.back(); // navigation.goBAck not working on react-navigation-web
+        console.log('Navigate to games list screen');
+        navigation.navigate('GamesListScreen');
       }
     } else {
       Alert.alert(

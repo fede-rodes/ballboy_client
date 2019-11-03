@@ -146,7 +146,6 @@ class OnboardingForm extends React.Component {
   }
 
   handleChange = ({ fieldName, value }) => {
-    console.log('handleChange', fieldName, value);
     this.setState({ [fieldName]: value });
   }
 

@@ -13,7 +13,12 @@ import GameDetails from '../../../Components/Games/GameDetails';
 // STYLE:
 //------------------------------------------------------------------------------
 const Container = styled(ScrollView)`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.concrete};
+`;
+//------------------------------------------------------------------------------
+const NothingFoundContainer = styled.View`
+  flex: 1;
+  justify-content: center;
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -31,7 +36,7 @@ class GameDetailsScreen extends React.PureComponent {
 
   handleChatPress = ({ roomId }) => {
     const { navigation } = this.props;
-    navigation.navigate('GameChatScreen', { roomId });
+    navigation.navigate('GameChatScreen', { _id: this.activityId, roomId });
   }
 
   handleAttendeesPress = () => {
@@ -47,22 +52,17 @@ class GameDetailsScreen extends React.PureComponent {
         fetchPolicy="cache-and-network"
       >
         {({ loading, error, data }) => {
-          if (loading) {
-            return <CenteredActivityIndicator />;
-          }
+          if (loading) return <CenteredActivityIndicator />;
 
           if (error || !data) {
             return (
-              <View
-                justifyContent="center"
-                style={{ flex: 1 }}
-              >
+              <NothingFoundContainer>
                 <NothingFound
                   iconSet="MaterialCommunityIcons"
                   iconName="calendar-plus"
                   text={I18n.t('gameDetailsScreen.notFound')}
                 />
-              </View>
+              </NothingFoundContainer>
             );
           }
 
