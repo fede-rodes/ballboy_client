@@ -19,10 +19,7 @@ const MIN_WIDTH = 80;
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
-// const FlexGrow = styled.View`
-//   flex-grow: 1; /* full width */
-// `;
-const FlexGrow = styled.View`
+const FlexOne = styled.View`
   flex: 1;
 `;
 //------------------------------------------------------------------------------
@@ -85,10 +82,10 @@ class InputField extends React.PureComponent {
       return (
         <Root onPress={this.handlePress} testID={testID}>
           <Row>
-            <FlexGrow pointerEvents={pointerEvents}>
+            <FlexOne pointerEvents={pointerEvents}>
               <Comp
                 ref={(field) => { this.field = field; }}
-                containerStyle={{ width: '100%' }}
+                containerStyle={{ width: '100%', pointerEvents }}
                 value={value}
                 disabled={disabled}
                 theme={theme}
@@ -96,7 +93,7 @@ class InputField extends React.PureComponent {
                 error={error}
                 {...rest}
               />
-            </FlexGrow>
+            </FlexOne>
             {/* Add custom carret */}
             <View>
               <Spacer size="XXL" />
@@ -133,10 +130,8 @@ class InputField extends React.PureComponent {
                 paddingHorizontal: 8,
                 textAlign: 'center',
                 width,
-                // width: '100%',
-                // maxWidth: width,
               }}
-              containerStyle={{ width }}
+              containerStyle={{ width, pointerEvents }}
               theme={theme}
               size={size}
               error={error}

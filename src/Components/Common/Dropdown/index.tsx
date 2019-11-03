@@ -82,11 +82,13 @@ const Dropdown = React.forwardRef(({
       },
     }))(InputBase);
 
+    // TODO: use MUI TextField instead
     return (
       <View style={{ height: 73, justifyContent: 'center' }}>
         <CustomLabel>{label}</CustomLabel>
         <DropdownMUI
-          ref={ref}
+          inputRef={ref}
+          // ref={ref}
           value={rest.value}
           onChange={(evt) => {
             onChangeText(data.find((d) => (d.label === evt.target.value)));

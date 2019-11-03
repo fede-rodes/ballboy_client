@@ -15,6 +15,7 @@ const DatePickerModal = ({
     value={value}
     onChange={onSelect}
     TextFieldComponent={() => null}
+    onClose={onClose}
   />
 );
 
