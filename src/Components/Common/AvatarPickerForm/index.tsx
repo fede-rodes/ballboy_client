@@ -37,7 +37,8 @@ class AvatarPickerForm extends React.PureComponent {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+        // TODO: show alert + translate
+        console.log('Sorry, we need camera roll permissions to make this work!');
       }
     }
   }
@@ -76,7 +77,7 @@ class AvatarPickerForm extends React.PureComponent {
     try {
       // TODO: add permissions https://docs.expo.io/versions/latest/sdk/imagepicker/
       const res = await ImagePicker.launchImageLibraryAsync(options);
-      console.log('res = ', res);
+      console.log({ res });
 
       if (res.cancelled) {
         console.log('User cancelled photo picker');
@@ -84,11 +85,12 @@ class AvatarPickerForm extends React.PureComponent {
         return;
       }
 
-      const { base64 } = res;
+      const { base64, uri } = res;
 
       // You can display the image using data:
       // const source = { uri: 'data:image/jpeg;base64,' + res.data };
-      const avatar = `data:image/jpeg;base64,${base64}`;
+      const avatar = base64 ? `data:image/jpeg;base64,${base64}` : uri;
+      console.log({ avatar });
       this.setState({ avatar });
       // Pass event up to parent component. onClientSuccessHook will set 'disabled'
       // value back to 'false' so that the user can re-submit the form
@@ -107,7 +109,7 @@ class AvatarPickerForm extends React.PureComponent {
     const { avatar, errors } = this.state;
 
     // Set user based on state values
-    const usr = Object.assign({}, user, { profile: { avatar } });
+    const usr = { ...user, profile: { avatar } };
 
     // Apply translation and concatenate field errors (string)
     const avatarErrors = ErrorHandling.getFieldErrors(errors, 'avatar', I18n.t);

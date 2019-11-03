@@ -97,7 +97,10 @@ const Dropdown = React.forwardRef(({
           // {...rest}
         >
           {data.map((item) => (
-            <MenuItem value={item.label}>
+            <MenuItem
+              key={item.label}
+              value={item.label}
+            >
               {item.label}
             </MenuItem>
           ))}
