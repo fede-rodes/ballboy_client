@@ -81,8 +81,6 @@ const GameListCard = ({ activity }) => {
   // const cardHeight = (isCanceled ? CARD_HEIGHT_CANCELED : CARD_HEIGHT) + Avatar.size('S') * (!!attendees && attendees.length > 0);
   const cardHeight = CARD_HEIGHT + (!!attendees && attendees.length > 0) * (Avatar.size('S') + 2 * getPixelsFromSize('M'));
 
-  console.log({ sport });
-
   return (
     <Outer height={cardHeight}>
       <Top alignItems="center" midHeight>
