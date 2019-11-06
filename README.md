@@ -3,9 +3,10 @@
 Clone the repo:
 
 ```
->> mkdir bb (you can call you project's folder whatever you want; bb stands for ballboy)
+>> mkdir bb (you can call your project's folder whatever you want; bb stands for ballboy)
 >> cd bb
->> git clone git@github.com:fede-rodes/ballboy_client.git client
+>> git clone git@github.com:fede-rodes/ballboy_client.git client (this will create a 'client' folder inside 'bb')
+>> cd client
 >> yarn run install (install dependencies, please use yarn not npm!)
 ```
 
@@ -126,7 +127,7 @@ Find out more about expo env vars:
 - [https://docs.expo.io/versions/latest/workflow/configuration/](https://docs.expo.io/versions/latest/workflow/configuration/)
 - [https://docs.expo.io/versions/latest/sdk/constants/](https://docs.expo.io/versions/latest/sdk/constants/)
 
-### Run expo
+### Run expo (React Native)
 
 - First, visit [https://vast-beach-90080.herokuapp.com/graphql](https://vast-beach-90080.herokuapp.com/graphql) in order to 'wake up' the server. I don't want to pay a single pennie for now, so the server is hosted on a Heroku-free-tire, which goes to sleep when inactive. Booting the server up takes a few minutes.
 - Start the emulator (genymotion is the emulator I use on Linux)
@@ -136,7 +137,20 @@ Find out more about expo env vars:
 >> cd /bb/client
 >> expo start
 ```
-- Once expo is open, set `Local` as the type of `CONNECTION` and finally hit the `Run on Android (iOS) emulator` button. After a little while (could take several minutes) the app should start on your emulator.
+- Once expo is open, set `Local` as the type of `CONNECTION` on the expo dashboard and finally hit the `Run on Android (iOS) emulator` button. After a little while (could take several minutes) the app should start on the emulator.
+
+### Run expo (Web)
+
+- First, visit [https://vast-beach-90080.herokuapp.com/graphql](https://vast-beach-90080.herokuapp.com/graphql) in order to 'wake up' the server. I don't want to pay a single pennie for now, so the server is hosted on a Heroku-free-tire, which goes to sleep when inactive. Booting the server up takes a few minutes.
+
+- Open a new terminal and start expo with the --web flag:
+
+```
+>> cd /bb/client
+>> expo start --web
+```
+- This should open a new window in your default browser with the web version of the app.
+
 
 ### Storybook
 
