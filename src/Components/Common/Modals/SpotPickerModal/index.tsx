@@ -36,7 +36,7 @@ const SpotPickerModal = ({
       <Container>
         <SpotsList
           cardComponent="SpotListCardSmall"
-          sportsIds={sport && sport.id ? [sport.id] : []} // empty array will return all spots
+          sports={sport ? [sport] : []} // empty array will return all spots
           // maxDistance={maxDistance} // km
           selectedSpot={value}
           onCardPress={onSelect}

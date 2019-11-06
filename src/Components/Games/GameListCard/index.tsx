@@ -15,6 +15,7 @@ import Spacer from '../../Common/Spacer';
 import Row from '../../Common/Row';
 import Icon from '../../Common/Icon';
 import Avatar from '../../Common/Avatar';
+import Tag from '../../Common/Tag';
 import getPixelsFromSize from '../../Common/Spacer/utils';
 // import BackgroundImage from '../../Spots/BackgroundImage';
 // import Organizer from '../Organizer';
@@ -82,13 +83,15 @@ const GameListCard = ({ activity }) => {
 
   return (
     <Outer height={cardHeight}>
-      <Top alignItems="center">
+      <Top alignItems="center" midHeight>
         <Row>
-          <Image source={sport ? themeIcons[sport.toLowerCase()] : themeIcons.football} />
+          {/* <Image source={sport ? themeIcons[sport.toLowerCase()] : themeIcons.football} /> */}
+          <Tag status="success" value={sport.toTitleCase()} />
           <Spacer row size="ML" />
-          <Text size="M">
+          <Tag status="error" value={formattedStartTime} />
+          {/* <Text size="M">
             {formattedStartTime}
-          </Text>
+          </Text> */}
         </Row>
         {/* <Text size="M">
           {I18n.t(sport)}
