@@ -580,7 +580,7 @@
           "tooLong": "Email es muy largo",
           "wrongCredentials": "Email o contraseña equivocados",
           "unknown": "Algo fue mal",
-          "notRegistered": "Email not esta registrado"
+          "notRegistered": "Email no esta registrado"
         }
       }
     },

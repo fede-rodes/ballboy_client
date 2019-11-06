@@ -151,6 +151,27 @@ Find out more about expo env vars:
 ```
 - This should open a new window in your default browser with the web version of the app.
 
+### Deploy
+
+[https://github.com/expo/web-examples/blob/master/docs/DEPLOYMENT.md](https://github.com/expo/web-examples/blob/master/docs/DEPLOYMENT.md)
+
+#### Now
+Now has a single-command zero-config deployment flow. You can use now to deploy your app for free! 100
+
+For more information on unlimited hosting, check out the blog post.
+
+Install the now CLI with `npm install -g now`.
+
+Build your Expo web app with `expo build:web`.
+
+To deploy:
+```
+Run cd web-build
+Run now --name your-project-name
+You should see a now.sh URL in your output like: > Ready! https://expo-web-is-cool-nocabnave.now.sh (copied!)
+Paste that URL into your browser when the build is complete, and you will see your deployed app!
+```
+To deploy to production in the future, run `now --prod`
 
 ### Storybook
 
