@@ -3,9 +3,10 @@
 Clone the repo:
 
 ```
->> mkdir bb (you can call you project's folder whatever you want; bb stands for ballboy)
+>> mkdir bb (you can call your project's folder whatever you want; bb stands for ballboy)
 >> cd bb
->> git clone git@github.com:fede-rodes/ballboy_client.git client
+>> git clone git@github.com:fede-rodes/ballboy_client.git client (this will create a 'client' folder inside 'bb')
+>> cd client
 >> yarn run install (install dependencies, please use yarn not npm!)
 ```
 
@@ -136,7 +137,7 @@ Find out more about expo env vars:
 >> cd /bb/client
 >> expo start
 ```
-- Once expo is open, set `Local` as the type of `CONNECTION` and finally hit the `Run on Android (iOS) emulator` button. After a little while (could take several minutes) the app should start on your emulator.
+- Once expo is open, set `Local` as the type of `CONNECTION` on the expo dashboard and finally hit the `Run on Android (iOS) emulator` button. After a little while (could take several minutes) the app should start on the emulator.
 
 ### Storybook
 
