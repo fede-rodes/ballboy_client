@@ -1,10 +1,11 @@
 import Constants from 'expo-constants';
 import React from 'react';
-import { Platform, Dimensions } from 'react-native';
+import { Platform } from 'react-native';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components/native';
 import GoogleStaticMap from 'react-native-google-static-map';
 import get from 'lodash/get';
+import { WINDOW_WIDTH } from '../../../constants';
 import spotDetailsFragment from '../../../GraphQL/Spots/Fragments/spotDetails';
 import Block from '../../Common/Block';
 import Row from '../../Common/Row';
@@ -19,15 +20,11 @@ import {
 // -----------------------------------------------------------------------------
 // CONSTANTS:
 // -----------------------------------------------------------------------------
-const { width: windowWidth } = Dimensions.get('window');
-// -----------------------------------------------------------------------------
 const googleMapsIosApiKey = get(Constants, 'manifest.ios.config.googleMapsApiKey', '');
 const googleMapsAndroidApiKey = get(Constants, 'manifest.android.config.googleMaps.apiKey', '');
 const googleMapsWebApiKey = get(Constants, 'manifest.extra.webGoogleMapsApiKey', '');
 
 let GOOGLE_MAPS_API_KEY;
-
-console.log('Platform.OS', Platform.OS);
 
 switch (Platform.OS) {
   case 'ios':
@@ -82,7 +79,7 @@ const SpotMap = ({ spot }) => {
         latitude={latLng.latitude.toString()}
         longitude={latLng.longitude.toString()}
         zoom={13}
-        size={{ width: parseInt(windowWidth, 10), height: 150 }}
+        size={{ width: parseInt(WINDOW_WIDTH, 10), height: 150 }}
         apiKey={GOOGLE_MAPS_API_KEY}
       />
       <Absolute>

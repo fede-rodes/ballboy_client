@@ -1,6 +1,7 @@
 // import React from 'react';
 // import { Dimensions } from 'react-native';
 // import { TabView, TabBar } from 'react-native-tab-view';
+// import { WINDOW_WIDTH } from '../../../constants';
 // import Colors from '../../../Themes/Colors';
 // import I18n from '../../../I18n';
 // import Text from '../../Common/Text';
@@ -40,7 +41,7 @@
 //           }
 //         }}
 //         onIndexChange={this.handleIndexChange}
-//         initialLayout={{ width: Dimensions.get('window').width }}
+//         initialLayout={{ width: WINDOW_WIDTH }}
 //         renderTabBar={props => (
 //           <TabBar
 //             {...props}

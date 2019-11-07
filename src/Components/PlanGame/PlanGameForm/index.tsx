@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, FlatList, Dimensions } from 'react-native';
+import { Keyboard, FlatList } from 'react-native';
 // import firebase from 'react-native-firebase';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import styled from 'styled-components/native';
 import ErrorHandling from 'error-handling-utils';
+import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../../../constants';
 import I18n from '../../../I18n';
 import ClosableLayout from '../../Layouts/ClosableLayout';
 import AbsoluteCenteredActivityIndicator from '../../Common/AbsoluteCenteredActivityIndicator';
@@ -64,7 +65,6 @@ const INIT_ERRORS = {
   ...cloneDeep(TITLE_DESCRIPTION_INIT_ERRORS),
 };
 
-const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
@@ -206,7 +206,6 @@ class PlanGameForm extends React.Component {
     Keyboard.dismiss();
 
     const nextSlide = Math.round(evt.nativeEvent.contentOffset.x / WINDOW_WIDTH);
-    console.log({ nextSlide });
     this.setState({ curSlide: nextSlide });
   }
 
@@ -231,6 +230,7 @@ class PlanGameForm extends React.Component {
     Keyboard.dismiss();
 
     const { curSlide } = this.state;
+    console.log('HANDLE NEXT', { curSlide });
 
     // firebase.analytics().logEvent(`plan_activity_footer_next_btn_press_idx_${curSlide}`);
 
@@ -239,7 +239,6 @@ class PlanGameForm extends React.Component {
 
     // Validate fields
     const errors = this.validateFields(this.state);
-    console.log({ errors });
 
     // In case of errors, display on UI and return handler to parent component
     if (ErrorHandling.hasErrors(errors)) {
@@ -287,7 +286,7 @@ class PlanGameForm extends React.Component {
 
     // Load slides dynamically so that we can prevent the user to scroll right
     // when the next button is disabled
-    const FILTERED_SLIDES = cloneDeep(SLIDES).slice(0, this.nSlides);
+    const FILTERED_SLIDES = cloneDeep(SLIDES); // .slice(0, this.nSlides);
 
     return (
       <Relative>
@@ -301,6 +300,7 @@ class PlanGameForm extends React.Component {
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16} // ~60 events per second
           onScroll={this.handleScroll}
+          scrollEnabled={false}
           data={FILTERED_SLIDES}
           extraData={FILTERED_SLIDES.length}
           keyExtractor={(item) => item.id}

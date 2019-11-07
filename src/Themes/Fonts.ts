@@ -1,8 +1,8 @@
 import { Dimensions } from 'react-native';
 
-const { width: WINDOW_WIDTH } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
-const isSmallPhone = WINDOW_WIDTH <= 320;
+const isSmallPhone = width <= 320;
 
 export const FontFamilies = {
   regular: 'Rajdhani-Regular',

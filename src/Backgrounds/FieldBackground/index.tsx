@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 // import { Svg } from 'expo';
 import styled from 'styled-components/native';
+import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../../constants';
 import Colors from '../../Themes/Colors';
 import Logo from '../../Components/Common/Logo';
 import Spacer from '../../Components/Common/Spacer';
@@ -11,7 +12,6 @@ import Spacer from '../../Components/Common/Spacer';
 // CONSTANTS:
 //------------------------------------------------------------------------------
 // const { Path } = Svg;
-const { width: fullWidth, height: fullHeight } = Dimensions.get('window');
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
