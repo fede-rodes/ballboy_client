@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import styled from 'styled-components/native';
+import { WINDOW_HEIGHT } from '../../../../constants';
 import Divider from '../../Divider';
 import Block from '../../Block';
 import Modal from '../Modal';
@@ -9,9 +10,8 @@ import Modal from '../Modal';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const { height: deviceHeight } = Dimensions.get('window');
 const MARGIN = 48;
-const MAX_BODY_HEIGHT = deviceHeight - (4 * MARGIN);
+const MAX_BODY_HEIGHT = WINDOW_HEIGHT - (4 * MARGIN);
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------

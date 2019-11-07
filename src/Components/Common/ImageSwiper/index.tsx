@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, Dimensions } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import get from 'lodash/get';
-
-//------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
+import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../../../constants';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

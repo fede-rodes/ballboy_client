@@ -1,6 +1,6 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
-import { Dimensions, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import moment from 'moment';
 import get from 'lodash/get';
 import styled from 'styled-components/native';
@@ -8,7 +8,7 @@ import { ACTIVITY_STATUSES } from '../../../constants';
 import activityFragment from '../../../GraphQL/Activities/Fragments/activity';
 import Colors from '../../../Themes/Colors';
 // import I18n from '../../../I18n';
-import themeIcons from '../../../Themes/Icons';
+// import themeIcons from '../../../Themes/Icons';
 import Text from '../../Common/Text';
 // import DotSpacer from '../../Common/DotSpacer';
 import Spacer from '../../Common/Spacer';
@@ -27,7 +27,6 @@ import GameCanceledFlag from '../GameCanceledFlag';
 //------------------------------------------------------------------------------
 const CARD_HEIGHT = 182;
 // const CARD_HEIGHT_CANCELED = 252;
-// const CARD_WIDTH = Dimensions.get('window').width; // aprox, we are not considering the padding from the parent container
 const HEADER_HEIGHT = 48;
 //------------------------------------------------------------------------------
 // STYLE:

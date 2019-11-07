@@ -1,7 +1,7 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
-import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
+import { WINDOW_WIDTH } from '../../../constants';
 import spotFragment from '../../../GraphQL/Spots/Fragments/spot';
 import Block from '../../Common/Block';
 import BackgroundImage from '../BackgroundImage';
@@ -11,7 +11,7 @@ import SpotHeader from '../SpotHeader';
 // CONSTANTS:
 //------------------------------------------------------------------------------
 const CARD_HEIGHT = 240;
-const CARD_WIDTH = Dimensions.get('window').width; // aprox, we are not considering the padding from the parent container
+const CARD_WIDTH = WINDOW_WIDTH; // aprox, we are not considering the padding from the parent container
 const FOOTER_HEIGHT = 80;
 
 //------------------------------------------------------------------------------

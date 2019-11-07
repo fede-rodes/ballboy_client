@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, ScrollView, Dimensions } from 'react-native';
+import { Keyboard, ScrollView } from 'react-native';
 // import firebase from 'react-native-firebase';
 import styled from 'styled-components/native';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
+import { WINDOW_WIDTH } from '../../../constants';
 import I18n from '../../../I18n';
 // import Images from '../../../Themes/Images';
 // import ImageBackground from '../../../Backgrounds/ImageBackground';
@@ -55,8 +56,6 @@ const SLIDES = [
 const INIT_STATE = {
   ...cloneDeep(LOCATION_INIT_STATE),
 };
-
-const { width: WINDOW_WIDTH } = Dimensions.get('window');
 //------------------------------------------------------------------------------
 // STYLE:
 //------------------------------------------------------------------------------
