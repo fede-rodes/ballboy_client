@@ -79,7 +79,7 @@ const ROUTES = {
   },
   SpotsFilterScreen: {
     title: 'spotsFilterScreen.navigation.title',
-    rightComponent: () => (
+    rightComponent: ({ navigation }) => (
       <HeaderBtn
         iconName="close"
         onPress={() => { navigation.navigate('SpotsListScreen'); }}
