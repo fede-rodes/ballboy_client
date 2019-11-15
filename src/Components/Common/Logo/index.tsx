@@ -42,7 +42,8 @@ const Logo = ({ scale }) => (
   <Image
     source={Images.logo}
     resizeMode="contain"
-    style={{ flex: 1 }}
+    // style={{ flex: 1 }}
+    style={{ width: 100 }}
   />
 );
 

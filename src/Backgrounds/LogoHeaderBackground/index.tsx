@@ -41,15 +41,15 @@ const LogoHeaderBackground = ({
           >
             <Logo scale={1} />
             {/* <Spacer size="L" /> */}
-            <Text
+            {/* <Text
               size="L"
               color={isWhiteTheme ? 'black' : 'white'}
               bold
             >
               {name.toUpperCase()}
-            </Text>
+            </Text> */}
           </View>,
-          <Spacer key="spacer" size="XL" />,
+          // <Spacer key="spacer" size="XL" />,
         ]}
         {children}
       </ScrollView>
