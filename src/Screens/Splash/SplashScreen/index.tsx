@@ -20,6 +20,7 @@ const FlexOne = styled.View`
 //------------------------------------------------------------------------------
 const SplashScreen = ({ navigation }) => (
   <FieldBackground>
+    <Spacer size="XXXL" />
     <Block>
       <TapsCounter
         onTapsReached={() => { navigation.navigate('DebugNav'); }}
