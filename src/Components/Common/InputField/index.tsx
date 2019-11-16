@@ -128,7 +128,7 @@ class InputField extends React.PureComponent {
               disabled={disabled}
               style={{
                 paddingHorizontal: 8,
-                textAlign: 'center',
+                // textAlign: 'center',
                 width,
               }}
               containerStyle={{ width, pointerEvents }}
