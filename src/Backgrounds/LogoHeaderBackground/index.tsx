@@ -37,7 +37,7 @@ const LogoHeaderBackground = ({
         {!hideLogo && [
           <View
             key="logo"
-            alignItems="center"
+            style={{ alignItems: 'center' }}
           >
             <Logo scale={1} />
             {/* <Spacer size="L" /> */}

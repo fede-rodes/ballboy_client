@@ -5,6 +5,8 @@ import { Image } from 'react-native';
 import Images from '../../../Themes/Images';
 // import Svg, { G, Path, Polygon } from 'react-native-svg';
 
+const SIZE = 100;
+
 // const { G, Path, Polygon } = Svg;
 // console.log('Object.keys(Svg)', Object.keys(Svg));
 
@@ -43,7 +45,7 @@ const Logo = ({ scale }) => (
     source={Images.logo}
     resizeMode="contain"
     // style={{ flex: 1 }}
-    style={{ width: 100 }}
+    style={{ width: SIZE, height: SIZE }}
   />
 );
 

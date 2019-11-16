@@ -47,7 +47,7 @@ const FieldBackground = ({ children }) => (
     <Spacer size="XXXL" />
     <Spacer size="XXXL" />
     <Spacer size="XXXL" />
-    <View alignItems="center" style={{ flex: 1 }}>
+    <View style={{ flex: 1, alignItems: 'center' }}>
       <Logo scale={1} />
     </View>
     {/* <Spacer size="XXXL" /> */}
