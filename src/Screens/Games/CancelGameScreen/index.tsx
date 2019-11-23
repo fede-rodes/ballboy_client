@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Query } from 'react-apollo';
 import { ACTIVITY_STATUSES } from '../../../constants';
 import { addModelState } from '../../../utils';
@@ -53,7 +53,9 @@ class CancelGameScreen extends React.PureComponent {
             variables={{ _id: this.activityId }}
             fetchPolicy="network-only"
           >
-            {({ loading, error, data, refetch }) => {
+            {({
+              loading, error, data, refetch,
+            }) => {
               if (loading) {
                 return <CenteredActivityIndicator />;
               }
@@ -74,7 +76,11 @@ class CancelGameScreen extends React.PureComponent {
                 // Refetch activity data
                 refetch();
                 // Redirect user to activity display screen
-                navigation.goBack(null);
+                if (Platform.OS === 'web') {
+                  navigation.navigate('GameDetailsScreen', { _id: this.activityId });
+                } else {
+                  navigation.goBack(null);
+                }
               };
 
               return (

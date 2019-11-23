@@ -23,7 +23,7 @@ import ChatComposer from '../../../Components/Chat/ChatComposer';
 import ChatSend from '../../../Components/Chat/ChatSend';
 
 //------------------------------------------------------------------------------
-// STYLE:
+// CONSTANTS:
 //------------------------------------------------------------------------------
 const { chatkitReadOnlyUser } = Constants.manifest.extra;
 //------------------------------------------------------------------------------

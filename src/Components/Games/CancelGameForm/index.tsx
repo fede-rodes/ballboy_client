@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
-import { Alert, View } from 'react-native';
+import { Platform, Alert, View } from 'react-native';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import ErrorHandling from 'error-handling-utils';
@@ -121,32 +121,44 @@ class CancelGameForm extends React.PureComponent {
     }
 
     // Display confirm alert
-    Alert.alert(
-      I18n.t('cancelGameForm.confirmAlert.header'),
-      I18n.t('cancelGameForm.confirmAlert.body'),
-      [
-        {
-          text: I18n.t('cancelGameForm.confirmAlert.footer.cancelBtnLabel'),
-          onPress: () => {
-            // Pass event up to parent component. onClientErrorHook will set 'disabled'
-            // value back to 'false' so that the user can re-submit the form
-            onClientCancelHook();
+    if (Platform.OS === 'web') {
+      const res = window.confirm(I18n.t('cancelGameForm.confirmAlert.body'));
+      if (res) {
+        onSuccessHook({
+          activityId: activity._id,
+          ...pick(this.state, Object.keys(INIT_STATE)),
+        });
+        return;
+      }
+      onClientCancelHook();
+    } else {
+      Alert.alert(
+        I18n.t('cancelGameForm.confirmAlert.header'),
+        I18n.t('cancelGameForm.confirmAlert.body'),
+        [
+          {
+            text: I18n.t('cancelGameForm.confirmAlert.footer.cancelBtnLabel'),
+            onPress: () => {
+              // Pass event up to parent component. onClientErrorHook will set 'disabled'
+              // value back to 'false' so that the user can re-submit the form
+              onClientCancelHook();
+            },
+            style: 'cancel',
           },
-          style: 'cancel',
-        },
-        {
-          text: I18n.t('cancelGameForm.confirmAlert.footer.okBtnLabel'),
-          onPress: () => {
-            // Pass event up to parent component. onSuccessHook 'disabled'
-            // value back to 'false' so that the user can re-submit the form
-            onSuccessHook({
-              activityId: activity._id,
-              ...pick(this.state, Object.keys(INIT_STATE)),
-            });
+          {
+            text: I18n.t('cancelGameForm.confirmAlert.footer.okBtnLabel'),
+            onPress: () => {
+              // Pass event up to parent component. onSuccessHook 'disabled'
+              // value back to 'false' so that the user can re-submit the form
+              onSuccessHook({
+                activityId: activity._id,
+                ...pick(this.state, Object.keys(INIT_STATE)),
+              });
+            },
           },
-        },
-      ],
-    );
+        ],
+      );
+    }
   }
 
   render() {
