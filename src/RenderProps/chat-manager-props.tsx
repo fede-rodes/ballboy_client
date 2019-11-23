@@ -22,8 +22,8 @@ class ChatManagerProps extends React.PureComponent {
 
   async componentDidMount() {
     const { userId, roomId } = this.props;
-    console.log('CHAT MANAGER USER ID', userId);
-    console.log('CHAT MANAGER ROOM ID', roomId);
+    // console.log('CHAT MANAGER USER ID', userId);
+    // console.log('CHAT MANAGER ROOM ID', roomId);
 
     if (!userId) {
       this.setState({ loading: false });
@@ -32,7 +32,7 @@ class ChatManagerProps extends React.PureComponent {
 
     // Get the authentication token from local storage if it exists
     const token = await AsyncStorage.getItem('x-auth-token');
-    console.log('TOKEN', token);
+    // console.log('TOKEN', token);
 
     const chatManager = new Chatkit.ChatManager({
       instanceLocator: chatkitInstanceLocator,
@@ -64,9 +64,11 @@ class ChatManagerProps extends React.PureComponent {
           roomId,
           messageLimit: 100,
           hooks: {
-            onMessage: ({ id, text, createdAt, sender }) => {
+            onMessage: ({
+              id, text, createdAt, sender,
+            }) => {
               // Invert sense for gifted chat to work
-              this.setState(prevState => ({
+              this.setState((prevState) => ({
                 messages: [
                   {
                     _id: id,
@@ -99,7 +101,7 @@ class ChatManagerProps extends React.PureComponent {
 
     if (chatkitUser) {
       try {
-        chatkitUser.disconnect();
+        await chatkitUser.disconnect();
       } catch (exc) {
         console.error('disconnect exc', exc);
       }
@@ -107,7 +109,7 @@ class ChatManagerProps extends React.PureComponent {
 
     if (chatkitUser && userId && userId !== chatkitReadOnlyUser) {
       try {
-        chatkitUser.roomSubscriptions[roomId].cancel();
+        await chatkitUser.roomSubscriptions[roomId].cancel();
       } catch (exc) {
         console.error('unsubscribe exc', exc);
       }

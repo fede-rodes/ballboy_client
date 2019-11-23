@@ -54,7 +54,7 @@ const GameChatScreen = ({ user, navigation }) => {
         handleSuccess,
       }) => (
         <ChatManagerProps userId={chatkitReadOnlyUser} roomId={roomId}>
-          {chatHandler => (
+          {(chatHandler) => (
             <ChatManagerProps userId={user._id} roomId={roomId}>
               {(userHandler) => {
                 const serverErrors = errors ? ErrorHandling.getFieldErrors(errors, 'server') : '';
@@ -89,17 +89,17 @@ const GameChatScreen = ({ user, navigation }) => {
                             isAnimated
                             alignTop
                             renderUsernameOnMessage
-                            renderBubble={props => <ChatBubble {...props} />}
-                            renderDay={props => <ChatDay {...props} locale={I18n.locale.substr(0, 2)} />}
-                            renderInputToolbar={props => <ChatInputToolbar {...props} />}
+                            renderBubble={(props) => <ChatBubble {...props} />}
+                            renderDay={(props) => <ChatDay {...props} locale={I18n.locale.substr(0, 2)} />}
+                            renderInputToolbar={(props) => <ChatInputToolbar {...props} />}
                             minInputToolbarHeight={50}
-                            renderSystemMessage={props => <ChatSystemMessage {...props} />}
+                            renderSystemMessage={(props) => <ChatSystemMessage {...props} />}
                             maxComposerHeight={70}
                             keyboardShouldPersistTaps="never"
-                            renderComposer={props => <ChatComposer {...props} />}
+                            renderComposer={(props) => <ChatComposer {...props} />}
                             placeholder={I18n.t('chatInputField.placeholder')}
                             textInputProps={{ editable: !disabled }}
-                            renderSend={props => <ChatSend {...props} disabled={disabled} />}
+                            renderSend={(props) => <ChatSend {...props} disabled={disabled} />}
                             alwaysShowSend
                             onSend={(messages) => {
                               handleBefore(); // set disable props to true
