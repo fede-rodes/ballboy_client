@@ -8,8 +8,8 @@ const colors = {
   gray: '#777',
   silver: '#e6e6e6',
 
-  primaryGreen: '#009f36',
-  secondaryGreen: '#005537',
+  primaryGreen: '#541388', // '#f9c22e', // '#ef476f', // '#fe6847', // '#76ff03', // '#f9a825', // '#ffeb3b', // '#ff0266', // '#ffde03', // '#1097e0', // '#99e041', // '#0336ff', //  // '#009f36',
+  secondaryGreen: '#1097e0',
   secondaryDarkBlueGreen: 'rgba(0, 53, 58, 0.84)',
   secondaryLightBlueGreen: 'rgba(0, 53, 58, 0.4)',
   actionYellow: '#f5a623',
@@ -32,7 +32,7 @@ const colors = {
   grass10: 'rgba(0, 159, 54, 0.1)',
   grass20: 'rgba(0, 159, 54, 0.2)',
   grassDark: '#005537',
-  notify: '#f5a623', // rgb(245, 166, 35)
+  notify: '#f9c22e', // '#f5a623', // rgb(245, 166, 35)
   notify20: 'rgba(245, 166, 35, 0.2)',
   negative: '#E0301E', // rgb(224, 48, 30)
   negative20: 'rgba(224, 48, 30, 0.2)',

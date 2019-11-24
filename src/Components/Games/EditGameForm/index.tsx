@@ -402,7 +402,7 @@ class EditGameForm extends React.PureComponent {
         <BottomLayout>
           <RaisedButton
             testID="editGameSubmitButton"
-            variant="primary"
+            variant="default"
             label={I18n.t('editGameForm.btnLabel')}
             disabled={disabled}
             onPress={this.handleSubmit}

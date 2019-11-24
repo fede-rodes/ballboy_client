@@ -5,6 +5,7 @@ import moment from 'moment';
 import get from 'lodash/get';
 import styled from 'styled-components/native';
 import { ACTIVITY_STATUSES } from '../../../constants';
+import Fonts from '../../../Themes/Fonts';
 import activityFragment from '../../../GraphQL/Activities/Fragments/activity';
 import Colors from '../../../Themes/Colors';
 // import I18n from '../../../I18n';
@@ -26,7 +27,7 @@ import GameCanceledFlag from '../GameCanceledFlag';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const CARD_HEIGHT = 222; // 182;
+const CARD_HEIGHT = 140 + Fonts.M.fontSize + Fonts.ML.fontSize + 3 * Fonts.SM.fontSize; // 222; // 182;
 // const CARD_HEIGHT_CANCELED = 252;
 const HEADER_HEIGHT = 48;
 //------------------------------------------------------------------------------

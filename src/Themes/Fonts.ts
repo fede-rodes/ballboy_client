@@ -3,6 +3,7 @@ import { Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
 const isSmallPhone = width <= 320;
+const isDesktop = width >= 600;
 
 export const FontFamilies = {
   regular: 'Rajdhani-Regular',
@@ -13,33 +14,33 @@ export const FontFamilies = {
 const Fonts = {
   XL: {
     fontFamily: FontFamilies.semibold,
-    fontSize: isSmallPhone ? 32 : 40,
+    fontSize: isSmallPhone ? 32 : (isDesktop ? 50 : 40),
   },
   L: {
     fontFamily: FontFamilies.semibold,
-    fontSize: isSmallPhone ? 24 : 32,
+    fontSize: isSmallPhone ? 24 : (isDesktop ? 38 : 32),
   },
   ML: {
     fontFamily: FontFamilies.semibold,
-    fontSize: isSmallPhone ? 18 : 24,
+    fontSize: isSmallPhone ? 18 : (isDesktop ? 26 : 24),
   },
   M: {
     fontFamily: FontFamilies.semibold,
-    fontSize: isSmallPhone ? 16 : 18,
+    fontSize: isSmallPhone ? 16 : (isDesktop ? 22 : 18),
   },
   SM: {
     fontFamily: FontFamilies.regular,
-    fontSize: isSmallPhone ? 14 : 16,
+    fontSize: isSmallPhone ? 14 : (isDesktop ? 20 : 16),
   },
   // TODO: rename to S
   SSM: {
     fontFamily: FontFamilies.regular,
-    fontSize: isSmallPhone ? 12 : 14,
+    fontSize: isSmallPhone ? 12 : (isDesktop ? 16 : 14),
   },
   // TODO: rename to XS
   S: {
     fontFamily: FontFamilies.regular,
-    fontSize: isSmallPhone ? 10 : 12,
+    fontSize: isSmallPhone ? 10 : (isDesktop ? 14 : 12),
   },
 };
 

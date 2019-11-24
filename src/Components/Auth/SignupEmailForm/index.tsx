@@ -236,7 +236,7 @@ class SignupEmailForm extends React.PureComponent {
           <Block>
             <RaisedButton
               testID="signupButtonSubmit"
-              variant="primary"
+              variant="default"
               label={I18n.t('signupEmailForm.btnLabel')}
               disabled={disabled}
               onPress={this.handleSubmit}
