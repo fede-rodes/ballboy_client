@@ -34,6 +34,7 @@ class AvatarPickerForm extends React.PureComponent {
   }
 
   async componentDidMount() {
+    // Move this to onBEforeHook or place it before calle the image picker from expo
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
