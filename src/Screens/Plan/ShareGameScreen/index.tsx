@@ -141,6 +141,7 @@ ShareGameScreen.propTypes = {
     }).isRequired,
     goBack: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
+    popToTop: PropTypes.func.isRequired,
   }).isRequired,
 };
 
