@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
-import { Alert } from 'react-native';
+import { Platform, Alert } from 'react-native';
 // import get from 'lodash/get';
 import I18n from '../../../I18n';
 import { ACTIVITY_STATUSES, ATTENDEE_ACTIONS } from '../../../constants';
@@ -37,21 +37,28 @@ class RSVPButtons extends React.PureComponent {
   }
 
   openAlert = () => {
-    Alert.alert(
-      I18n.t('rsvpButtons.leaveAlert.header'),
-      I18n.t('rsvpButtons.leaveAlert.body'),
-      [
-        {
-          text: I18n.t('rsvpButtons.leaveAlert.footer.cancelBtnLabel'),
-          onPress: () => {},
-          style: 'cancel',
-        },
-        {
-          text: I18n.t('rsvpButtons.leaveAlert.footer.okBtnLabel'),
-          onPress: () => { this.handlePress({ action: ATTENDEE_ACTIONS.REMOVE }); },
-        },
-      ],
-    );
+    if (Platform.OS === 'web') {
+      const res = window.confirm(I18n.t('rsvpButtons.leaveAlert.body'));
+      if (res) {
+        this.handlePress({ action: ATTENDEE_ACTIONS.REMOVE });
+      }
+    } else {
+      Alert.alert(
+        I18n.t('rsvpButtons.leaveAlert.header'),
+        I18n.t('rsvpButtons.leaveAlert.body'),
+        [
+          {
+            text: I18n.t('rsvpButtons.leaveAlert.footer.cancelBtnLabel'),
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {
+            text: I18n.t('rsvpButtons.leaveAlert.footer.okBtnLabel'),
+            onPress: () => { this.handlePress({ action: ATTENDEE_ACTIONS.REMOVE }); },
+          },
+        ],
+      );
+    }
   }
 
   render() {
@@ -63,7 +70,9 @@ class RSVPButtons extends React.PureComponent {
       disabled,
     } = this.props;
 
-    const { status, capacity, attendeesIds, isAttendee } = activity;
+    const {
+ status, capacity, attendeesIds, isAttendee 
+} = activity;
 
     const isCanceled = status === ACTIVITY_STATUSES.CANCELED;
     const isFinished = status === ACTIVITY_STATUSES.FINISHED;
