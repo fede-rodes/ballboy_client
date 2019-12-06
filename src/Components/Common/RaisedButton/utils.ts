@@ -51,9 +51,9 @@ export const getPalette = (variant) => {
       };
     case 'transparent':
       return {
-        fontColor: 'white',
+        fontColor: 'black',
         bgColor: 'transparent',
-        borderColor: 'white',
+        borderColor: 'black',
       };
     default:
       throw new Error('Unknown variant');

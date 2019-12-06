@@ -6,7 +6,7 @@ const colors = {
   white: '#fff',
   black: '#000',
   gray: '#777',
-  silver: '#e6e6e6',
+  silver: '#e2dee6', // '#e6e6e6',
 
   primaryGreen: '#541388', // '#f9c22e', // '#ef476f', // '#fe6847', // '#76ff03', // '#f9a825', // '#ffeb3b', // '#ff0266', // '#ffde03', // '#1097e0', // '#99e041', // '#0336ff', //  // '#009f36',
   secondaryGreen: '#1097e0',

@@ -41,6 +41,7 @@ const Outer = styled.View`
   shadow-opacity: 0.8;
   elevation: 2;
   background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.silver};
 `;
 //------------------------------------------------------------------------------
 const Top = styled(Row)`

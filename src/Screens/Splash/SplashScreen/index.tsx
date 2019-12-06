@@ -28,7 +28,7 @@ const SplashScreen = ({ navigation }) => (
         <Text
           testID="splashText"
           size="L"
-          color="white"
+          // color="white"
           center
           style={{ fontSize: 30 }}
         >

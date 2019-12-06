@@ -7,7 +7,6 @@ import { StatusBar } from 'react-native';
 // import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
 import styled, { ThemeProvider } from 'styled-components/native';
-
 // import { createAppContainer } from 'react-navigation';
 import client from './GraphQL/ApolloClient';
 import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
@@ -26,7 +25,7 @@ import LoadAssets from './Components/Common/LoadAssets';
 //------------------------------------------------------------------------------
 const AppRootView = styled.View`
   flex: 1;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: ${({ theme }) => theme.colors.white};
   margin-bottom: ${getBottomSpace()}px;
   margin-top: ${ifIphoneX() ? 30 : 0}px;
