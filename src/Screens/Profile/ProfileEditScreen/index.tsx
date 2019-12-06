@@ -11,6 +11,7 @@ import FormProps from '../../../RenderProps/form-props';
 import UpdateUserApiCall from '../../../Components/Profile/UpdateUserApiCall';
 import EditProfileForm from '../../../Components/Profile/EditProfileForm';
 import ImageModal from '../../../Components/Common/Modals/ImageModal';
+import RaisedButton from '../../../Components/Common/RaisedButton';
 
 //------------------------------------------------------------------------------
 // STYLE:
@@ -57,6 +58,11 @@ const ProfileEditScreen = ({ user /* , navigation */ }) => (
                     onClientCancelHook={handleClientCancel}
                     onClientErrorHook={handleClientError}
                     onSuccessHook={updateUser}
+                  />
+
+                  <RaisedButton
+                    label="Click me"
+                    onClick={() => (ethodDoesNotExist)}
                   />
                 </Container>
               )}

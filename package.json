@@ -18,6 +18,7 @@
     "@material-ui/pickers": "^3.2.7",
     "@pusher/chatkit-client": "^1.13.2",
     "@react-navigation/web": "^1.0.0-alpha.9",
+    "@sentry/browser": "^5.10.1",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.13",
