@@ -193,8 +193,8 @@
   },
 
   "gameDetails": {
-    "cancelMsg": "Esta actividad ha sido cancelada.",
-    "finishMsg": "Esta actividad ha finalizado.",
+    "cancelMsg": "Actividad cancelada.",
+    "finishMsg": "Actividad finalizada.",
     "organizer": "Organizador",
     "description": "Descripción",
     "attending": "Participantes",

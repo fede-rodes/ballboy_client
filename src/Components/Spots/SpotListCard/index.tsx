@@ -25,6 +25,7 @@ const Outer = styled.View`
   shadow-color: ${({ theme }) => theme.colors.shade};
   shadow-opacity: 0.8;
   elevation: 2;
+  border: 1px solid ${({ theme }) => theme.colors.silver};
 `;
 //------------------------------------------------------------------------------
 const FlexOne = styled.View`

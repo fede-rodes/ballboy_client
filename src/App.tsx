@@ -1,4 +1,5 @@
 // import './polyfills';
+import Constants from 'expo-constants';
 import React, { Component } from 'react';
 import MomentUtils from '@date-io/moment';
 // import Crashes from 'appcenter-crashes';
@@ -7,6 +8,7 @@ import { ApolloProvider } from 'react-apollo';
 import { StatusBar } from 'react-native';
 // import firebase from 'react-native-firebase';
 import { MenuProvider } from 'react-native-popup-menu';
+import * as Sentry from '@sentry/browser';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // import { createAppContainer } from 'react-navigation';
@@ -21,6 +23,10 @@ import scTheme from './Themes/scTheme'; // styled-components theme
 // import { logNavigationState } from './utils';
 // import { CodePushProvider } from './Context/CodePush';
 import LoadAssets from './Components/Common/LoadAssets';
+
+const { webSentryDsn } = Constants.manifest.extra;
+
+Sentry.init({ dsn: webSentryDsn });
 
 //------------------------------------------------------------------------------
 // STYLE:

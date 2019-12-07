@@ -145,7 +145,7 @@ class PasscodeForm extends React.Component {
           </Block>
           <Block>
             <RaisedButton
-              variant="primary"
+              variant="default"
               label={btnLabel}
               disabled={disabled}
               onPress={this.handleSubmit}

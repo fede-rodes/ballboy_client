@@ -16,7 +16,7 @@ import NoGamesFound from '../../../Components/Games/NoGamesFound';
 const Container = styled.View`
   flex: 1;
   padding: 0 8px;
-  background-color: ${({ theme }) => theme.colors.concrete};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:

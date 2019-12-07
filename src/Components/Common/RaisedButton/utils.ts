@@ -2,15 +2,15 @@ export const getPalette = (variant) => {
   switch (variant) {
     case 'default':
       return {
-        fontColor: 'white',
-        bgColor: 'actionYellow',
-        borderColor: 'actionYellow',
+        fontColor: 'black', // 'white',
+        bgColor: 'notify', // 'actionYellow',
+        borderColor: 'notify', // 'actionYellow',
       };
     case 'primary':
       return {
         fontColor: 'white',
-        bgColor: 'grass',
-        borderColor: 'grass',
+        bgColor: 'secondaryGreen',
+        borderColor: 'secondaryGreen',
       };
     case 'secondary':
       return {
@@ -51,9 +51,9 @@ export const getPalette = (variant) => {
       };
     case 'transparent':
       return {
-        fontColor: 'white',
+        fontColor: 'black',
         bgColor: 'transparent',
-        borderColor: 'white',
+        borderColor: 'black',
       };
     default:
       throw new Error('Unknown variant');

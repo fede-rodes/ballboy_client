@@ -24,7 +24,7 @@ const buttons = [{
   route: Platform.select({ web: 'GamesListScreen', default: 'GameSearchTab' }),
   icon: {
     set: 'MaterialCommunityIcons',
-    name: 'account-group',
+    name: 'calendar',
   },
 }, {
   id: 'spots',
@@ -32,7 +32,7 @@ const buttons = [{
   route: Platform.select({ web: 'SpotsListScreen', default: 'SpotSearchTab' }),
   icon: {
     set: 'MaterialCommunityIcons',
-    name: 'near-me',
+    name: 'soccer-field', // 'map-marker-radius',
   },
 }, {
   id: 'organize',

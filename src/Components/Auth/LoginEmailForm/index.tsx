@@ -146,7 +146,7 @@ class LoginEmailForm extends React.PureComponent {
         <Block>
           <RaisedButton
             testID="loginSubmitButton"
-            variant="primary"
+            variant="default"
             label={I18n.t('loginEmailForm.btnLabel')}
             disabled={disabled}
             onPress={this.handleSubmit}

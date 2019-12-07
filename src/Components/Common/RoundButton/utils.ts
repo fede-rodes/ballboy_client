@@ -8,9 +8,9 @@ export const getPalette = (status, reverse) => {
       };
     case 'primary':
       return {
-        fontColor: !reverse ? 'white' : 'grass',
-        bgColor: !reverse ? 'grass' : 'white',
-        borderColor: 'grass',
+        fontColor: !reverse ? 'white' : 'secondaryGreen',
+        bgColor: !reverse ? 'secondaryGreen' : 'white',
+        borderColor: 'secondaryGreen',
       };
     case 'secondary':
       return {

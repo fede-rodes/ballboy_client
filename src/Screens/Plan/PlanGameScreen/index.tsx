@@ -40,7 +40,6 @@ class PlanGameScreen extends React.Component {
     if (Platform.OS === 'web') {
       const res = window.confirm(I18n.t('planGameScreen.leaveAlert.body'));
       if (res) {
-        console.log('Navigate to games list screen');
         navigation.navigate('GamesListScreen');
       }
     } else {
