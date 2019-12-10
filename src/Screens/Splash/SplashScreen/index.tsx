@@ -39,7 +39,7 @@ const SplashScreen = ({ navigation }) => (
     <FlexOne />
     <Block>
       <RaisedButton
-        variant="default"
+        variant="primary"
         label={I18n.t('splashScreen.signupBtnLabel')}
         onPress={() => { navigation.navigate('SignupEmailScreen'); }}
       />

@@ -17,7 +17,7 @@ const FlexOne = styled.View`
 const Inner = styled.View`
   padding: 0 8px;
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.concrete};
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:

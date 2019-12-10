@@ -8,7 +8,7 @@ const colors = {
   gray: '#777',
   silver: '#e2dbe8', // '#e2dee6', // '#e6e6e6',
 
-  primaryGreen: '#541388', // '#f9c22e', // '#ef476f', // '#fe6847', // '#76ff03', // '#f9a825', // '#ffeb3b', // '#ff0266', // '#ffde03', // '#1097e0', // '#99e041', // '#0336ff', //  // '#009f36',
+  primaryGreen: 'dodgerblue', // 'darkorchid', // '#541388', // '#f9c22e', // '#ef476f', // '#fe6847', // '#76ff03', // '#f9a825', // '#ffeb3b', // '#ff0266', // '#ffde03', // '#1097e0', // '#99e041', // '#0336ff', //  // '#009f36',
   secondaryGreen: '#1097e0',
   secondaryDarkBlueGreen: 'rgba(0, 53, 58, 0.84)',
   secondaryLightBlueGreen: 'rgba(0, 53, 58, 0.4)',
@@ -44,6 +44,8 @@ const colors = {
   orange: 'orange',
   facebook: '#3B5998',
   whatsapp: '#25d366',
+  darkorchid: 'darkorchid',
+  dodgerblue: 'dodgerblue',
 };
 
 export default colors;

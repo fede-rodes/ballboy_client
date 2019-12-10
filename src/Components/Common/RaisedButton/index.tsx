@@ -39,7 +39,10 @@ const RaisedButton = ({
   ...rest
 }) => {
   const palette = getPalette(variant);
-  const { fontColor, bgColor, borderColor, withShadow } = palette; // string to be used with Colors[string]
+  // fontColor, bgColor, borderColor are strings to be used with Colors[string]
+  const {
+    fontColor, bgColor, borderColor, withShadow,
+  } = palette;
 
   const Root = disabled ? View : TouchableOpacity;
 
