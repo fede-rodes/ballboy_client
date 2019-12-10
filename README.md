@@ -154,24 +154,14 @@ Find out more about expo env vars:
 ### Deploy
 
 [https://github.com/expo/web-examples/blob/master/docs/DEPLOYMENT.md](https://github.com/expo/web-examples/blob/master/docs/DEPLOYMENT.md)
+[https://www.freecodecamp.org/news/how-to-deploy-a-react-application-to-netlify-363b8a98a985/](https://www.freecodecamp.org/news/how-to-deploy-a-react-application-to-netlify-363b8a98a985/)
 
-#### Now
-Now has a single-command zero-config deployment flow. You can use now to deploy your app for free! 100
+#### Netlify
 
-For more information on unlimited hosting, check out the blog post.
+Install the Netlify CLI with `npm install netlify-cli -g`.
 
-Install the now CLI with `npm install -g now`.
+Then run `yarn run deploy:web`.
 
-Build your Expo web app with `expo build:web`.
-
-To deploy:
-```
-Run cd web-build
-Run now --name your-project-name
-You should see a now.sh URL in your output like: > Ready! https://expo-web-is-cool-nocabnave.now.sh (copied!)
-Paste that URL into your browser when the build is complete, and you will see your deployed app!
-```
-To deploy to production in the future, run `now --prod`
 
 ### Storybook
 
