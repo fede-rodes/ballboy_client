@@ -28,7 +28,7 @@ const ClosableLayout = ({
   const isWhiteTheme = theme === 'white';
 
   return (
-    <Container bgColor={isWhiteTheme ? 'primaryGreen' : 'silver'}>
+    <Container bgColor={isWhiteTheme ? 'dodgerblue' : 'silver'}>
       <Row
         justifyContent="space-between"
         alignItems="center"

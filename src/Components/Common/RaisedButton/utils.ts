@@ -3,14 +3,14 @@ export const getPalette = (variant) => {
     case 'default':
       return {
         fontColor: 'black', // 'white',
-        bgColor: 'notify', // 'actionYellow',
-        borderColor: 'notify', // 'actionYellow',
+        bgColor: 'orange', // 'actionYellow',
+        borderColor: 'orange', // 'actionYellow',
       };
     case 'primary':
       return {
         fontColor: 'white',
-        bgColor: 'secondaryGreen',
-        borderColor: 'secondaryGreen',
+        bgColor: 'darkorchid',
+        borderColor: 'darkorchid',
       };
     case 'secondary':
       return {
