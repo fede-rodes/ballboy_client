@@ -7,7 +7,16 @@ import Chatkit from '@pusher/chatkit-client/react-native';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const { chatkitInstanceLocator, chatkitAuthEndpoint, chatkitReadOnlyUser } = Constants.manifest.extra;
+const { NODE_ENV } = process.env;
+const {
+  devServerUrl,
+  prodServerUrl,
+  chatkitAuthEndpoint,
+  chatkitInstanceLocator,
+  chatkitReadOnlyUser,
+} = Constants.manifest.extra;
+
+const serverUrl = NODE_ENV === 'production' ? prodServerUrl : devServerUrl;
 
 //------------------------------------------------------------------------------
 // PROPS AND METHODS PROVIDER:
@@ -38,7 +47,7 @@ class ChatManagerProps extends React.PureComponent {
       instanceLocator: chatkitInstanceLocator,
       userId,
       tokenProvider: new Chatkit.TokenProvider({
-        url: chatkitAuthEndpoint,
+        url: `${serverUrl}${chatkitAuthEndpoint}`,
         headers: {
           authorization: userId === chatkitReadOnlyUser ? '' : (token ? `Bearer ${token}` : ''),
         },

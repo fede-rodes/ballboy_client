@@ -7,8 +7,14 @@ import { onError } from 'apollo-link-error';
 import { createHttpLink } from 'apollo-link-http';
 import { AsyncStorage } from 'react-native';
 
+const { NODE_ENV } = process.env;
+console.log({ __DEV__, NODE_ENV });
+const { devServerUrl, prodServerUrl, graphqlEndpoint } = Constants.manifest.extra;
+
+const serverUrl = NODE_ENV === 'production' ? prodServerUrl : devServerUrl;
+
 const httpLink = createHttpLink({
-  uri: Constants.manifest.extra.graphqlServer,
+  uri: `${serverUrl}${graphqlEndpoint}`,
 });
 
 const authMiddleware = setContext(async (req, { headers }) => {
@@ -24,7 +30,7 @@ const authMiddleware = setContext(async (req, { headers }) => {
   };
 });
 
-export const addErrorHandlers = link => ApolloLink.from([
+export const addErrorHandlers = (link) => ApolloLink.from([
   onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
@@ -36,7 +42,7 @@ export const addErrorHandlers = link => ApolloLink.from([
   link,
 ]);
 
-export const cache = new InMemoryCache({ dataIdFromObject: o => (o._id ? `${o.__typename}:${o._id}` : null) });
+export const cache = new InMemoryCache({ dataIdFromObject: (o) => (o._id ? `${o.__typename}:${o._id}` : null) });
 
 const client = new ApolloClient({
   link: addErrorHandlers(authMiddleware.concat(httpLink)),
