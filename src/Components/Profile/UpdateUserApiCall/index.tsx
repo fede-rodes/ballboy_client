@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 import extend from 'lodash/extend';
-import pick from 'lodash/pick';
 import { withSpotFilters, spotFiltersPropTypes } from '../../../Context/SpotFilters';
 import updateUserMutation from '../../../GraphQL/Users/Mutations/updateUser';
 import privateUserQuery from '../../../GraphQL/Users/Queries/privateUser';
@@ -30,8 +29,6 @@ class UpdateUserApiCall extends React.PureComponent {
     } = this.props;
     const { name: username, city, avatar } = inputFields;
 
-    console.log({ city });
-
     const variables = {};
 
     if (username) {
@@ -41,6 +38,7 @@ class UpdateUserApiCall extends React.PureComponent {
       const {
         name, country, formattedAddress, location,
       } = city;
+
       extend(variables, {
         city: name,
         country,

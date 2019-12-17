@@ -17,6 +17,7 @@ import AppNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 // import createRootNavigation, { getActiveRouteName } from './Navigation/AppNavigation';
 import { getBottomSpace, ifIphoneX } from './iphoneHelpers';
 import { UserProvider } from './Context/User';
+import { CitiesProvider } from './Context/Cities';
 import { SpotFiltersProvider } from './Context/SpotFilters';
 // import { Events, getInitialEvent, IncomingLinks } from './Services/IncomingLinks';
 import scTheme from './Themes/scTheme'; // styled-components theme
@@ -142,27 +143,29 @@ class App extends Component {
         <ThemeProvider theme={scTheme}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <UserProvider>
-              <SpotFiltersProvider>
-                <MenuProvider>
-                  <LoadAssets>
-                    <AppRootView>
-                      <StatusBar barStyle="light-content" />
-                      {/* <ConnectionCheck /> */}
-                      <AppNavigation
-                        // ref={(ref) => { this.router = ref; }}
-                        // See: https://reactnavigation.org/docs/en/screen-tracking.html
-                        onNavigationStateChange={(prevState, currState) => {
-                          const currScreen = getActiveRouteName(currState);
-                          const prevScreen = getActiveRouteName(prevState);
-                        // if (prevScreen !== currScreen) {
-                        //   firebase.analytics().setCurrentScreen(currScreen);
-                        // }
-                        }}
-                      />
-                    </AppRootView>
-                  </LoadAssets>
-                </MenuProvider>
-              </SpotFiltersProvider>
+              <CitiesProvider>
+                <SpotFiltersProvider>
+                  <MenuProvider>
+                    <LoadAssets>
+                      <AppRootView>
+                        <StatusBar barStyle="light-content" />
+                        {/* <ConnectionCheck /> */}
+                        <AppNavigation
+                          // ref={(ref) => { this.router = ref; }}
+                          // See: https://reactnavigation.org/docs/en/screen-tracking.html
+                          onNavigationStateChange={(prevState, currState) => {
+                            const currScreen = getActiveRouteName(currState);
+                            const prevScreen = getActiveRouteName(prevState);
+                          // if (prevScreen !== currScreen) {
+                          //   firebase.analytics().setCurrentScreen(currScreen);
+                          // }
+                          }}
+                        />
+                      </AppRootView>
+                    </LoadAssets>
+                  </MenuProvider>
+                </SpotFiltersProvider>
+              </CitiesProvider>
             </UserProvider>
           </MuiPickersUtilsProvider>
         </ThemeProvider>
