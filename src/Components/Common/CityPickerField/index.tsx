@@ -4,13 +4,13 @@ import { propType } from 'graphql-anywhere';
 import { useQuery } from 'react-apollo';
 import cityFragment from '../../../GraphQL/Cities/Fragments/city';
 import citiesQuery from '../../../GraphQL/Cities/Queries/cities';
-import CenteredActivityIndicator from '../../Common/CenteredActivityIndicator';
+import CenteredActivityIndicator from '../CenteredActivityIndicator';
 import InputField from '../InputField';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LocationPickerField = ({ value, onChange, ...rest }) => {
+const CityPickerField = ({ value, onChange, ...rest }) => {
   const { loading, error, data } = useQuery(citiesQuery);
 
   if (loading) {
@@ -23,7 +23,7 @@ const LocationPickerField = ({ value, onChange, ...rest }) => {
   const { cities } = data;
   console.log({ cities });
 
-  const items = cities.map(({ _id, cityname }) => ({ label: cityname, value: _id }));
+  const items = cities.map(({ _id, name }) => ({ label: name, value: _id }));
 
   const selected = value ? items.find((i) => (i.value === value._id)) : null;
   const nCities = cities.length;
@@ -44,18 +44,18 @@ const LocationPickerField = ({ value, onChange, ...rest }) => {
   );
 };
 
-LocationPickerField.propTypes = {
+CityPickerField.propTypes = {
   value: propType(cityFragment),
   onChange: PropTypes.func,
   // Plus all InputField props (theme, size)
 };
 
-LocationPickerField.defaultProps = {
+CityPickerField.defaultProps = {
   value: null,
   onChange: () => {},
 };
 
-export default LocationPickerField;
+export default CityPickerField;
 
 
 // import React from 'react';

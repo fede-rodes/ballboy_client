@@ -28,15 +28,25 @@ class UpdateUserApiCall extends React.PureComponent {
       onError,
       onSuccess,
     } = this.props;
-    const { name: username, location, avatar } = inputFields;
+    const { name: username, city, avatar } = inputFields;
+
+    console.log({ city });
 
     const variables = {};
 
     if (username) {
       extend(variables, { username });
     }
-    if (location) {
-      extend(variables, pick(location, ['city', 'country', 'formattedAddress', 'coordinates']));
+    if (city) {
+      const {
+        name, country, formattedAddress, location,
+      } = city;
+      extend(variables, {
+        city: name,
+        country,
+        formattedAddress,
+        coordinates: location.coordinates,
+      });
     }
     if (avatar) {
       extend(variables, { avatar });

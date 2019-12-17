@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 const cityFragment = gql`
   fragment cityFragment on City {
     _id
-    cityname
+    name
     country
     formattedAddress
     location {

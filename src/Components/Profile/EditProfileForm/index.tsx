@@ -15,7 +15,7 @@ import Block from '../../Common/Block';
 import TextField from '../../Common/TextField';
 import RaisedButton from '../../Common/RaisedButton';
 import AvatarPicker from '../../Common/AvatarPicker';
-import LocationPickerField from '../../Common/LocationPickerField';
+import CityPickerField from '../../Common/CityPickerField';
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
@@ -32,7 +32,7 @@ const getInitState = ({ profile }) => {
     // birthYear: (profile && profile.year_of_birth && profile.year_of_birth.toString()) || '',
     // avatar: (profile && profile.avatar && profile.avatar.toString()) || '',
     avatar,
-    location: CITIES.find(c => city === c.city),
+    location: CITIES.find((c) => city === c.city),
   };
 };
 
@@ -185,7 +185,7 @@ class EditProfileForm extends React.PureComponent {
             />
           </Block>
           <Block midHeight>
-            <LocationPickerField
+            <CityPickerField
               testID="editProfileFieldLocation"
               label={I18n.t('editProfileForm.fields.location.label')}
               value={location}

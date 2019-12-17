@@ -10,7 +10,7 @@ import I18n from '../../../I18n';
 // import Images from '../../../Themes/Images';
 // import ImageBackground from '../../../Backgrounds/ImageBackground';
 import Footer from '../../Common/DarkFooter';
-import LocationSlide, { INIT_STATE as LOCATION_INIT_STATE } from '../LocationSlide';
+import CitySlide, { INIT_STATE as CITY_INIT_STATE } from '../CitySlide';
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
@@ -47,14 +47,14 @@ const SLIDES = [
   //   ),
   // },
   {
-    id: 'locationSlide',
-    Comp: LocationSlide,
-    requiredFields: LocationSlide.requiredFields,
+    id: 'citySlide',
+    Comp: CitySlide,
+    requiredFields: CitySlide.requiredFields,
   },
 ];
 
 const INIT_STATE = {
-  ...cloneDeep(LOCATION_INIT_STATE),
+  ...cloneDeep(CITY_INIT_STATE),
 };
 //------------------------------------------------------------------------------
 // STYLE:

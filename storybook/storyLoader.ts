@@ -25,6 +25,7 @@ function loadStories() {
 	require('../src/Components/Common/CapacityPickerField/stories');
 	require('../src/Components/Common/CenteredActivityIndicator/stories');
 	require('../src/Components/Common/Checkbox/stories');
+	require('../src/Components/Common/CityPickerField/stories');
 	require('../src/Components/Common/ConnectionCheck/stories');
 	require('../src/Components/Common/DarkFooter/stories');
 	require('../src/Components/Common/DarkFooterButton/stories');
@@ -41,7 +42,6 @@ function loadStories() {
 	require('../src/Components/Common/InputField/stories');
 	require('../src/Components/Common/LinkNavigate/stories');
 	require('../src/Components/Common/LinkOpenURL/stories');
-	require('../src/Components/Common/LocationPickerField/stories');
 	require('../src/Components/Common/Logo/stories');
 	require('../src/Components/Common/Menu/stories');
 	require('../src/Components/Common/Modals/CancelConfirmModal/stories');
@@ -96,7 +96,7 @@ function loadStories() {
 	require('../src/Components/Layouts/ClosableLayout/stories');
 	require('../src/Components/Layouts/FixedBottomLayout/stories');
 	require('../src/Components/Layouts/FixedTopLayout/stories');
-	require('../src/Components/Onboarding/LocationSlide/stories');
+	require('../src/Components/Onboarding/CitySlide/stories');
 	require('../src/Components/Onboarding/OnboardingForm/stories');
 	require('../src/Components/PlanGame/InviteOnly/stories');
 	require('../src/Components/PlanGame/PlanGameForm/stories');
@@ -166,6 +166,7 @@ const stories = [
 	'../src/Components/Common/CapacityPickerField/stories',
 	'../src/Components/Common/CenteredActivityIndicator/stories',
 	'../src/Components/Common/Checkbox/stories',
+	'../src/Components/Common/CityPickerField/stories',
 	'../src/Components/Common/ConnectionCheck/stories',
 	'../src/Components/Common/DarkFooter/stories',
 	'../src/Components/Common/DarkFooterButton/stories',
@@ -182,7 +183,6 @@ const stories = [
 	'../src/Components/Common/InputField/stories',
 	'../src/Components/Common/LinkNavigate/stories',
 	'../src/Components/Common/LinkOpenURL/stories',
-	'../src/Components/Common/LocationPickerField/stories',
 	'../src/Components/Common/Logo/stories',
 	'../src/Components/Common/Menu/stories',
 	'../src/Components/Common/Modals/CancelConfirmModal/stories',
@@ -237,7 +237,7 @@ const stories = [
 	'../src/Components/Layouts/ClosableLayout/stories',
 	'../src/Components/Layouts/FixedBottomLayout/stories',
 	'../src/Components/Layouts/FixedTopLayout/stories',
-	'../src/Components/Onboarding/LocationSlide/stories',
+	'../src/Components/Onboarding/CitySlide/stories',
 	'../src/Components/Onboarding/OnboardingForm/stories',
 	'../src/Components/PlanGame/InviteOnly/stories',
 	'../src/Components/PlanGame/PlanGameForm/stories',

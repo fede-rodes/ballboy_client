@@ -738,7 +738,7 @@
             "deprecationReason": null
           },
           {
-            "name": "cityname",
+            "name": "name",
             "description": "",
             "args": [],
             "type": {

@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import LocationSlide from '.';
+import CitySlide from '.';
 
 class Container extends React.PureComponent {
   state = {
-    location: null,
+    city: null,
   }
 
   handleChange = ({ fieldName, value }) => {
@@ -13,16 +13,16 @@ class Container extends React.PureComponent {
   }
 
   render() {
-    const { location } = this.state;
+    const { city } = this.state;
 
     return (
-      <LocationSlide
-        location={location}
+      <CitySlide
+        city={city}
         onChange={this.handleChange}
       />
     );
   }
 }
 
-storiesOf('Onboarding.LocationSlide', module)
-  .add('LocationSlide', () => <Container />);
+storiesOf('Onboarding.CitySlide', module)
+  .add('CitySlide', () => <Container />);

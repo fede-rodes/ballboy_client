@@ -20,14 +20,14 @@ import CenteredActivityIndicator from '../../Common/CenteredActivityIndicator';
 // CONSTANTS:
 //------------------------------------------------------------------------------
 export const INIT_STATE = {
-  location: null,
+  city: null,
 };
 
 export const getInitState = () => cloneDeep(INIT_STATE);
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LocationSlide = ({ location, onChange }) => {
+const CitySlide = ({ city, onChange }) => {
   const { loading, error, data } = useQuery(citiesQuery);
 
   if (loading) {
@@ -55,9 +55,9 @@ const LocationSlide = ({ location, onChange }) => {
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => (
               <RaisedButton
-                label={item.cityname}
-                variant={location && location._id && location._id === item._id ? 'default' : 'transparent'}
-                onPress={() => { onChange({ fieldName: 'location', value: item }); }}
+                label={item.name}
+                variant={city && city._id && city._id === item._id ? 'default' : 'transparent'}
+                onPress={() => { onChange({ fieldName: 'city', value: item }); }}
               />
             )}
             ItemSeparatorComponent={() => (<Spacer size="XL" />)}
@@ -69,19 +69,19 @@ const LocationSlide = ({ location, onChange }) => {
   );
 };
 
-LocationSlide.requiredFields = ['location'];
+CitySlide.requiredFields = ['city'];
 
-LocationSlide.propTypes = {
-  location: propType(cityFragment),
+CitySlide.propTypes = {
+  city: propType(cityFragment),
   onChange: PropTypes.func,
 };
 
-LocationSlide.defaultProps = {
-  location: getInitState(),
+CitySlide.defaultProps = {
+  city: getInitState(),
   onChange: () => {},
 };
 
-export default LocationSlide;
+export default CitySlide;
 
 
 // import PropTypes from 'prop-types';
