@@ -1,31 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
-import { useQuery } from 'react-apollo';
+import { CitiesContext } from '../../../Context/Cities';
 import cityFragment from '../../../GraphQL/Cities/Fragments/city';
-import citiesQuery from '../../../GraphQL/Cities/Queries/cities';
-import CenteredActivityIndicator from '../CenteredActivityIndicator';
 import InputField from '../InputField';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const CityPickerField = ({ value, onChange, ...rest }) => {
-  const { loading, error, data } = useQuery(citiesQuery);
+  const { cities } = useContext(CitiesContext);
 
-  if (loading) {
-    return <CenteredActivityIndicator />;
-  }
-  if (error || !data || !data.cities) {
-    return null;
-  }
+  const data = cities.map(({ _id, name }) => ({ label: name, value: _id }));
 
-  const { cities } = data;
-  console.log({ cities });
-
-  const items = cities.map(({ _id, name }) => ({ label: name, value: _id }));
-
-  const selected = value ? items.find((i) => (i.value === value._id)) : null;
+  const selected = value ? data.find((i) => (i.value === value._id)) : null;
   const nCities = cities.length;
 
   return (
@@ -33,9 +21,9 @@ const CityPickerField = ({ value, onChange, ...rest }) => {
       comp="Dropdown"
       value={selected ? selected.label : ''}
       data={data}
-      onChangeText={(d) => {
-        const location = cities.find((c) => (c._id === d.value));
-        onChange(location);
+      onChangeText={(item) => {
+        const city = cities.find((c) => (c._id === item.value));
+        onChange(city);
       }}
       dropdownPosition={-nCities}
       itemCount={nCities}

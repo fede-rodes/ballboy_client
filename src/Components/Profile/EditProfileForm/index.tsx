@@ -7,8 +7,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 // import moment from 'moment';
 import ErrorHandling from 'error-handling-utils';
-import { useQuery } from 'react-apollo';
 import I18n from '../../../I18n';
+import { withCities } from '../../../Context/Cities';
 import privateUserFragment from '../../../GraphQL/Users/Fragments/privateUser';
 import cityFragment from '../../../GraphQL/Cities/Fragments/city';
 import citiesQuery from '../../../GraphQL/Cities/Queries/cities';
@@ -26,22 +26,28 @@ export const MAX_CHARS = 120;
 
 let INIT_STATE;
 
-const getInitState = ({ profile }) => {
-  const { username, avatar, city } = profile;
+const getInitState = (user, cities) => {
+  const {
+    profile: {
+      username,
+      avatar,
+      city,
+    },
+  } = user;
 
   return {
     name: username,
     // birthYear: (profile && profile.year_of_birth && profile.year_of_birth.toString()) || '',
     // avatar: (profile && profile.avatar && profile.avatar.toString()) || '',
     avatar,
-    location: CITIES.find((c) => city === c.city),
+    city: cities.find((c) => city === c.name),
   };
 };
 
 const INIT_ERRORS = {
   name: [], // use usernbame instead
   // birthYear: [],
-  location: [],
+  city: [],
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -50,10 +56,10 @@ class EditProfileForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const { user } = props;
+    const { user, cities } = props;
     // console.log('user', user);
 
-    INIT_STATE = getInitState(user);
+    INIT_STATE = getInitState(user, cities);
 
     // Initialize state based on current user data
     this.state = {
@@ -88,7 +94,7 @@ class EditProfileForm extends React.PureComponent {
     } /* , () => { console.log('this.state', this.state); } */);
   }
 
-  // TODO: validate location (required)
+  // TODO: validate city (required)
   validateFields = ({ name /* , birthYear */ }) => {
     // Initialize errors
     const errors = cloneDeep(INIT_ERRORS);
@@ -156,7 +162,7 @@ class EditProfileForm extends React.PureComponent {
 
   render() {
     const { user, disabled } = this.props;
-    const { name, location, /* birthYear, */ errors } = this.state;
+    const { name, city, /* birthYear, */ errors } = this.state;
 
     // Apply translation and concatenate field errors (string)
     const nameErrors = ErrorHandling.getFieldErrors(errors, 'name', I18n.t);
@@ -188,14 +194,14 @@ class EditProfileForm extends React.PureComponent {
           </Block>
           <Block midHeight>
             <CityPickerField
-              testID="editProfileFieldLocation"
-              label={I18n.t('editProfileForm.fields.location.label')}
-              value={location}
+              testID="editProfileFieldLocation" // TODO
+              label={I18n.t('editProfileForm.fields.city.label')}
+              value={city}
               size="ML"
               disabled={disabled}
               fullWidth
               onChange={(value) => {
-                this.handleChange({ fieldName: 'location', value });
+                this.handleChange({ fieldName: 'city', value });
               }}
             />
           </Block>
@@ -230,6 +236,7 @@ class EditProfileForm extends React.PureComponent {
 
 EditProfileForm.propTypes = {
   user: propType(privateUserFragment).isRequired,
+  cities: PropTypes.arrayOf(propType(cityFragment)).isRequired,
   disabled: PropTypes.bool,
   errors: PropTypes.object, // eslint-disable-line
   onBeforeHook: PropTypes.func,
@@ -247,4 +254,4 @@ EditProfileForm.defaultProps = {
   onSuccessHook: () => {},
 };
 
-export default EditProfileForm;
+export default withCities(EditProfileForm);

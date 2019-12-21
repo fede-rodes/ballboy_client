@@ -85,7 +85,7 @@
           "tooLong": "Name is too long"
         }
       },
-      "location": {
+      "city": {
         "label": "City",
         "placeholder": "",
         "errors": {

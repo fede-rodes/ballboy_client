@@ -19,6 +19,7 @@ import curateErrors from './utils';
  */
 class UpdateUserApiCall extends React.PureComponent {
   handleUpdate = async (inputFields) => {
+    console.log({ inputFields });
     const {
       maxDistance,
       allSports,

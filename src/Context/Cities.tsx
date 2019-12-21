@@ -73,7 +73,7 @@ export const withCities = (Component) => (props) => (
   </CitiesConsumer>
 );
 
-export const userPropTypes = {
+export const citiesPropTypes = {
   loadingCities: PropTypes.bool,
   cities: propType(cityFragment),
 };
