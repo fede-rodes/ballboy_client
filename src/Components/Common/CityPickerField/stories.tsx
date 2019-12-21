@@ -6,11 +6,11 @@ import Block from '../Block';
 import CityPickerField from '.';
 
 class Container extends React.PureComponent {
-  state = { value: null }
+  state = { city: null }
 
   handleChange = (city) => {
     this.setState(
-      { value: city },
+      { city },
       // () => { console.log(this.state); },
     );
   }
@@ -22,7 +22,7 @@ class Container extends React.PureComponent {
       fullWidth,
       size,
     } = this.props;
-    const { value } = this.state;
+    const { city } = this.state;
 
     return (
       <View>
@@ -30,7 +30,7 @@ class Container extends React.PureComponent {
           theme={theme}
           label={label}
           fullWidth={fullWidth}
-          value={value}
+          city={city}
           onChange={this.handleChange}
           size={size}
         />

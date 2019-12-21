@@ -11,7 +11,6 @@ import I18n from '../../../I18n';
 import { withCities } from '../../../Context/Cities';
 import privateUserFragment from '../../../GraphQL/Users/Fragments/privateUser';
 import cityFragment from '../../../GraphQL/Cities/Fragments/city';
-import citiesQuery from '../../../GraphQL/Cities/Queries/cities';
 import { TopLayout, BottomLayout } from '../../Layouts/FixedBottomLayout';
 import Block from '../../Common/Block';
 import TextField from '../../Common/TextField';
@@ -194,9 +193,9 @@ class EditProfileForm extends React.PureComponent {
           </Block>
           <Block midHeight>
             <CityPickerField
-              testID="editProfileFieldLocation" // TODO
+              testID="editProfileFieldCity"
               label={I18n.t('editProfileForm.fields.city.label')}
-              value={city}
+              city={city}
               size="ML"
               disabled={disabled}
               fullWidth

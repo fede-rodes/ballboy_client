@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components/native';
 // import moment from 'moment';
 // import MockDate from 'mockdate';
 import I18n from '../../../I18n';
-import { CITIES } from '../../../constants';
+// import { CITIES } from '../../../constants';
 import privateUser from '../../../GraphQL/Users/Queries/privateUser';
 import mockClient, { ApolloMockProvider } from '../../../GraphQL/ApolloMockClient';
 import scTheme from '../../../Themes/scTheme'; // styled-components theme
@@ -15,7 +15,7 @@ const validName = 'John Doe';
 const longName = new Array(MAX_CHARS + 2).join('a'); // aaaaaa... length = MAX_CHARS + 1
 const someErrorMsg = 'Some error msg';
 
-const mockLocation = CITIES[0];
+// const mockLocation = CITIES[0];
 
 describe('EditProfileForm', () => {
   let user;
@@ -31,7 +31,7 @@ describe('EditProfileForm', () => {
     const rendered = renderer.create(
       <ApolloMockProvider>
         <ThemeProvider theme={scTheme}>
-          <EditProfileForm user={user} location={mockLocation} />
+          <EditProfileForm user={user} /* location={mockLocation} */ />
         </ThemeProvider>
       </ApolloMockProvider>,
     ).toJSON();
@@ -39,7 +39,7 @@ describe('EditProfileForm', () => {
   });
 
   it('renders custom label button', () => {
-    const wrapper = shallow(<EditProfileForm location={mockLocation} user={user} />);
+    const wrapper = shallow(<EditProfileForm user={user} />);
     expect(wrapper.find({ testID: 'editProfileSubmitButton' }).props().label).toBe(I18n.t('editProfileForm.btnLabel'));
   });
 
@@ -51,7 +51,7 @@ describe('EditProfileForm', () => {
     const wrapper = shallow(
       <EditProfileForm
         user={user}
-        location={mockLocation}
+        // location={mockLocation}
         onClientErrorHook={handleClientError}
       />,
     );
@@ -74,7 +74,7 @@ describe('EditProfileForm', () => {
     const handleClientError = jest.fn();
     const wrapper = shallow(
       <EditProfileForm
-        location={mockLocation}
+        // location={mockLocation}
         user={user}
         onClientErrorHook={handleClientError}
       />,
@@ -100,7 +100,7 @@ describe('EditProfileForm', () => {
     const handleClientError = jest.fn();
     const wrapper = shallow(
       <EditProfileForm
-        location={mockLocation}
+        // location={mockLocation}
         user={user}
         onClientErrorHook={handleClientError}
       />,
@@ -130,7 +130,7 @@ describe('EditProfileForm', () => {
     const wrapper = shallow(
       <EditProfileForm
         user={user}
-        location={mockLocation}
+        // location={mockLocation}
         onBeforeHook={handleBefore}
         onClientCancelHook={handleClientCancel}
         onSuccessHook={handleSuccess}
@@ -150,7 +150,7 @@ describe('EditProfileForm', () => {
   });
 
   it('renders errors props', () => {
-    const wrapper = shallow(<EditProfileForm location={mockLocation} user={user} />);
+    const wrapper = shallow(<EditProfileForm user={user} />);
     expect(wrapper.find({ testID: 'editProfileFieldName' }).props().error).toBe('');
     wrapper.setProps({ errors: { name: [someErrorMsg] } });
     expect(wrapper.find({ testID: 'editProfileFieldName' }).props().error).toBe(someErrorMsg);
@@ -165,7 +165,7 @@ describe('EditProfileForm', () => {
     const wrapper = shallow(
       <EditProfileForm
         user={user}
-        location={mockLocation}
+        // location={mockLocation}
         onBeforeHook={handleBefore}
         onClientCancelHook={handleClientCancel}
         onClientErrorHook={handleClientError}
