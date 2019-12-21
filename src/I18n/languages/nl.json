@@ -85,7 +85,7 @@
           "tooLong": "Naam is te lang"
         }
       },
-      "location": {
+      "city": {
         "label": "Stad",
         "placeholder": "",
         "errors": {

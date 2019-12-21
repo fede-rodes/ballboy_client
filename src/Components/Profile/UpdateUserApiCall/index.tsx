@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 import extend from 'lodash/extend';
-import pick from 'lodash/pick';
 import { withSpotFilters, spotFiltersPropTypes } from '../../../Context/SpotFilters';
 import updateUserMutation from '../../../GraphQL/Users/Mutations/updateUser';
 import privateUserQuery from '../../../GraphQL/Users/Queries/privateUser';
@@ -20,6 +19,7 @@ import curateErrors from './utils';
  */
 class UpdateUserApiCall extends React.PureComponent {
   handleUpdate = async (inputFields) => {
+    console.log({ inputFields });
     const {
       maxDistance,
       allSports,
@@ -28,15 +28,24 @@ class UpdateUserApiCall extends React.PureComponent {
       onError,
       onSuccess,
     } = this.props;
-    const { name: username, location, avatar } = inputFields;
+    const { name: username, city, avatar } = inputFields;
 
     const variables = {};
 
     if (username) {
       extend(variables, { username });
     }
-    if (location) {
-      extend(variables, pick(location, ['city', 'country', 'formattedAddress', 'coordinates']));
+    if (city) {
+      const {
+        name, country, formattedAddress, location,
+      } = city;
+
+      extend(variables, {
+        city: name,
+        country,
+        formattedAddress,
+        coordinates: location.coordinates,
+      });
     }
     if (avatar) {
       extend(variables, { avatar });

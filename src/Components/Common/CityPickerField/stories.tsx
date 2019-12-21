@@ -3,14 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Block from '../Block';
-import LocationPickerField from '.';
+import CityPickerField from '.';
 
 class Container extends React.PureComponent {
-  state = { value: null }
+  state = { city: null }
 
-  handleChange = (location) => {
+  handleChange = (city) => {
     this.setState(
-      { value: location },
+      { city },
       // () => { console.log(this.state); },
     );
   }
@@ -22,15 +22,15 @@ class Container extends React.PureComponent {
       fullWidth,
       size,
     } = this.props;
-    const { value } = this.state;
+    const { city } = this.state;
 
     return (
       <View>
-        <LocationPickerField
+        <CityPickerField
           theme={theme}
           label={label}
           fullWidth={fullWidth}
-          value={value}
+          city={city}
           onChange={this.handleChange}
           size={size}
         />
@@ -53,13 +53,13 @@ Container.defaultProps = {
   fullWidth: false,
 };
 
-storiesOf('Common.LocationPickerField', module)
-  .add('LocationPickerField', () => <Container />)
-  .add('LocationPickerField white theme', () => (
+storiesOf('Common.CityPickerField', module)
+  .add('CityPickerField', () => <Container />)
+  .add('CityPickerField white theme', () => (
     <Block bgColor="primaryGreen">
       <Container theme="white" />
     </Block>
   ))
-  .add('LocationPickerField fullWidth size ML', () => (
+  .add('CityPickerField fullWidth size ML', () => (
     <Container label="I'm the label" fullWidth size="ML" />
   ));

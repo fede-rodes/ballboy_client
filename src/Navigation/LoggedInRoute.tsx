@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withUser, userPropTypes } from '../Context/User';
+import { withCities, citiesPropTypes } from '../Context/Cities';
 import CenteredActivityIndicator from '../Components/Common/CenteredActivityIndicator';
 
 //------------------------------------------------------------------------------
@@ -32,14 +33,15 @@ class LoggedInRoute extends React.PureComponent {
     const {
       loadingUser,
       user,
+      loadingCities,
       component: Component,
       overlay: Overlay,
       onLoggedOut,
       ...rest
     } = this.props;
 
-    // Wait until user is ready
-    if (loadingUser) {
+    // Wait until user and cities are ready
+    if (loadingUser || loadingCities) {
       return <CenteredActivityIndicator />;
     }
 
@@ -56,6 +58,7 @@ class LoggedInRoute extends React.PureComponent {
 LoggedInRoute.propTypes = {
   loadingUser: userPropTypes.loadingUser.isRequired,
   user: userPropTypes.user,
+  loadingCities: citiesPropTypes.loadingCities.isRequired,
   component: PropTypes.func.isRequired,
   overlay: PropTypes.func,
   onLoggedOut: PropTypes.func,
@@ -69,6 +72,7 @@ LoggedInRoute.defaultProps = {
 
 const enhance = compose(
   withUser,
+  withCities,
 );
 
 export default enhance(LoggedInRoute);

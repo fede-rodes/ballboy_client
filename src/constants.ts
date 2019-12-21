@@ -1,6 +1,5 @@
 // KEEP IN SYNC WITH SERVER CONSTANTS
 // TODO: use ts enum instead
-import Constants from 'expo-constants';
 import { Platform, Dimensions } from 'react-native';
 
 const { width: WW, height: WH } = Dimensions.get('window');
@@ -34,10 +33,6 @@ export const ATTENDEE_ACTIONS = {
   ADD: 'ADD',
   REMOVE: 'REMOVE',
 };
-
-// TODO: we should probably introduce a Cities collection instead
-// TODO: apply i18n
-export const CITIES = Constants.manifest.extra.cities;
 
 export const CHECK_EMAIL_ACTIONS = {
   LOGIN: 'LOGIN',

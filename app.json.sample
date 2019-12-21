@@ -13,17 +13,19 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon2_name.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash_orange.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffff14"
+      "backgroundColor": "#e59030"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/**",
+      "node_modules/react-navigation/src/**/*.png",
+      "node_modules/@expo/vector-icons/fonts/*.ttf"
     ],
     "entryPoint": "./index.ts",
     "ios": {
@@ -40,7 +42,7 @@
         ]
       },
       "config": {
-        "googleMapsApiKey": "xxx"
+        "googleMapsApiKey": "XXX"
       }
     },
     "android": {
@@ -51,7 +53,7 @@
       ],
       "config": {
         "googleMaps": {
-          "apiKey": "xxx"
+          "apiKey": "XXX"
         }
       },
       "intentFilters": [
@@ -68,71 +70,36 @@
         }
       ]
     },
-    "extra": {
-      "graphqlServer": "http://192.168.56.1:3001/graphql",
-      "isStorybook": false,
-      "chatkitAuthEndpoint": "http://192.168.56.1:3001/chatkit-auth",
-      "chatkitReadOnlyUser": "readonly",
-      "chatkitInstanceLocator": "xxx",
-      "cloudinaryCloudname": "xxx",
-      "cloudinaryApiKey": "xxx",
-      "cloudinaryApiSecret": "xxx",
-      "cloudinaryUploadPreset": "default",
-      "feedbackUrl": "https://goo.gl/forms/123",
-      "privacyUrl": "https://ballboy.app/privacy",
-      "termsUrl": "https://ballboy.app/terms",
-      "cities": [
+    "hooks": {
+      "postPublish": [
         {
-          "id": "amsterdam",
-          "city": "Amsterdam",
-          "country": "Netherlands",
-          "formattedAddress": "Amsterdam, Netherlands",
-          "coordinates": [
-            52.354733,
-            4.8284116
-          ]
-        },
-        {
-          "id": "enschede",
-          "city": "Enschede",
-          "country": "Netherlands",
-          "formattedAddress": "Enschede, Netherlands",
-          "coordinates": [
-            52.220615,
-            6.895782
-          ]
-        },
-        {
-          "id": "rotterdam",
-          "city": "Rotterdam",
-          "country": "Netherlands",
-          "formattedAddress": "Rotterdam, Netherlands",
-          "coordinates": [
-            51.92806,
-            4.420195
-          ]
-        },
-        {
-          "id": "barcelona",
-          "city": "Barcelona",
-          "country": "Spain",
-          "formattedAddress": "Barcelona, Spain",
-          "coordinates": [
-            41.394897,
-            2.0785563
-          ]
-        },
-        {
-          "id": "buenosAires",
-          "city": "Buenos Aires",
-          "country": "Argentina",
-          "formattedAddress": "Buenos Aires, Argentina",
-          "coordinates": [
-            -34.61566,
-            -58.50351
-          ]
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "ballboy",
+            "project": "react-native",
+            "authToken": "XXX"
+          }
         }
       ]
+    },
+    "extra": {
+      "isStorybook": true,
+      "devServerUrl": "http://192.168.1.133:3001",
+      "prodServerUrl": "https://vast-beach-90080.herokuapp.com",
+      "graphqlEndpoint": "/graphql",
+      "chatkitAuthEndpoint": "/chatkit-auth",
+      "chatkitReadOnlyUser": "readonly",
+      "chatkitInstanceLocator": "XXX",
+      "cloudinaryCloudname": "XXX",
+      "cloudinaryApiKey": "XXX",
+      "cloudinaryApiSecret": "XXX",
+      "cloudinaryUploadPreset": "default",
+      "webGoogleMapsApiKey": "XXX",
+      "rnSentryDsn": "XXX",
+      "webSentryDsn": "XXX",
+      "feedbackUrl": "https://goo.gl/forms/123",
+      "privacyUrl": "https://ballboy.app/privacy",
+      "termsUrl": "https://ballboy.app/terms"
     }
   }
 }

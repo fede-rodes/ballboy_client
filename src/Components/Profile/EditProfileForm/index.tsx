@@ -8,14 +8,15 @@ import pick from 'lodash/pick';
 // import moment from 'moment';
 import ErrorHandling from 'error-handling-utils';
 import I18n from '../../../I18n';
-import { CITIES } from '../../../constants';
+import { withCities } from '../../../Context/Cities';
 import privateUserFragment from '../../../GraphQL/Users/Fragments/privateUser';
+import cityFragment from '../../../GraphQL/Cities/Fragments/city';
 import { TopLayout, BottomLayout } from '../../Layouts/FixedBottomLayout';
 import Block from '../../Common/Block';
 import TextField from '../../Common/TextField';
 import RaisedButton from '../../Common/RaisedButton';
 import AvatarPicker from '../../Common/AvatarPicker';
-import LocationPickerField from '../../Common/LocationPickerField';
+import CityPickerField from '../../Common/CityPickerField';
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
@@ -24,22 +25,28 @@ export const MAX_CHARS = 120;
 
 let INIT_STATE;
 
-const getInitState = ({ profile }) => {
-  const { username, avatar, city } = profile;
+const getInitState = (user, cities) => {
+  const {
+    profile: {
+      username,
+      avatar,
+      city,
+    },
+  } = user;
 
   return {
     name: username,
     // birthYear: (profile && profile.year_of_birth && profile.year_of_birth.toString()) || '',
     // avatar: (profile && profile.avatar && profile.avatar.toString()) || '',
     avatar,
-    location: CITIES.find(c => city === c.city),
+    city: cities.find((c) => city === c.name),
   };
 };
 
 const INIT_ERRORS = {
   name: [], // use usernbame instead
   // birthYear: [],
-  location: [],
+  city: [],
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -48,10 +55,10 @@ class EditProfileForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const { user } = props;
+    const { user, cities } = props;
     // console.log('user', user);
 
-    INIT_STATE = getInitState(user);
+    INIT_STATE = getInitState(user, cities);
 
     // Initialize state based on current user data
     this.state = {
@@ -86,7 +93,7 @@ class EditProfileForm extends React.PureComponent {
     } /* , () => { console.log('this.state', this.state); } */);
   }
 
-  // TODO: validate location (required)
+  // TODO: validate city (required)
   validateFields = ({ name /* , birthYear */ }) => {
     // Initialize errors
     const errors = cloneDeep(INIT_ERRORS);
@@ -154,7 +161,7 @@ class EditProfileForm extends React.PureComponent {
 
   render() {
     const { user, disabled } = this.props;
-    const { name, location, /* birthYear, */ errors } = this.state;
+    const { name, city, /* birthYear, */ errors } = this.state;
 
     // Apply translation and concatenate field errors (string)
     const nameErrors = ErrorHandling.getFieldErrors(errors, 'name', I18n.t);
@@ -185,15 +192,15 @@ class EditProfileForm extends React.PureComponent {
             />
           </Block>
           <Block midHeight>
-            <LocationPickerField
-              testID="editProfileFieldLocation"
-              label={I18n.t('editProfileForm.fields.location.label')}
-              value={location}
+            <CityPickerField
+              testID="editProfileFieldCity"
+              label={I18n.t('editProfileForm.fields.city.label')}
+              city={city}
               size="ML"
               disabled={disabled}
               fullWidth
               onChange={(value) => {
-                this.handleChange({ fieldName: 'location', value });
+                this.handleChange({ fieldName: 'city', value });
               }}
             />
           </Block>
@@ -228,6 +235,7 @@ class EditProfileForm extends React.PureComponent {
 
 EditProfileForm.propTypes = {
   user: propType(privateUserFragment).isRequired,
+  cities: PropTypes.arrayOf(propType(cityFragment)).isRequired,
   disabled: PropTypes.bool,
   errors: PropTypes.object, // eslint-disable-line
   onBeforeHook: PropTypes.func,
@@ -245,4 +253,4 @@ EditProfileForm.defaultProps = {
   onSuccessHook: () => {},
 };
 
-export default EditProfileForm;
+export default withCities(EditProfileForm);

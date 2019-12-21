@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
 import styled from 'styled-components/native';
 import { spotFiltersPropTypes, withSpotFilters } from '../../../Context/SpotFilters';
 import { TopLayout, BottomLayout } from '../../../Components/Layouts/FixedTopLayout';
@@ -36,13 +35,13 @@ class SpotsListScreen extends React.Component {
     return (
       <FlexOne testID="SpotsListScreen">
         {(!allSports || maxDistance < 20) && (
-        <TopLayout>
-          <SpotsFilterFlap
-            maxDistance={maxDistance}
-            allSports={allSports}
-            selectedSports={selectedSports}
-          />
-        </TopLayout>
+          <TopLayout>
+            <SpotsFilterFlap
+              maxDistance={maxDistance}
+              allSports={allSports}
+              selectedSports={selectedSports}
+            />
+          </TopLayout>
         )}
         <BottomLayout
           contentContainerStyle={{

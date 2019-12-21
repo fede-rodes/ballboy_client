@@ -30,6 +30,14 @@ type AuthToken {
   token: String!
 }
 
+type City {
+  _id: ID!
+  name: String
+  country: String
+  formattedAddress: String
+  location: Point
+}
+
 scalar Date
 
 type DateRange {
@@ -103,6 +111,7 @@ type Query {
   privateUser: PrivateUser
   publicUser(_id: ID!): PublicUser
   publicUsers(_ids: [ID!]): [PublicUser]
+  cities: [City]
   spots(sports: [Sport], distance: Float, limit: Int!, offset: Int!): [Spot]
   spotDetails(_id: ID!): Spot
   activities(sports: [Sport], distance: Float, limit: Int!, offset: Int!): [Activity]
