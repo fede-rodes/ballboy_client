@@ -83,7 +83,7 @@
       ]
     },
     "extra": {
-      "isStorybook": true,
+      "isStorybook": false,
       "devServerUrl": "http://192.168.1.133:3001",
       "prodServerUrl": "https://vast-beach-90080.herokuapp.com",
       "graphqlEndpoint": "/graphql",

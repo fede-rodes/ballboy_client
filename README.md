@@ -20,8 +20,32 @@ Clone the repo:
 
 ### Set expo environment variables
 
-At the root of the project you'll find a `app.json.sample` file. Re-name it to `app.json`. That's where expo keeps all the environment variables. Set your env vars under `extra` making sure
-`expo.extra.isStorybook` is set to `false` (more on this later).
+At the root of the project you'll find a `app.json.sample` file. Duplicate said file and re-name it to `app.json`. That's where expo keeps all the environment variables. Set your env vars under `extra` making sure `expo.extra.isStorybook` is set to `false` (more on this later).
+
+#### Google Maps API Keys (static map service API)
+
+- Visit [https://developers.google.com/maps/documentation/javascript/get-api-key](https://developers.google.com/maps/documentation/javascript/get-api-key) and create a new project.
+- Set `ios.config.googleMapsApiKey` by enabling 'Maps Static API' for ios.
+- Set `android.config.googleMaps.apiKey` by enabling 'Maps Static API' for android.
+- Set `extra.webGoogleMapsApiKey` by enabling 'Maps Static API' for web.
+
+#### Sentry (error tracking service API)
+
+- Visit [https://sentry.io](https://sentry.io), create an account and a new 'Organization'.
+- Set `extra.webSentryDsn` by creating a new 'React' project and getting the DSN key
+- Set `extra.rnSentryDsn` by creating a new 'React Native' project and getting the DSN key. In addition, enable the `hooks.postPublish[0].config.authToken` by following the expo-sentry docs:  [https://docs.expo.io/versions/latest/guides/using-sentry/](https://docs.expo.io/versions/latest/guides/using-sentry/)
+
+#### Chatkit (chat service API)
+
+- Visit [https://pusher.com/chatkit](https://pusher.com/chatkit), create a new account and a new Chatkit project.
+- Set `extra.chatkitInstanceLocator` from the credentials tab
+- Go to `ROLES` inside the `Console` tab and create a `readonly` role by enabling the following permissions: `room:join`, `room:leave`, `room:get`, `room:messages:get`, `room:typing_indicator:create`, `presence:subscribe`, `user:get`, `user:rooms:get`, `file:get` and `cursors:read:get`.
+
+#### Cloudinary (image host and manipulation service API)
+
+- Visit [https://cloudinary.com/](https://cloudinary.com/) and create a new account.
+- From the `Dashboard` tab, grab the `Cloud name`, `API key` and `API secret` keys and set `extra.cloudinaryCloudname`, `extra.cloudinaryApiKey` and `extra.cloudinaryApiSecret` respectively.
+- Finally, go to `settings` section ([https://cloudinary.com/console/settings](https://cloudinary.com/console/settings)), move to the `Upload` tab and scroll down to `Upload presets`. Set `Upload preset name` to `default` and `Signing Mode` to `unsigned`. Hit save.
 
 Find out more about expo env vars:
 - [https://expo.canny.io/feature-requests/p/dotenv-support](https://expo.canny.io/feature-requests/p/dotenv-support)
